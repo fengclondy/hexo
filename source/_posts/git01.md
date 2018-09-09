@@ -10,7 +10,7 @@ git中最重要的三个点：工作区、暂存区和树形分支
 ### git基本操作
 
 - `$ git init`： 初始化一个Git仓库
-- `git remote add origin https://github.com/suguoqiang/hexo.git`：添加一个origin变量代替url地址
+- `$ git remote add origin https://github.com/suguoqiang/hexo.git`：添加一个origin变量代替url地址
 - `$ git add <file>`： 添加文件到暂存区，可反复使用。`.`代表当前路径下所有文件
 - `$ git commit -m <message>`：提交到树形分支
 - `$ git status`：查看当前仓库状态
