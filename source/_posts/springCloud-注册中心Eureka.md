@@ -25,7 +25,7 @@ categories: springCloud
 
 1. 添加依赖：
 
-```
+```xml
 <dependencies>
 	<dependency>
 		<groupId>org.springframework.cloud</groupId>
@@ -42,10 +42,11 @@ categories: springCloud
 	</dependency>
 </dependencies>
 ```
+<!-- more -->
 
 2. 添加启动代码中添加@EnableEurekaServer注解
 
-```
+```java
 @SpringBootApplication
 @EnableEurekaServer
 public class EurekaServiceRegisterApplication {
@@ -58,7 +59,7 @@ public class EurekaServiceRegisterApplication {
 
 3. 配置文件
 
-```
+```java
 spring.application.name=spring-cloud-eureka
 
 server.port=8000
@@ -81,7 +82,7 @@ logging.level.com.netflix.discovery=OFF
 
 - 1.添加依赖
 
-```
+```xml
 <dependencies>
     <dependency>
          <groupId>org.springframework.cloud</groupId>
@@ -102,7 +103,7 @@ logging.level.com.netflix.discovery=OFF
 
 - 2. 添加启动代码中添加@EnableDiscoveryClient注解
 
-```
+```java
 @EnableDiscoveryClient
 @SpringBootApplication
 public class EurekaServerProducerApplication {
@@ -115,7 +116,7 @@ public class EurekaServerProducerApplication {
 
 - 3. 配置文件
 
-```
+```properties
 #服务提供者的名字
 spring.application.name=COMPUTE-SERVICE
 
@@ -128,7 +129,7 @@ eureka.client.serviceUrl.defaultZone=http://192.168.2.102:8761/eureka/
 
 - 4. 编写服务实现类,向外提供服务
 
-```
+```java
 @RestController
 public class ServiceInstanceRestController {
 
@@ -156,7 +157,7 @@ public class ServiceInstanceRestController {
 
 - 1. 添加依赖
 
-```
+```xml
 <dependencies>
         <!-- Feign实现声明式HTTP客户端 -->
         <dependency>
@@ -183,7 +184,7 @@ public class ServiceInstanceRestController {
 
 - 2. 启动类代码：
 
-```
+```java
 @EnableDiscoveryClient
 @EnableFeignClients
 @SpringBootApplication
@@ -197,7 +198,7 @@ public class EurekaConsumerApplication {
 
 - 3. 添加配置
 
-```
+```properties
 #应用名称
 spring.application.name=feign-consumer
 
@@ -210,7 +211,7 @@ eureka.client.serviceUrl.defaultZone=http://192.168.2.102:8761/eureka/
 
 - 4. 编写服务
 
-```
+```java
 //web入口函数
 @RestController
 public class ConsumerController {
@@ -225,7 +226,7 @@ public class ConsumerController {
 }
 ```
 
-```
+```java
 //实体类（接口实现）
 @FeignClient("COMPUTE-SERVICE")
 public interface ComputeClient {
@@ -239,7 +240,7 @@ public interface ComputeClient {
 
 - 1. 添加依赖：
 
-```
+```xml
 <dependencies>
         <!-- 客户端负载均衡 -->
         <dependency>
@@ -266,7 +267,7 @@ public interface ComputeClient {
 
 - 2. 启动类代码
 
-```
+```java
 @EnableDiscoveryClient //开启服务发现的能力
 @SpringBootApplication
 public class EurekaConsumerApplication {
@@ -285,7 +286,7 @@ public class EurekaConsumerApplication {
 
 - 3. 添加配置
 
-```
+```properties
 #应用名称
 spring.application.name=ribbon-consumer
 
@@ -299,7 +300,7 @@ eureka.client.serviceUrl.defaultZone=http://192.168.2.102:8761/eureka/
 
 - 4. 编写服务
 
-```
+```java
 @RestController
 public class ConsumerController {
 
@@ -329,7 +330,7 @@ public class ConsumerController {
 
 1、创建application-peer1.properties，作为peer1服务中心的配置，并将serviceUrl指向peer2
 
-```
+```properties
 spring.application.name=spring-cloud-eureka
 server.port=8000
 eureka.instance.hostname=peer1
@@ -339,7 +340,7 @@ eureka.client.serviceUrl.defaultZone=http://peer2:8001/eureka/
 
 2、创建application-peer2.properties，作为peer2服务中心的配置，并将serviceUrl指向peer1
 
-```
+```properties
 spring.application.name=spring-cloud-eureka
 server.port=8001
 eureka.instance.hostname=peer2
@@ -349,14 +350,14 @@ eureka.client.serviceUrl.defaultZone=http://peer1:8000/eureka/
 
 3、host转换
 
-```
+```shell
 127.0.0.1 peer1  
 127.0.0.1 peer2  
 ```
 
 4、打包启动
 
-```
+```shell
 #打包
 mvn clean package
 # 分别以peer1和peeer2 配置信息启动eureka

@@ -138,7 +138,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
 ```
 
-2、其他认证：
+2、接口url认证：
+
 ```java
 @Primary
 @Order(90)
@@ -169,7 +170,37 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 
 ```
 
-3、其他（可选）
+3、跨域设置（可选）：
+
+```java
+@Configuration
+public class CorsConfig {
+	/**
+	 * 跨域过滤器
+	 * @return
+	 */
+	private CorsConfiguration buildConfig() {
+		CorsConfiguration corsConfiguration = new CorsConfiguration();
+		corsConfiguration.addAllowedOrigin("*");
+		corsConfiguration.addAllowedHeader("*");
+		corsConfiguration.addAllowedMethod("*");
+		return corsConfiguration;
+	}
+	/**
+	 * 跨域过滤器
+	 * @return
+	 */
+	@Bean
+	public CorsFilter corsFilter() {
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", buildConfig());
+		return new CorsFilter(source);
+	}
+}
+```
+
+4、其他（可选）
+
 ```java
 /**
  * @author gqsu

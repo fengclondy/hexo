@@ -54,15 +54,15 @@
 
 hexo分为站点配置文件和主题配置文件，
    主题的安装(以next为例)： 
-   
+
    >$ cd your-hexo-site
-   
+
    >$ git clone https://github.com/iissnan/hexo-theme-next themes/next
-   
+
    在站点配置文件 _config.yml中，
-   
+
    >theme: next
-   
+
    使用调试命令验证主题：
    >hexo s --debug
 
@@ -70,20 +70,20 @@ hexo分为站点配置文件和主题配置文件，
 
    看看本机是否存在SSH keys,打开Git Bash,并运行:
    >$ cd ~/. ssh
-   
+
    如果没有，创建;否则忽略该步骤：
    >$ ssh-keygen -t rsa -C "your_email@example.com"
-   
-   拷贝你的SSh秘钥至GitHub的配置的SSh key中：
+
+   拷贝你的SSh秘钥(id_rsa.pub)至GitHub的配置的SSh key中：
    >$ clip < ~/.ssh/id_rsa.pub
-   
+
    配置用户信息：
    >$ git config --global user.name "username"//用户名
 
    >$ git config --global user.email "usernameg@xxx.com"//填写自己的邮箱
-   
+
    测试是否连通：
    >$ ssh -T git@github.com
-   
+
    下一步就是去hexo的站点配置文件，修改
    ![](https://user-gold-cdn.xitu.io/2018/1/11/160e4f2f37cb4b1f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)

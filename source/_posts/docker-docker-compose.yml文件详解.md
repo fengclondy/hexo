@@ -8,6 +8,8 @@ categoriets: docker
 
 参考博客：https://blog.csdn.net/qq_36148847/article/details/79427878
 
+> 使用docker-compose进行统一构建，就不需要在写DockerFile文件了。
+
 ### 常见配置参数
 
 #### version
@@ -218,3 +220,27 @@ services:
 ```
 
 
+
+
+
+#### 进阶
+描述: 某docker-compose里有两个容器:db,web.都在同一个内部网络172.66.1.0/24网段里,其中容器web的网络接口为:172.66.1.100,而容器db的网络接口为:172.66.1.200.
+```
+# docker-compose.yml 文件
+version: '3'
+networks:
+    study_net:
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.66.1.0/24
+services:
+    web:
+        networks:
+            study_net:
+                ipv4_address: 172.66.1.100
+    db:
+        networks:
+            study_net:
+                ipv4_address: 172.66.1.200
+```

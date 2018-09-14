@@ -9,7 +9,7 @@ categories: springBoot
 ### springboot整和mybatis-plus
 
 1、添加依赖：
-```
+```xml
 <dependency>
 	<groupId>org.springframework.boot</groupId>
 	<artifactId>spring-boot-starter-jdbc</artifactId>
@@ -25,8 +25,11 @@ categories: springBoot
 	<version>${mybatisplus.version}</version>
 </dependency>
 ```
+<!-- more -->
+
 2、配置文件：
-```
+
+```yaml
 # datasoure默认使用JDBC
 spring:
   datasource:
@@ -56,7 +59,7 @@ mybatis-plus:
 ```
 
 3、Mapper扫描配置：
-```
+```java
 @Configuration
 @MapperScan("com.example.sbmp.mapper*")
 public class MybatisPlusConfig {

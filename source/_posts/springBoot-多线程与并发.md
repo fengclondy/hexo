@@ -8,11 +8,11 @@ categories: springBoot
 
 
 #### 多线程
- 
+
 >使用ThreadPoolTask实现一个机遇线程池的TaskExector。
 
 1）配置类：
-```
+```java
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
@@ -42,9 +42,11 @@ public class TaskExecutorConfig implements AsyncConfigurer {
 }
 ```
 
+<!-- more -->
+
 2）任务执行类：
 
-```
+```java
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -65,7 +67,7 @@ public class AsyncTaskService {
 
 3）启动类
 
-```
+```java
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class Main {
@@ -85,7 +87,7 @@ public class Main {
 
 #### 条件判断
 
-```
+```java
 import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;
 import org.springframework.core.type.AnnotatedTypeMetadata;

@@ -18,3 +18,5 @@ categories: springBoot
 `/trace trace` 目前主要是监控http请求的,监控每个请求的状况
 `/autoconfig` 显示当前SpringBoot，已经自动配置的的属性
 `/metrics` 是整个监控里面的核心信息
+
+<!-- more -->

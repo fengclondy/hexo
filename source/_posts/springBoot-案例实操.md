@@ -23,13 +23,14 @@ categories: springBoot
 
 >可参见本博客 redis 的安装与使用
 
-```
+```xml
 <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-data-redis</artifactId>
 </dependency>
 ```
 
+<!-- more -->
 
 ### 使用javaMail发送邮件
 
@@ -44,7 +45,7 @@ categories: springBoot
 
 2、application.properties中加入配置：
 
-```
+```properties
 spring.mail.host=smtp.139.com
 spring.mail.username=用户名
 spring.mail.password=密码
@@ -267,7 +268,7 @@ public void sendTemplateMail() {
 </dependency>
 ```
 在resources/templates/下，创建一个模板页面mail.ftl（或者mail.html）
-```ftl
+```html
 <html>
 <body>
     <h3>你好， ${username}, 这是一封模板邮件!</h3>

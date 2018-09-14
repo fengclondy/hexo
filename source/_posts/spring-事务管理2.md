@@ -26,3 +26,4 @@ Ioc的初始化过程：
 - 3、向 IOC 容器(BeanFactory)注册 BeanDefinition.
 - 4、根据 lazy-init 属性初始化 Bean 实例和依赖注入.
 
+<!-- more -->

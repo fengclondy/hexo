@@ -21,7 +21,7 @@ lombok常用注解含义：
 @Cleanup    #代表的资源会被自动关闭，默认是调用资源的close()方法，在输入流中使用，可以不用手动关闭
 @Getter/@Setter
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper=true)       #覆写equals和hashCode，callSuper默认为false，表示不调用父类
 @NoArgsConstructor/@RequiredArgsConstructor /@AllArgsConstructor  #无参/有参/全参构造方法
 @Data        #3,4,5的组合形式
 @Value

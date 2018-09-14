@@ -60,10 +60,28 @@ public void delete() {
 ```
 @EnableCaching	开启缓存功能，放在配置类或启动类上
 @CacheConfig	缓存配置，设置缓存名称
-@Cacheable	执行方法前先查询缓存是否有数据。有则直接返回缓存数据；否则查询数据再将数据放入缓存
-@CachePut	执行新增或更新方法后，将数据放入缓存中
-@CacheEvict	清除缓存
-@Caching	将多个缓存操作重新组合到一个方法中
+@Cacheable	执行方法前先查询缓存是否有数据。有则直接返回缓存数据；否则查询数据再将数据放入缓存，有三个属性，value、key和condition，condition默认为空
+@CachePut	执行新增或更新方法后，将数据放入缓存中，与@Cacheable先查缓存在执行方法不同，它是先执行方法
+@CacheEvict	清除缓存，可以指定的属性有value、key、condition、allEntries(清除缓存中的所有元素,默认为false)和beforeInvocation(是否在执行之前清除，避免执行报错，默认为false)
+@Caching	将多个缓存操作重新组合到一个方法中，有三个属性：cacheable、put和evict，分别用于指定@Cacheable、@CachePut和@CacheEvict
 ```
+
+例子：
+```java
+### 例子1
+@Cacheable(value="users", key="#id")
+//@Cacheable(value={"users"}, key="#user.id", condition="#user.id%2==0")
+public User find(Integer id) {
+   return null;
+}
+   
+### 例子2
+@Caching(cacheable = @Cacheable("users"), evict = { @CacheEvict("cache2"),@CacheEvict(value = "cache3", allEntries = true) })
+public User find(Integer id) {
+   return null;
+}
+```
+
+
 
 https://juejin.im/post/59408d5aa0bb9f006b725f50

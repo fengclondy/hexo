@@ -11,7 +11,7 @@ categoriets: share
 
 #### html代码转纯文本
 
-```
+```java
 //将html转换为纯文本，此方法最后保留了&nbps空格，使用时注意将空格替换掉
 public static String delHTMLTag(String htmlStr){ 
 　　　String regEx_script="<script[^>]*?>[\\s\\S]*?<\\/script>"; //定义script的正则表达式 
@@ -33,3 +33,5 @@ public static String delHTMLTag(String htmlStr){
 　　　return htmlStr.trim(); //返回文本字符串 
 }
 ```
+
+<!-- more -->

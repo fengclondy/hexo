@@ -9,7 +9,7 @@ categories: springBoot
 
 ### 定时任务的实现
 
-```
+```java
 ## 方式一、固定时间
 @Scheduled(fixedDelay = 5000)  //上次执行完成后，每 5s 调用一次
 public void doSomething() { 
@@ -32,9 +32,11 @@ public void doSomething(){
 >注：如果执行某次操作时，方法被阻塞了，下次方法到来时并不会立马执行，都会先去执行上次没有执行的任务。
 ```
 
+<!-- more -->
+
 - cron方式参数说明：
 
-```
+```shell
 按顺序依次为:
 1)秒（0~59）
 2)分钟（0~59）
@@ -50,4 +52,5 @@ public void doSomething(){
 "-"字符用来指定一个时间段。
 ```
 >可以包含列表：
+>
 >>天（星期））可以为 “MON-FRI”，“MON，WED，FRI”，“MON-WED,SAT”

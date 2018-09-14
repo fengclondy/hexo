@@ -51,4 +51,6 @@ public class WebConfig extends WebMvcConfigurerAdapter{
 
 参考：http://www.tianshouzhi.com/api/tutorials/springboot/106
 
+<!-- more -->
+
 ### 2、给予注解的配置

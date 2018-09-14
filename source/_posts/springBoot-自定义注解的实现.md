@@ -9,7 +9,7 @@ categories: springBoot
 ### 自定义权限注解
 
 1、定义一个自定义注解类
-```
+```java
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
@@ -25,8 +25,11 @@ public @interface Access {
 `@Retention`注解表示的是本注解(标注这个注解的注解保留时期).   
 `@Documented`是否生成文档的标注, 也就是生成接口文档是, 是否生成注解文档.  
 
+<!-- more -->
+
 常用的元素类型及保留时间：
-```
+
+```java
 public enum ElementType {
     // TYPE类型可以声明在类上或枚举上或者是注解上
     TYPE,
@@ -59,7 +62,7 @@ public enum ElementType {
 }
 ```
 
-```
+```java
 public enum RetentionPolicy {
     // 源代码时期
     SOURCE,
@@ -71,7 +74,7 @@ public enum RetentionPolicy {
 ```
 
 2、在方法上配置权限注解
-```
+```java
 @RestController
 public class HelloController {
 
@@ -86,7 +89,7 @@ public class HelloController {
 ```
 
 3、编写权限逻辑
-```
+```java
 // 自定义一个权限拦截器, 继承HandlerInterceptorAdapter类
 public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 

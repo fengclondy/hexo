@@ -11,7 +11,7 @@ categoriets: share
 
 原理及实现
 
-```
+```java
 /**
  * 打印星星
  */
@@ -150,11 +150,13 @@ public class PrintStar {
 }
 ```
 
+<!-- more -->
+
 ### 打印水仙花数
 
 >水仙花数是指一个 n 位数（n≥3 ），它的每个位上的数字的 n 次幂之和等于它本身（例如：1^3 + 5^3+ 3^3 = 153）
 
-```
+```java
 /**
  * 计算并三位数打印水仙花数
  */
@@ -185,7 +187,7 @@ public class NarcissisticNumber {
 
 ### 生成指定范围的随机整数
 
-```
+```java
 import java.util.Random;
 
 /**
@@ -216,7 +218,7 @@ public class TestRandom {
 
 ### 生成指定范围内不重复的随机数
 
-```
+```java
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -325,7 +327,7 @@ public class RandomNumber {
 
 ### 正整数的逆序输出
 
-```
+```java
 import java.util.Scanner;
 
 /**
@@ -360,7 +362,7 @@ public class NumberReverse {
 ```
 
 ### 统计数字出现次数
-```
+```java
 import java.util.Scanner;
 
 /**
@@ -399,7 +401,7 @@ public class NumberRepeat {
 
 ### 计算阶乘 
 
-```
+```java
 /**
  * 计算阶乘 
  */
@@ -441,7 +443,7 @@ public class Factorial {
 >斐波那契数列指的是这样一个数列 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233，377，610，987，1597........
 这个数列从第3项开始，每一项都等于前两项之和。
 
-```
+```java
 /*
  * 实现求第n位的斐波那契数列的值
  */
@@ -496,7 +498,7 @@ public class FibonacciSequence {
 
 ### 统计字符串中每组数字出现的次数
 
-```
+```java
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;

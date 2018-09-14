@@ -10,9 +10,14 @@ categories: rabbitmq
 
 >由于RabbitMQ依赖Erlang， 所以需要先安装Erlang。
 
-1、下载并安装 Erlang。
+#### 1、下载并安装 Erlang。
+Erlang下载地址：http://www.erlang.org/downloads
 
-2、下载并安装 RabbitMQ Server。
+双击.exe文件进行安装就好。 配置ERLANG_HOME的环境变量，指向erlang的安装目录，同时将%ERLANG_HOME%\bin加入到Path 中。输入erl验证安装是否成功。
+
+
+#### 2、下载并安装 RabbitMQ Server。
+RabbitMQ下载地址：http://www.rabbitmq.com/download.html
 
 开启web管理控制台:
 

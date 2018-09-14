@@ -39,7 +39,10 @@ public class ConfigServerApplication {
 }
 ```
 
+<!-- more -->
+
 3、添加配置文件.yml
+
 ```
 eureka:
   client:

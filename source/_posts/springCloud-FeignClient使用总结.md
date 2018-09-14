@@ -30,6 +30,8 @@ public interface UserInfoFeign {
 通过@fallback属性，这里的UserInfoFeignServiceImpl是接口UserInfoFeign的降级处理实现类，
 在实现类头部加上`@Compent`注解
 
+<!-- more -->
+
 
 ### FeignClient接口，不能使用@GetMapping 之类的简化组合注解
 必须使用非简化形式 @RequestMapping(value = "/simple/{id}", method = RequestMethod.GET)

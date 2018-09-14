@@ -8,7 +8,7 @@ categories: springBoot
 
 ### 数据库连接池
 springBoot默认集成了tomcat，所以默认也就有了tomcat连接池。为了优化连接池效率和方法，采用HikariCP
-```
+```xml
 <!--tomcat-jdbc排除 -->
 <dependency>
 	<groupId>org.springframework.boot</groupId>
@@ -26,3 +26,5 @@ springBoot默认集成了tomcat，所以默认也就有了tomcat连接池。为�
 	<artifactId>HikariCP</artifactId>
 </dependency>
 ```
+
+<!-- more -->

@@ -9,7 +9,7 @@ tags:
 ### 安装rabbitmq
 
 1、安装：
-```
+```powershell
 #安装epel源[EPEL (Extra Packages for Enterprise Linux，企业版Linux的额外软件包) 是Fedora小组维护的一个软件仓库项目为RHEL/CentOS提供他们默认不提供的软件.]
 rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
 # 扩展erlang源安装最新的erlang
@@ -25,7 +25,7 @@ yum install rabbitmq-server-3.6.1-1.noarch.rpm
 
 2、配置：
 
-```
+```powershell
 复制代码
 # 启动服务
 /etc/init.d/rabbitmq-server start
@@ -41,7 +41,7 @@ rabbitmqctl  set_permissions  -p  '/'  admin '.' '.' '.'
 
 3、启动web管理
 
-```
+```powershell
 # 启动Web插件
 rabbitmq-plugins enable rabbitmq_management
 # 删除guest用户

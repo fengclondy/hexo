@@ -61,8 +61,10 @@ public class AccessFilter extends ZuulFilter  {
 }
 ```
 
+<!-- more -->
 
-`filterType`：返回一个字符串代表过滤器的类型，在zuul中定义了四种不同生命周期的过滤器类型，具体如下：
+filterType`：返回一个字符串代表过滤器的类型，在zuul中定义了四种不同生命周期的过滤器类型，具体如下：
+
 - pre：可以在请求被路由之前调用
 - routing：在路由请求时候被调用
 - post：在routing和error过滤器之后被调用

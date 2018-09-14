@@ -1,6 +1,6 @@
 ---
 layout: post
-title: study--Redis
+title: study--Redis相关问题
 date: 2018-07-27 08:33:24
 tags: study
 categories: study

@@ -88,6 +88,15 @@ echo Starting redis...
 start "redis" "startRedis.bat"
 ```
 
+或者：`redis-server --service-install redis.windows-service.conf --loglevel verbose`。你也可以在`redis.windows.conf`中设置密码。列举常用服务：
+```
+redis-server --service-uninstall    #卸载服务
+redis-server --service-start    #开启服务
+redis-server --service-stop    #停止服务
+```
+
+
+
 3、在打开一个cmd窗口，进行基本操作：
 
 ```
@@ -133,10 +142,6 @@ requirepass [密码]；
 ====== PING_INLINE ======
 ```
 表示平均每秒处理647.43个并发请求，相当于每秒有60万用户请求。此电脑配置4G内存单核CUP，性能还是能够的。
-
-
-
-
 
 
 

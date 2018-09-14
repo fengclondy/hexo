@@ -55,6 +55,8 @@ $ java -jar app.jar --Dspring.config.location=application.properties
 $ java -jar app.jar --spring.profiles.active = prod
 ```
 
+<!-- more -->
+
 2、方式二采用了gradle管理：
 
 ```powershell

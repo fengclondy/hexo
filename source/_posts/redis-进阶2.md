@@ -1,6 +1,6 @@
 ---
 layout: post
-title: redis01
+title: redis进阶2
 date: 2018-08-08 01:20:57
 tags: redis
 categories: redis
@@ -36,3 +36,5 @@ spring:
       -	139.224.200.249:7003														
       -	139.224.200.249:7005
 ```
+
+<!-- more -->

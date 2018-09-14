@@ -9,7 +9,7 @@ categories: springBoot
 ### 集成swagger
 
 1、引入依赖：
-```java
+```xml
 <dependency>
     <groupId>io.springfox</groupId>
     <artifactId>springfox-swagger2</artifactId>
@@ -52,7 +52,10 @@ public class Swagger2Config {
 }
 ```
 
+<!-- more -->
+
 3、添加文档内容：
+
 ```java
 @ApiOperation(value="创建用户", notes="根据User对象创建用户")
 @ApiImplicitParam(name = "user", value = "用户详细实体user", required = true, dataType = "User")

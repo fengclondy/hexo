@@ -8,7 +8,9 @@ categories: springBoot
 
 ### Spring Boot公共配置详细
 
-```xml
+<!-- more -->
+
+```properties
 # ===================================================================
 # COMMON SPRING BOOT PROPERTIES
 #

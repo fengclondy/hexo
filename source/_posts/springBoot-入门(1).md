@@ -27,6 +27,8 @@ Spring 4.x里已经可以通过注解来实现配置了，而Spring Boot则把�
 
 Maven的出现已经可以帮我解决了很多依赖的问题，不用再一个一个jar包去下载导入，但是有没有这么一种感觉，我还是要在pom里面写很多，而且有时候我根本不知道要添加哪个jar包，这一点Spring Boot也想到了，它提供了一系列starter来简化Maven依赖，比如你只需要添加一个spring-boot-starter-web，如下，就可添加web开发中常用的依赖包。
 
+<!-- more -->
+
 
 ##### 开始使用
 

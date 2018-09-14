@@ -12,7 +12,7 @@ categories: study
 
 `~./conf` 目录下配置配置文件：
 
-```
+```xaml
 ### 设置自己的maven仓库保存地址
 <localRepository>D:\Program Files\apache-maven-3.5.2\george</localRepository>
 
@@ -45,7 +45,7 @@ categories: study
 
 五种请求类型：
 
-```
+```json
 GET ：获取资源
 POST ：新建资源
 PUT ：更新资源（客户端提供完整的资源）
@@ -54,7 +54,7 @@ DELETE ：删除资源
 ```
 >RESTful的含义：url地址中只包含名词表示资源，使用http动词表示动作进行操作资源。
 例子：
-```
+```json
 ### 错误   -->  正确
 GET /blog/getArticles --> GET /blog/Articles  获取所有文章
 GET /blog/addArticles --> POST /blog/Articles  添加一篇文章
@@ -76,7 +76,7 @@ GET /rest/api/deleteArticles?id=1 --> DELETE /blog/Articles/1  删除一篇文�
 >ObjectMapper是Jackson提供的一个类，作用是将java对象与json格式相互转化
 
 list是传入的linkedHashMap格式数据
-```
+```java
 ObjectMapper mapper = new ObjectMapper();
 List<User> infos = mapper.convertValue(list, new TypeReference<List<User>>(){});
 ```
@@ -88,14 +88,14 @@ List<User> infos = mapper.convertValue(list, new TypeReference<List<User>>(){});
 
 
 #### 工程名的构建
-```
+```properties
 spring.application.name=XXX-XXX-XX
 ```
 不能识别下划线"_"，只能识别"-"
 
 
 #### 为表添加唯一性约束
-```
+```sql
 ALTER TABLE msg_queue ADD UNIQUE KEY(resource_name, resource_type);
 ```
 

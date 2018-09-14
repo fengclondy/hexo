@@ -42,6 +42,8 @@ interface UserRepository extends Repository<User, Long> {
 
 如果User用户既使用mysql也使用mongodb呢，也可以做混合使用
 
+<!-- more -->
+
 ```java
 @Entity
 @Document

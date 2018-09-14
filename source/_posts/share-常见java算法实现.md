@@ -9,7 +9,7 @@ categoriets: share
 
 ### 冒泡排序算法
 
-```
+```java
 /**
  * 冒泡排序算法
  */
@@ -69,9 +69,11 @@ public class BubbleSort {
 
 ```
 
+<!-- more -->
+
 ### 选择排序算法
 
-```
+```java
 import java.util.Arrays;
 
 /**
@@ -111,7 +113,7 @@ public class SelectionSort {
 
 ### 直接插入排序算法
 
-```
+```java
 import java.util.Arrays;
 
 /**
@@ -145,7 +147,7 @@ public class InsertSort {
 
 ### 二分法插入排序算法
 
-```
+```java
 /**
  * 二分法插入排序
  */
@@ -198,7 +200,7 @@ public class BinaryInsertSort {
 
 ### 快速排序算法
 
-```
+```java
 import java.util.Arrays;
 
 /**
@@ -260,7 +262,7 @@ public class QuickSort {
 
 ### 基数排序算法
 
-```
+```java
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -323,7 +325,7 @@ public class BasicSort {
 
 ### 二分查找算法
 
-```
+```java
 /**
  * 二分法查找算法
  */

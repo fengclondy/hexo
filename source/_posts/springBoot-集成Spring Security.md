@@ -19,13 +19,16 @@ categories: springBoot
 >security默认的用户名是user, 默认密码是应用启动的时候，通过UUID算法随机生成的。默认的role是"USER"
 
 2、当然，为了方便，可以在application.properties配置你的用户名密码，例如
-```java
+```properties
 # security
 security.user.name=admin
 security.user.password=admin
 ```
 
+<!-- more -->
+
 ### 中阶 Security：内存用户名密码认证
+
 下面进行定制用户名密码（多用户）
 ```java
 package com.favorites.security;

@@ -15,13 +15,13 @@ categories: springBoot
 
 在application.yml中配置：
 
-```
+```yaml
 logging:
   config: classpath:logback-spring.xml
 ```
 
 在resource目录下，创建:logback-spring.xml。完整的 logback-spring.xml 文件：
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="false">
     <!--
@@ -125,3 +125,5 @@ logging:
 </configuration>
 
 ```
+
+<!-- more -->

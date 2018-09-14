@@ -9,20 +9,22 @@ categories: springBoot
 ### springBoot整合MongoDB
 
 #### 1、添加依赖：
-```pom
+```xml
 <dependency>
 	<groupId>org.springframework.boot</groupId> 
 	<artifactId>spring-boot-starter-data-mongodb</artifactId>
 </dependency>
-​````
-
-#### 2、配置文件中添加访问配置信息：
-​```yml
+```
+#### 2、配置文件中添加访问配置信息
+```yml
 spring: 
   data:
     mongodb:
-      uri:  mongodb://root:123456@192.168.1.201:27017/students
+      uri:  mongodb://root:root@127.0.0.1:27017/demo
+#集群设置：spring.data.mongodb.uri=mongodb://user:pwd@ip1:port1,ip2:port2/database
 ```
+
+<!-- more -->
 
 #### 3、利用 MongoTemplate 操作 MongoDB
 

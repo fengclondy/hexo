@@ -11,7 +11,7 @@ categories: sql
 
 
 1、修改主服务器master：
-```
+```shell
 #vi /etc/my.cnf
 [mysqld]
 log-bin=mysql-bin   //[必须]启用二进制日志
@@ -19,7 +19,7 @@ server-id=232      //[必须]服务器唯一ID，默认是1，一般取IP最后�
 ```
 
 2、修改从服务salve:
-```
+```shell
 #vi /etc/my.cnf
 [mysqld]
 log-bin=mysql-bin   //[不是必须]启用二进制日志
@@ -27,21 +27,24 @@ server-id=222      //[必须]服务器唯一ID，默认是1，一般取IP最后�
 ```
 
 3、重启两台服务器的mysql:
-```
+```shell
 service mysqld restart
 
 //若启动不成功,查看日志，一般是my.cnf配置问题
 cat /var/log/mysqld.log
 ```
 
+<!-- more -->
+
 4、在主服务器上建立帐户并授权slave:
-```
+
+```shell
 GRANT REPLICATION SLAVE ON *.* to 'hs'@'%' identified by 'a123.+-'; 
 //一般不用root帐号，@;%;表示所有客户端都可能连，只要帐号(hs)，密码正确(a123.+-)，此处可用具体客户端IP代替，如192.168.0.1，加强安全。
 ```
 
 5、登录主服务器的mysql，查询master的状态
-```
+```mysql
   mysql>show master status;
    +------------------+----------+--------------+------------------+
    | File             | Position | Binlog_Do_DB | Binlog_Ignore_DB |
@@ -53,13 +56,13 @@ GRANT REPLICATION SLAVE ON *.* to 'hs'@'%' identified by 'a123.+-';
 ```
 
 6、配置从服务器Slave：
-```
+```mysql
 mysql>change master to master_host='192.168.0.232',master_user='hs',master_password='a123.+-',master_log_file='mysql-bin.000003',master_log_pos=712;   
 Mysql>start slave;    //启动从服务器复制功能,注意上面的用户名，密码，端口等
 ```
 
 7、检查从服务器复制功能状态：
-```
+```mysql
 mysql> show slave status\G
   Slave_IO_State: Waiting for master to send event
   Master_Host: 192.168.0.232  //主服务器地址

@@ -36,7 +36,7 @@ categories: springBoot
 
 `java -jar spring-boot-demo01.jar --spring.profiles.active = prod`
 
-### 
+<!-- more -->
 
 ### SpringBoot使用数据库，初始化数据
 
@@ -124,7 +124,7 @@ spring:
  spring.jackson.date-format=yyyy-MM-dd HH:mm:ss
  spring.jackson.time-zone=GMT+8
  ```
- 
+
  前台传过来的是String字符的时间，不想转换，可在实体类的date属性头上加入：
  ```xml
  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")

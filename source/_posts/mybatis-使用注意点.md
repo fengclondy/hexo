@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Mybatis01
+title: Mybatis使用注意点
 date: 2018-05-17 02:33:25
 tags: mybatis
 categories: mybatis

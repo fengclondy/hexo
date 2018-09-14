@@ -7,7 +7,7 @@ categories: springCloud
 ---
 
 添加依赖：
-```
+```xml
 <dependency>
     <groupId>org.springframework.cloud</groupId>
     <artifactId>spring-cloud-starter-hystrix</artifactId>
@@ -16,7 +16,7 @@ categories: springCloud
 
 ### Ribbon中引入Hystrix
 
-```
+```java
 @SpringBootApplication
 @EnableDiscoveryClient   
 @EnableCircuitBreaker   #开启断路器功能
@@ -34,6 +34,7 @@ public class RibbonApplication {
 
 }
 ```
+<!-- more -->
 
 ```
 @RestController
@@ -71,7 +72,7 @@ public class ComputeService {
 
 ### Feign使用Hystrix
 
-```
+```java
 @FeignClient(value = "compute-service", fallback = ComputeClientHystrix.class)
 public interface ComputeClient {
 
@@ -81,7 +82,7 @@ public interface ComputeClient {
 }
 ```
 
-```
+```java
 @Component
 public class ComputeClientHystrix implements ComputeClient {
 
@@ -94,7 +95,7 @@ public class ComputeClientHystrix implements ComputeClient {
 ```
 
 最后一定不要忘记的操作，在配置中加入以下代码，开启断路器功能：
-```
+```yaml
 feign:
   hystrix:
     enabled: true

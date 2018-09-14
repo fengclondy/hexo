@@ -102,9 +102,9 @@ docker build 命令会根据 Dockerfile 文件及上下文构建新 Docker 镜�
 
 将当前目录做为构建上下文时，可以像下面这样使用docker build命令构建镜像：
 
-```dockerfile
-docker build .
-Sending build context to Docker daemon  6.51 MB
+```powershell
+$ docker build .
+$ Sending build context to Docker daemon  6.51 MB
 ...
 ```
 
@@ -116,28 +116,28 @@ Sending build context to Docker daemon  6.51 MB
 
 Dockerfile 一般位于构建上下文的根目录下，也可以通过-f指定该文件的位置：
 
-```dockerfile
-docker build -f /path/to/a/Dockerfile .
+```powershell
+$ docker build -f /path/to/a/Dockerfile .
 ```
 >还可以通过-t参数指定构建成镜像的仓库、标签。
 
 
 #### 镜像标签
 
-```dockerfile
-docker build -t nginx/v3 .
+```powershell
+$ docker build -t nginx/v3 .
 ```
 
 如果存在多个仓库下，或使用多个镜像标签，就可以使用多个-t参数：
 
-```dockerfile
-docker build -t nginx/v3:1.0.2 -t nginx/v3:latest .
+```powershell
+$ docker build -t nginx/v3:1.0.2 -t nginx/v3:latest .
 ```
 
 注意，在 Docker 守护进程执行 Dockerfile 中的指令前，首先会对 Dockerfile 进行语法检查，有语法错误时会返回：
 
-```dockerfile
-docker build -t nginx/v3 .
+```powershell
+$ docker build -t nginx/v3 .
 Sending build context to Docker daemon 2.048 kB
 Error response from daemon: Unknown instruction: RUNCMD
 ```
@@ -208,21 +208,21 @@ RUN cmd11     RUN cmd12
 #### 安装、启动、测试
 
 ```powershell
-yum install docker
+$ yum install docker
 ```
 ```powershell
-systemctl start docker.service
-systemctl enable docker.service
+$ systemctl start docker.service
+$ systemctl enable docker.service
 ```
 ```powershell
-docker version
+$ docker version
 ```
 
 #### 配置
 
 Docker 中国官方镜像加速可通过registry.docker-cn.com访问。该镜像库只包含流行的公有镜像，私有镜像仍需要从美国镜像库中拉取。
 
-```
+```json
 vi  /etc/docker/daemon.json
 #添加后
 {
@@ -234,65 +234,65 @@ vi  /etc/docker/daemon.json
 
 
 #### 拉取docker镜像
-```
-docker pull image_name
+```powershell
+$ docker pull image_name
 ```
 #### 查看宿主机上的镜像，Docker镜像保存在/var/lib/docker目录下
-```
-docker images
+```powershell
+$ docker images
 ```
 
 #### 删除镜像
-```
-docker rmi  docker.io/tomcat:7.0.77-jre7   或者  docker rmi b39c68b7af30
+```powershell
+$ docker rmi  docker.io/tomcat:7.0.77-jre7   或者  docker rmi b39c68b7af30
 ```
 
 #### 查看当前有哪些容器正在运行
-```
-docker ps
+```powershell
+$ docker ps
 ```
 
 #### 查看所有容器
-```
-docker ps -a
+```powershell
+$ docker ps -a
 ```
 
 #### 启动、停止、重启容器命令
-```
-docker start container_name/container_id
-docker stop container_name/container_id
-docker restart container_name/container_id
+```powershell
+$ docker start container_name/container_id
+$ docker stop container_name/container_id
+$ docker restart container_name/container_id
 ```
 
 #### 后台启动一个容器后，如果想进入到这个容器，可以使用attach命令
-```
-docker attach container_name/container_id
+```powershell
+$ docker attach container_name/container_id
 ```
 
 #### 删除容器的命令
-```
-docker rm container_name/container_id
+```powershell
+$ docker rm container_name/container_id
 ```
 
 #### 删除所有停止的容器
-```
-docker rm $(docker ps -a -q)
+```powershell
+$ docker rm $(docker ps -a -q)
 ```
 
 #### 查看当前系统Docker信息
-```
-docker info
+```powershell
+$ docker info
 ```
 
 #### 从Docker hub上下载某个镜像
 ```
-docker pull centos:latest
+$ docker pull centos:latest
 ```
 >执行docker pull centos会将Centos这个仓库下面的所有镜像下载到本地repository。
 
 #### 查找Docker Hub上的nginx镜像
-```
-docker search nginx
+```powershell
+$ docker search nginx
 ```
 
 以上操作仅做简单了解，后文有详细说明。这里以一个简单示例，作为展示：
@@ -302,3 +302,27 @@ docker search nginx
 - 访问：http://localhost:91 测试，这里的localhost指的是宿主机的主机名
 ![](http://p2jr3pegk.bkt.clouddn.com/docker02-1.png)
 
+#### 其他
+1、删除所有镜像：
+
+```powershell
+$ docker rmi $(docker images -q)
+```
+
+2、杀死所有正在运行的容器：
+
+```powershell
+$ docker kill $(docker ps -a -q)
+```
+
+3、删除所有已停止的容器：
+
+```powershell
+$ docker rm $(docker ps -a -q)
+```
+
+4、删除所有未打标签的镜像：
+
+```powershell
+$ docker rmi $(docker images -q -f dangling=true)
+```

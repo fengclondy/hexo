@@ -7,7 +7,7 @@ tags:
 
 ### 安装准备
 1、安装maven：
-```
+```powershell
 wget http://mirror.bit.edu.cn/apache/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.tar.gz
 ## 解压
 tar vxf apache-maven-3.5.0-bin.tar.gz
@@ -15,7 +15,7 @@ tar vxf apache-maven-3.5.0-bin.tar.gz
 mv apache-maven-3.5.0 /usr/local/maven3
 ```
 2、修改环境变量，在/etc/profile中添加：
-```
+```properties
 MAVEN_HOME=/usr/local/maven3
 export MAVEN_HOME
 export PATH=${PATH}:${MAVEN_HOME}/bin
@@ -26,11 +26,12 @@ export PATH=${PATH}:${MAVEN_HOME}/bin
 
 ### 安装jenkins
 1、下载安装包：
-```
+
+```powershell
 wget http://mirrors.jenkins.io/war/2.83/jenkins.war
 ```
 2、启动服务(War包自带Jetty服务器)
-```
+```java
 java -jar jenkins.war &
 ```
 3、第一次启动Jenkins时，会自动生成一个随机的口令。该口令用于，在打开`localhost:8080`后输入的密码。
@@ -42,7 +43,7 @@ java -jar jenkins.war &
 
 ### 其他
 1、关于重启和关闭,直接添加相应的关键字即可
-```
+```powershell
 #重启Jenkies
 http://localhost:8080/restart
 #关闭Jenkies

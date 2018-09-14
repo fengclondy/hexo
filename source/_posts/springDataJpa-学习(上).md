@@ -23,7 +23,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 2、使用默认方法
 
-```
+```java
 @Test
 public void testBaseQuery() throws Exception {
 	User user=new User();
@@ -36,6 +36,8 @@ public void testBaseQuery() throws Exception {
 	// ...
 }
 ```
+
+<!-- more -->
 
 ### Repository中查询方法定义规则（自定义方法）
 
@@ -157,7 +159,7 @@ GenerationType有四种方式：
 
 在org.hibernate.id.IdentifierGeneratorFactory中指定了hibernate主键生成策略和各自的具体生成器之间的关系：
 
-```
+```java
 static {  
   GENERATORS.put("uuid", UUIDHexGenerator.class);  
   GENERATORS.put("hilo", TableHiLoGenerator.class);  
@@ -184,7 +186,7 @@ static {
 
 下面两种形式是等价的：
 
-```
+```java
 //方式1
 @Id
 @GeneratedValue(generator = "IDGenerator")
@@ -200,7 +202,7 @@ static {
 
 >1、方法名过长，约定大于配置  
  2、难实现特别复杂的查询
- 
+
 spring data完美支持，使用`@Query`和`@Modifying`来进行改善：  
 `@Query`支持原生Sql语句，标注在方法头部即可。`@Modifying`主要用于更新操作。
 可添加`@Transactional`对事物的支持，查询超时的设置等

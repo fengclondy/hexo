@@ -1,6 +1,6 @@
 ---
 layout: post
-title: mongodb
+title: mongodb-使用
 date: 2018-08-06 06:45:50
 tags: mongodb
 categories: mongodb
@@ -16,6 +16,8 @@ mongod.exe --dbpath "D:\Program Files\MongoDB\Server\4.0\data\db"
 
 正常启动会出现：
 ![](http://p2jr3pegk.bkt.clouddn.com/mongo01-1.png)
+
+> 可以定义.bat文件，然后输入上面内容，避免每次指明db路径，建议在添加完用户后，指明--auth开启权限认证功能
 
 <!-- more -->
 
@@ -35,12 +37,13 @@ It looks like you are trying to access MongoDB over HTTP on the native driver po
 
 ### 基本操作
 默认会连接到test数据库
-
 ```shell
 > show dbs       #查看当前有哪些数据库
 > db              #查看当前所在的数据库
 > use admin       #切换到 admin 数据库
 > show collections      #查看当前数据库中有哪些集合
+> user admin; show users;   #查看admin库下的所有用户
+> db.system.users.find();  #查看所有用户，必须是在admin库下才能看到
 > db.users.insert({username:"george",pwd:"1234"})   #创建了users这个集合，并往其中插入一条数据;另一种实现方式为 save
 > db.users.find()      #查看users集合的所有数据
 > db.users.update({username:"george"},{age:22})   #修改数据，修改的是整个文档，会替换掉数据
@@ -72,19 +75,35 @@ db.createUser({
     roles:[{role:"<role>",db:"<db>"},{role:"<role>",db:"<db>"}]
 })
 ```
+添加成功后，会显示Json格式的信息以及success的成功信息
 >mongodb内建的角色: read, readWrite, dbAdmin, dbOwner, userAdmin，dbAdminAnyDatabase，userAdminAnyDatabase，readWriteAnyDatabase，readAnyDatabase，clusterAdmin
 
-这里创建用户：george，密码：george，权限：只读权限
+#### 操作
+这里创建用户：root，密码：root，权限：只读权限
 ```shell
-> db.createUser({user:"george",pwd:"george",roles:[{role:"read",db:"demo"}]})
+> db.createUser({user:"root",pwd:"root",roles:[{role:"read",db:"demo"}]})
 ```
 然后进行认证,以后都需要进行权限认证
 ```shell
->db.auth("george","george")
+>db.auth("root","root")
 ```
+>注意，查看添加的用户信息在admin表中查看，创建了demo库，但是没有显示，是因为没有数据，向其中茶树一条数据即可完成显示。还需要注意的是插入操作要先选择库。
+
+#### 远程连接
+为了以后方便，在配置文件mongod.cfg中设置：
+```yaml
+security:
+  authorization: enabled
+```
+重新启动服务端，然后通过远程连接
+```shell
+>mongo admin -u root -p root    //连接到Mongo数据库
+```
+
 
 ### 开启监控
 1、自带的功能：
+
 ```powershell
 $ mongostat
 ```
@@ -93,12 +112,13 @@ $ mongostat
 $ mongotop
 ```
 或者(启动的时候添加--rest参数，开启28017端口，然后通过浏览器访问):
-```
+```shell
 ./mongod --dbpath ../data/db/ --rest
 ```
 
 2、自带的数据库状态查看：
-```
+
+```shell
 >db.serverStatus()
 >db.stats()
 >db.collection.stats()

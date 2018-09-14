@@ -17,7 +17,7 @@ categoriets: spring
 逻辑事务：是Spring管理的事务，不同于物理事务，逻辑事务提供更丰富的控制，而且如果想得到Spring事务管理的好处，必须使用逻辑事务，因此在Spring中如果没特别强调一般就是逻辑事务；
 
 - 2、@Transactional可指定的事务属性
-```
+```shell
 @isolation：用于指定事务的隔离级别。默认为底层事务的隔离级别
 
 @noRollbackFor：指定遇到特定异常时不回滚事务
@@ -35,11 +35,13 @@ categoriets: spring
 @timeout：指定事务的超长时长。
 ```
 
+<!-- more -->
+
 - 3、属性参数的含义
 
 事务隔离级别：用来解决并发事务时出现的问题，其使用TransactionDefinition中的静态变量来指定：
 
-```
+```shell
 ISOLATION_DEFAULT：默认隔离级别，即使用底层数据库默认的隔离级别；
 ISOLATION_READ_UNCOMMITTED：未提交读；
 ISOLATION_READ_COMMITTED：提交读，一般情况下我们使用这个；
@@ -65,7 +67,7 @@ PROPAGATION_NESTED：如果当前存在事务，则创建一个事务作为当�
 
 - 1、在配置文件的头部引入<tx>和<aop>命名空间（以spring-mybatis为例）
 
-```
+```xml
  <beans
 xmlns:aop="http://www.springframework.org/schema/aop"
 xmlns:tx="http://www.springframework.org/schema/tx"
@@ -90,7 +92,7 @@ xsi:schemaLocation="
 
 >注：被申明为事务的方法一定要抛异常，且该异常不能被try{}cathch{}捕获
 
- 
+
 #### 三、注意要点
 
 - 一个类的内部，方法 A 调用方法 B 。在方法 B 上申明事务而 A 没有，则方法 B 的事务不起作用。如果在 A 上申明而 B 上没有，则方法 B 会自动参与该事务。（重要）
@@ -104,7 +106,7 @@ xsi:schemaLocation="
 
 编程式事务的实现：
 
-```
+```java
 Connection conn = null;  
 UserTransaction tx = null;  
 try {  
