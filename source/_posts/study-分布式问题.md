@@ -1,6 +1,6 @@
 ---
 layout: post
-title: study-集群、分布式、负载均衡的概念理解
+title: study-分布式事务
 date: 2018-08-10 00:57:54
 tags: study
 categories: study
@@ -17,6 +17,8 @@ categories: study
 本质上来说，分布式事务就是为了保证不同数据库的数据一致性。
 
 >此处特别注意的是，区别于数据库的事务ACID（即原子性，隔离性，一致性和持久性）
+
+<!-- more -->
 
 #### 分布式事务产生的原因
 

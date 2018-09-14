@@ -1,6 +1,6 @@
 ---
 layout: post
-title: springBoot-整合MongoDB
+title: springBoot-其他
 date: 2018-09-04 08:46:27
 tags: springBoot
 categories: springBoot
@@ -13,6 +13,8 @@ categories: springBoot
 4. classpath:/ (类路径config下).
 
 优先级由高到底，高优先级的配置会覆盖低优先级的配置
+
+<!-- more -->
 
 ### springBoot启动顺序
 这里调用的是AbstractApplicationContext的refresh()方法刷新上下文。
