@@ -2,7 +2,8 @@
 layout: post
 title: linux-安装Jenkins，部署SpringBoot工程
 date: 2018-07-23 07:07:39
-tags:
+tags: linux
+categories: linux
 ---
 
 ### 安装准备

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: docker --- docker-compose.yml文件详解
+title: docker-compose.yml文件详解
 date: 2018-06-09 06:11:41
 tags: docker
 categoriets: docker

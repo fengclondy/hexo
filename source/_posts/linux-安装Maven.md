@@ -2,7 +2,8 @@
 layout: post
 title: linux-搭建maven
 date: 2018-08-07 01:31:36
-tags:
+tags: linux
+categories: linux
 ---
 
 ### 安装

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: elasticsearch进阶
+title: ES进阶
 date: 2018-03-22 08:29:47
 tags: elasticsearch
 categories: elasticsearch

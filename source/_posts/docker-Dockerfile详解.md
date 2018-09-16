@@ -1,6 +1,6 @@
 ---
 layout: post
-title: docker -- Dockerfile文件详解
+title: Dockerfile文件详解
 date: 2018-05-09 02:43:09
 tags: docker
 categoriets: docker

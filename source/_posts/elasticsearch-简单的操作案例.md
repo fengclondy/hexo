@@ -1,6 +1,6 @@
 ---
 layout: post
-title: elasticsearch索引分词 ---简单的操作案例
+title: ES之索引分词 ---简单的操作案例
 date: 2018-03-22 10:47:15
 tags: elasticsearch
 categories: elasticsearch

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: elasticsearch --- 性能调优
+title: ES之性能调优
 date: 2018-03-28 03:00:32
 tags: elasticsearch
 categories: elasticsearch

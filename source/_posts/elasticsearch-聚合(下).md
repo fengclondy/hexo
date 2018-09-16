@@ -1,6 +1,6 @@
 ---
 layout: post
-title: elasticsearch高级篇 --- 聚合（下）
+title: ES高级篇 --- 聚合（下）
 date: 2018-03-27 05:46:21
 tags: elasticsearch
 categories: elasticsearch

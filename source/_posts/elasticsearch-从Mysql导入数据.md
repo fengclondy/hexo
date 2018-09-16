@@ -1,6 +1,6 @@
 ---
 layout: post
-title: elasticsearch--从mysql中获取数据导入ES
+title: ES之从mysql中获取数据导入至ES
 date: 2018-07-27 02:12:00
 tags: elasticsearch
 categories: elasticsearch

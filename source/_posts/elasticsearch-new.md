@@ -1,6 +1,6 @@
 ---
 layout: post
-title: elasticsearch-new
+title: ES 6.x新版本特性
 date: 2018-06-15 06:13:50
 tags: elasticsearch
 categories: elasticsearch

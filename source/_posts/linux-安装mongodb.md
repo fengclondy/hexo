@@ -2,7 +2,8 @@
 layout: post
 title: linux-安装MongoDB
 date: 2018-08-06 09:52:38
-tags:
+tags: linux
+categories: linux
 ---
 
 ### 下载与安装

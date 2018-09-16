@@ -1,6 +1,6 @@
 ---
 layout: post
-title: elasticsearch全文所有引擎的搭建
+title: ES之全文所有引擎的搭建
 date: 2018-03-23 10:15:51
 tags: elasticsearch
 categories: elasticsearch

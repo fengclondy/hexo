@@ -2,7 +2,8 @@
 layout: post
 title: 小字典
 date: 2018-03-15 06:16:42
-tags:
+tags: note
+categories: note
 ---
 
 ### 好用的开源库

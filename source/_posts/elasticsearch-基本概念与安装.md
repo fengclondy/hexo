@@ -1,6 +1,6 @@
 ---
 layout: post
-title: elasticsearch 6.x的基本概念与安装
+title: ES 6.x的基本概念与安装
 date: 2018-03-14 10:49:15
 tags: elasticsearch
 categories: elasticsearch

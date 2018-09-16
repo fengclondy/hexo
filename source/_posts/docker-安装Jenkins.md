@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Docker安装Jenkins
+title: Docker上安装Jenkins
 date: 2018-06-13 09:41:39
 tags: docker
 categoriets: docker

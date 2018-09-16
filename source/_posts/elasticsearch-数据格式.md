@@ -1,6 +1,6 @@
 ---
 layout: post
-title: elasticsearch数据格式
+title: ES之数据格式
 date: 2018-03-29 02:25:16
 tags: elasticsearch
 categories: elasticsearch

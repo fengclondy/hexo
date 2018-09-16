@@ -1,6 +1,6 @@
 ---
 layout: post
-title: elasticsearch--- Java High Level REST Client使用
+title: ES之Java High Level REST Client使用
 date: 2018-03-30 01:11:36
 tags: elasticsearch
 categories: elasticsearch

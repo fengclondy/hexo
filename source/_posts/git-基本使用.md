@@ -1,8 +1,9 @@
 ---
 layout: post
-title: git
+title: Git的基本使用
 date: 2018-02-09 01:12:47
-tags:
+tags: git
+categories: git
 ---
 
 git中最重要的三个点：工作区、暂存区和树形分支

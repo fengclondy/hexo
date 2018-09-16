@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 使用Java High Level REST Client操作elasticsearch
+title: SpringBoot整合ES
 date: 2018-03-21 02:22:00
 tags: elasticsearch
 categories: elasticsearch

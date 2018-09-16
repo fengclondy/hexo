@@ -2,7 +2,8 @@
 layout: post
 title: linux--其他相关
 date: 2018-06-11 05:30:20
-tags:
+tags: linux
+categories: linux
 ---
 
 

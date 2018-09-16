@@ -1,6 +1,6 @@
 ---
 layout: post
-title: elasticsearch 6.x使用
+title: ES 6.x使用
 date: 2018-03-15 05:57:30
 tags: elasticsearch
 categories: elasticsearch

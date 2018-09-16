@@ -2,7 +2,8 @@
 layout: post
 title: redis--事务处理
 date: 2018-08-06 03:26:09
-tags:
+tags: redis
+categories: redis
 ---
 
 ### 通过MULTI开启事物，然后命令入列，EXEC结束事物

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: hexoBlog
+title: hexoBlog语法备忘录
 date: 2018-08-07 07:00:01
 tags:
 ---

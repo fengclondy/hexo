@@ -1,6 +1,6 @@
 ---
 layout: post
-title: elasticsearch高级篇 --- 地理位置
+title: ES高级篇 --- 地理位置
 date: 2018-03-27 09:52:15
 tags: elasticsearch
 categories: elasticsearch

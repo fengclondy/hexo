@@ -1,6 +1,6 @@
 ---
 layout: post
-title: elasticsearch高级篇（2）
+title: ES高级篇（2）
 date: 2018-03-26 09:26:13
 tags: elasticsearch
 categories: elasticsearch

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: elasticsearch---案例分析
+title: ES之案例分析
 date: 2018-04-03 01:45:29
 tags: elasticsearch
 categories: elasticsearch

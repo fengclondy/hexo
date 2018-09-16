@@ -1,6 +1,6 @@
 ---
 layout: post
-title: elasticsearch--Kibana使用完整版教程
+title: ES之Kibana使用完整版教程
 date: 2018-06-11 06:15:41
 tags: elasticsearch
 categories: elasticsearch

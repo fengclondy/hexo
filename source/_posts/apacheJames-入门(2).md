@@ -182,56 +182,58 @@ public class BizMaillet extends GenericMailet {   //GenericMailet 是一个maile
 ```
 
 编译
-    我们把这两个java文件的class文件编译成一个名字为：jamesstudy.jar 的jar文件。
+   我们把这两个java文件的class文件编译成一个名字为：jamesstudy.jar 的jar文件。
     
 ##### 发布－Matcher 和 Mailet以及config.xml
 
 1.发布jar文件
 
-    我们把这个jar文件发布到项目根目录 \apps\james\SAR-INF\lib 下面
+我们把这个jar文件发布到项目根目录 \apps\james\SAR-INF\lib 下面
     
-    注意：如果没有找到相关目录，则需要先启动一遍james,相关的文件夹才会被创建。还有一点需要特别说明：lib目录是通过我们手动创建的。
+>注意：如果没有找到相关目录，则需要先启动一遍james,相关的文件夹才会被创建。还有一点需要特别说明：lib目录是通过我们手动创建的。
 
 2.将Matcher 和 Mailet发布到config.xml中，config.xml在james\apps\james\SAR-INF\下
        
-1）我们首先找到如下内容:   
+1）我们首先找到如下内容: 
 ```xml
-   <mailetpackages>  
-      <mailetpackage>org.apache.james.transport.mailetsmailetpackage>  
-      <mailetpackage>org.apache.james.transport.mailets.smimemailetpackage>  
-   <mailetpackages>  
-   <matcherpackages>  
-      <matcherpackage>org.apache.james.transport.matchersmatcherpackage>  
-      <matcherpackage>org.apache.james.transport.matchers.smimematcherpackage>  
-   <matcherpackages>
+<mailetpackages>  
+  <mailetpackage>org.apache.james.transport.mailetsmailetpackage>  
+  <mailetpackage>org.apache.james.transport.mailets.smimemailetpackage>  
+<mailetpackages>  
+<matcherpackages>  
+  <matcherpackage>org.apache.james.transport.matchersmatcherpackage>  
+  <matcherpackage>org.apache.james.transport.matchers.smimematcherpackage>  
+<matcherpackages>
 ```
 
 2）加入包声明:
 ```xml
-   <mailetpackages>  
-      <mailetpackage>com.yy.jamesstudymailetpackage>  
-      <mailetpackage>org.apache.james.transport.mailetsmailetpackage>  
-      <mailetpackage>org.apache.james.transport.mailets.smimemailetpackage>  
-   <mailetpackages>  
+<mailetpackages>  
+  <mailetpackage>com.yy.jamesstudymailetpackage>  
+  <mailetpackage>org.apache.james.transport.mailetsmailetpackage>  
+  <mailetpackage>org.apache.james.transport.mailets.smimemailetpackage>  
+<mailetpackages>  
   
-   <matcherpackages>  
-      <matcherpackage>com.yy.jamesstudy matcherpackage>  
-      <matcherpackage>org.apache.james.transport.matchersmatcherpackage>  
-      <matcherpackage>org.apache.james.transport.matchers.smimematcherpackage>  
-   <matcherpackages>
+<matcherpackages>  
+  <matcherpackage>com.yy.jamesstudy matcherpackage>  
+  <matcherpackage>org.apache.james.transport.matchersmatcherpackage>  
+  <matcherpackage>org.apache.james.transport.matchers.smimematcherpackage>  
+<matcherpackages>
 ```
 
 3）加入 Matcher 和 Mailet的关联关系
-     找到 `<processor name="root"></processor>`元素在它的下面加入
+找到 `<processor name="root"></processor>`元素在它的下面加入
 xml 代码:
+
 ```xml
-   <mailet match="BizMatcher" class="BizMaillet"/> 
+  <mailet match="BizMatcher" class="BizMaillet"/> 
 ```
 
 Mailet元素代表了一个matcher和一个mailet的组合。Match属性：是指matcher的类名。而class 属性：是指mailet的类名。
- 最后别忘了，保存退出。并且重新启动james服务器。
+最后别忘了，保存退出。并且重新启动james服务器。
 
- 测试－ 验证我们的mail应用程序
+测试－ 验证我们的mail应用程序:
+
 我们主要通过mail类来测试我们的应用。还记得我们刚才写的那个mail类吗？！在那个类中我们初始化了相关的信息.
                    username = "kakaxi";
                    password = "kakaxi";
@@ -261,9 +263,9 @@ content:How are you today!
 总结
 
 最终我们看到发送者和正文的信息。That’s all ! 大功告成。
-         其实james的功能是非常非常强大的，尤其是它的Mailet API能够帮助我们完成很多与邮件邮件有关的工作如过滤垃圾邮件。
-         用它我们甚至可以搭建我们自己的企业邮件服务器。
-         我们通过james接收到的邮件，然后用matcher找到我们想要处理的邮件，然后通过mailet做一些业务上的处理。这篇文章涵盖的面很小。如果大家有兴趣可以研究一下james项目。
-         Config.xml实际上是最重要的文件，如果你把它研究透彻了那么就就算把Mailet API研究透了。
+其实james的功能是非常非常强大的，尤其是它的Mailet API能够帮助我们完成很多与邮件邮件有关的工作如过滤垃圾邮件。
+用它我们甚至可以搭建我们自己的企业邮件服务器。
+我们通过james接收到的邮件，然后用matcher找到我们想要处理的邮件，然后通过mailet做一些业务上的处理。这篇文章涵盖的面很小。如果大家有兴趣可以研究一下james项目。
+Config.xml实际上是最重要的文件，如果你把它研究透彻了那么就就算把Mailet API研究透了。
          
-         参考：http://www.cnblogs.com/softidea/p/5348683.html
+参考：http://www.cnblogs.com/softidea/p/5348683.html
