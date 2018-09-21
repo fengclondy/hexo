@@ -63,11 +63,11 @@ It looks like you are trying to access MongoDB over HTTP on the native driver po
 
 ### 开启安全认证
 启动服务时，开启安全认证：
-```
+```shell
 mongod --auth
 ```
 启动客户端，发现仍可以连接，但是无法操作。此时需要在admin数据库中创建用户,语法如下：
-```
+```json
 db.createUser({
     user:"username",
     pwd:"password",

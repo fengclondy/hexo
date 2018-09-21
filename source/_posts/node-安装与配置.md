@@ -43,3 +43,5 @@ $ forever start index.js
 ```powershell
 $ forever stop index.js
 ```
+
+<!-- more -->

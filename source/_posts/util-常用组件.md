@@ -8,7 +8,7 @@ categories: util
 
 ### 使用POI组件导出excel
 1、添加依赖:
-```
+```xml
 dependency>
 	<groupId>org.apache.poi</groupId>
 	<artifactId>poi-ooxml</artifactId>
@@ -16,8 +16,11 @@ dependency>
 </dependency>
 ```
 
+<!-- more -->
+
 2、创建实体类：
-```
+
+```java
 package excel;
 
 import java.util.Date;
@@ -74,7 +77,8 @@ public class Student {
 ```
 
 3、具体的excel操作:
-```
+
+```java
 package excel;
 
 import java.io.FileOutputStream;
@@ -161,7 +165,7 @@ public class CreateSimpleExcelToDisk {
 
 ### 利用iText 组件导出PDF
 1、添加依赖
-```
+```xml
 <dependency>
 	<groupId>com.itextpdf</groupId>
 	<artifactId>itextpdf</artifactId>
@@ -175,7 +179,7 @@ public class CreateSimpleExcelToDisk {
 </dependency>
 ```
 2、具体操作：
-```
+```java
 package excel;
 
 import java.io.FileOutputStream;
@@ -222,7 +226,7 @@ public class CreatPdf {
 ### 上传文件到七牛云
 
 1、引入依赖：
-```
+```xml
 <dependency>
     <groupId>com.qiniu</groupId>
     <artifactId>qiniu-java-sdk</artifactId>
@@ -231,7 +235,7 @@ public class CreatPdf {
 ```
 
 2、具体操作：
-```
+```java
 /**
  * 上传文件到七牛云存储demo
  * @author GIE
@@ -245,13 +249,13 @@ public class QiniuTest {
 		 Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
 		 UploadManager uploadManager = new UploadManager();
 		    try {
-		       /**
-                         * 上传文件
-                             *
-                         * @param file  上传的文件对象
-                         * @param key   上传文件保存的文件名(下载时候使用,不能重复)
-                         * @param token 上传凭证
-                            */
+		    /**
+              * 上传文件
+              *
+              * @param file  上传的文件对象
+              * @param key   上传文件保存的文件名(下载时候使用,不能重复)
+              * @param token 上传凭证
+            */
            Response  response = uploadManager.put(new File("d:/1.png"), "1.png", getUpToken(auth));
 		    } catch (QiniuException e) {
 		        Response r = e.response;

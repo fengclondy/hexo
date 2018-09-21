@@ -26,7 +26,10 @@ exit
 !
 ```
 
+<!-- more -->
+
 #### 脚本解释说明
+
 Elasticsearch启动需要jdk支持，故首先设置jdk系统变量
 ```powershell
 export JAVA_HOME=/usr/local/java/jdk1.8.0_121

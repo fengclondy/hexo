@@ -38,7 +38,10 @@ SET NULL
 private String noColumn;
 ```
 
+<!-- more -->
+
 #### 事物机制
+
 数据库事务中的四大特性，ACID。即：A:原子性(Atomicity)，C:一致性(Consistency)，I:隔离性(Isolation)，D:持久性(Durability)。
 
 ```
@@ -117,9 +120,13 @@ CAP定理，又被叫作布鲁尔定理，即一致性，高可用和分区容�
 #### linux下批量注释代码
 批量注释：ctrl+V然后上下键选中操作行 -->按下大写I-->输入"#"或者"\\"-->按两下ESC，即可。
 
+取消注释：与批量注释操作相似。
 
 #### @autowired报空指针
-`@autowired`写在变量上的注入要等到类完全加载完，才会将相应的bean注入，而变量是在加载类的时候按照相应顺序加载的，所以变量的加载要早于`@autowired`变量的加载
+`@autowired`写在变量上的注入要等到类完全加载完，才会将相应的bean注入，而变量是在加载类的时候按照相应顺序加载的，所以变量的加载要早于`@autowired`变量的加载。
+>特别注意如果类是new出来的，那么就不能在类中使用@Autowired导入spring中的bean。可以在类的头部加上@Component，将其控制权交由spring容器管理。
 
 
-取消注释：
+
+
+

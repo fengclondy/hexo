@@ -29,3 +29,5 @@ Lettuce取代了Jedis，成为底层连接Redis的方案。Lettuce是一个可�
 如果你留意访问信息，会发现不少大厂已经悄然升级到HTTP/2了，其中升级最多的是资源类站点，毕竟二进制传输和首部压缩之类的特性可以直接享受。但是要想享受HTTP/2的全部好处，程序上不直接照搬原来的代码是不可能的，起码Server Push之类就做不到。Spring Boot 2.0中，无论选择Tomcat, Netty, Jetty哪一个作为Web容器，都可以支持HTTP/2。但是注意，如果要使用HTTP/2的全部特性，必须使用Servlet 4.0及以上版本。JDK 9新增的HTTPClient可以完整支持HTTP/2。
 
 当然，Spring Boot 2.0的新特性还不止这些，还有OAuth 2.0、嵌入式Netty、Kotlin、JOOQ、Quartz、WebFlux响应式编程等等。
+
+<!-- more -->

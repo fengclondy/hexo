@@ -85,12 +85,12 @@ yum install -y lrzsz
 
 ```powershell
 $ cd  /etc/sysconfig/network-scripts/  #进入网络配置文件目录
-$ vi  ifcfg-eth0  #编辑配置文件，添加修改以下内容
+$ vi  ifcfg-eth0  #编辑配置文件，添加修改以下内容(可能是ifcfg-ensxx)
 ```
 
 参考如下示例，进行修改：
 
-```
+```powershell
  DEVICE=eth0    #设备名称
  HWADDR=00:0C:29:8D:24:73   #mac地址
  TYPE=Ethernet    #网络类型
@@ -107,7 +107,7 @@ $ vi  ifcfg-eth0  #编辑配置文件，添加修改以下内容
  IPV6_FAILURE_FATAL=no
  NAME=eno16777736
  UUID=ae0965e7-22b9-45aa-8ec9-3f0a20a85d11
- ONBOOT=yes     #开机自启动
+ ONBOOT=yes     #开机自启动(就是这里)
  IPADDR0=210.28.188.98     #设置静态IP地址
  PREFIXO0=24    #设置子网掩码
  GATEWAY0=210.28.188.1    #设置网关

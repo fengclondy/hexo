@@ -23,6 +23,9 @@ tags:
 
  
 
+<!-- more -->
+
+
 #### 二、事务
 
 1、事务
@@ -38,7 +41,7 @@ tags:
 
 2、spring中的事务管理
 
- 
+
 分层开发: 事务处于service层
 
 Spring的事务管理分成两类:
@@ -124,7 +127,7 @@ spring中的注解：
 
 一对多|多对一关系中,放置sql语句冗余.一般选择一的一方放弃维护,inverse属性设置为true.
 
- 
+
 #### 2.many-to-one 多对一关系映射配置(在多的一方实体映射文件中配置)
 
 ```
@@ -143,7 +146,7 @@ spring中的注解：
          column="lkm_cust_id" 
          class="Customer" ></many-to-one>
 ```
- 
+
 
 #### 3.many-to-many多对多关系映射配置
 

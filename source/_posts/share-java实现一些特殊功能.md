@@ -11,6 +11,8 @@ categoriets: share
 
 原理及实现
 
+<!-- more -->
+
 ```java
 /**
  * 打印星星
@@ -150,7 +152,7 @@ public class PrintStar {
 }
 ```
 
-<!-- more -->
+
 
 ### 打印水仙花数
 

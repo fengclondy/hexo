@@ -52,6 +52,8 @@ npx webpack --mode development  // 设置mode为开发模式，打包后的文�
 
 当执行npx webpack命令的时候，webpack会自动查找项目中src目录下的index.js文件，然后进行打包，生成一个dist目录并存在一个打包好的main.js文件
 
+<!-- more -->
+
 ### 文件结构
 
 在项目下创建一个webpack.config.js(默认，可修改)文件来配置webpack

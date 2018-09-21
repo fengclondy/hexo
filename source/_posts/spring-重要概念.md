@@ -1,7 +1,7 @@
 ---
 layout: post
-title: spring--事务管理
-date: 2017-04-27 02:32:56
+title: spring--重要概念
+date: 2017-05-27 02:32:56
 tags: spring
 categoriets: spring
 ---

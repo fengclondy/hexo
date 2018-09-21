@@ -78,7 +78,7 @@ JSTL(JSP Standard Tag Library,JSP标准标签库)是一个不断完善的开放�
 (2))通过eclipse部署
 新建工程的时候直接部署，在JSP使用JSTL-core标签库，core在jsp中的使用。
 在 web.xml 中添加
-```
+```jsp
 <jsp-config>
 　　<taglib>
 　　　　<taglib-uri>http://java.sun.com/jsp/jstl/core</taglib-uri>
@@ -87,7 +87,7 @@ JSTL(JSP Standard Tag Library,JSP标准标签库)是一个不断完善的开放�
 </jsp-config>
 ```
 在jsp文件中添加:
-```
+```jsp
 <%@ taglib prefix=“c” uri=“http://java.sun.com/jsp/jstl/core” %>或<%@ taglib prefix="c" uri="/WEB-INF/c.tld" %>
 使用<c:out value=“HelloWorld” />
 ```
@@ -100,7 +100,7 @@ JSTL(JSP Standard Tag Library,JSP标准标签库)是一个不断完善的开放�
 #### Core的条件控制标签
 单分支条件  :       `<c:if > 属性:test [var] [scope]`
 多分支条件 ：   
-```
+```jsp
 <c:choose>
 	<c:whe> 属性: test
  　  <c:otherwise>
@@ -111,12 +111,12 @@ JSTL(JSP Standard Tag Library,JSP标准标签库)是一个不断完善的开放�
 输出转换成的URL :        `<c:url > 属性:value [context] [var] [scope]  和  <jsp:include >`
 相似用于包含其它页面的内容:`<c:import >属性:url [context] [charEncoding] [var] [scope]`
 重定向 : 
-```
+```jsp
 <c:redirect >属性: url [context]   与  
 <c:url><c:import><c:redirect>
 ```
 配合使用,用于传参
-```
+```jsp
 <c:param >属性: name value
 ```
 
@@ -127,7 +127,7 @@ JSTL(JSP Standard Tag Library,JSP标准标签库)是一个不断完善的开放�
 (属性varStatus和var相似设置一个作用域变量;只是varStatus作用域变量中存的是包括运行状态的对象;此对象包含如下属性 :  current index count first last begin end step
 
 简单循环
-```
+```jsp
 <%@ page language="java" contentType="text/html; charset=GBK"%>
 <%@ taglib prefix="c" uri="/WEB-INF/c.tld" %>
 <html>
@@ -144,7 +144,7 @@ JSTL(JSP Standard Tag Library,JSP标准标签库)是一个不断完善的开放�
 ```
 
 循环迭代:
-```
+```jsp
 <%@ page language="java" contentType="text/html; charset=GBK"%>
 <%@ taglib prefix="c" uri="/WEB-INF/c.tld" %>
 <html>
@@ -162,7 +162,7 @@ JSTL(JSP Standard Tag Library,JSP标准标签库)是一个不断完善的开放�
 
 #### 在JSP使用JSTL-format标签库
 在 web.xml 中添加:
-```
+```jsp
 <jsp-config>
 　　<taglib>
 　　　　<taglib-uri>http://java.sun.com/jstl/fmt</taglib-uri>
@@ -190,7 +190,7 @@ type取值:
 例:`<fmt:formatNumber value=“” pattern=“###.##” />`
 
 format实例:
-```
+```jsp
 <%@ page language="java" contentType="text/html; charset=GBK"%>
 <%@ taglib prefix="fmt" uri="/WEB-INF/fmt.tld" %>
 <html>
@@ -215,7 +215,7 @@ format实例:
 
 Json是一种特殊的Map，只是Json中的键值用冒号隔开，而Map中的是等号隔开.
 
-```
+```json
 {"vessel"="999","voyage"="SGQ0","imono"="010203"}      //Map格式
 {"vessel"："999","voyage"："SGQ0","imono"："010203"}     //Json格式
 ```
@@ -223,7 +223,7 @@ Json是一种特殊的Map，只是Json中的键值用冒号隔开，而Map中的
 在easyui中，对于map格式的数组，一般用List<Map<String,Object>>格式存放数据，如果知道对应的数据的model，可以直接用List<E(实体)>。
 
 例如：
-```
+```json
 [
   {"vessel"="999","voyage"="SGQ0","imoNo"="010203"},
   {"vessel"="789","voyage"="GY","imoNo"="010204"}，
@@ -234,7 +234,7 @@ Json是一种特殊的Map，只是Json中的键值用冒号隔开，而Map中的
 
 
 例如：
-```
+```json
 [
   {"vessel"："999","voyage"："SGQ0","imoNo"："010203"},
   {"vessel"："789","voyage"："GY","imoNo"："010204"}，
@@ -242,7 +242,7 @@ Json是一种特殊的Map，只是Json中的键值用冒号隔开，而Map中的
 ]
 ```
 对于json格式的数据，则需要用JsonArray进行接收。
-```
+```java
 String str = "{...}";
 JsonArray  jsonArray = new JsonArray(str);
 JSONObject Object = JsonArray.getJSONObject(i); 

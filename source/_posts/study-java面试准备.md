@@ -13,9 +13,11 @@ categories: study
 
 - 适合多个相同程序代码的线程去处理同一资源的情况，可以把线程同程序中的数据有效的分离， 较好地体现了面向对象的设计思想。
 - 可以避免由于 Java 的单继承特性带来的局限。例如，class Student 已经继承了 class Person，如 果要把 Student 类放入多线程中去，那么就不能使用继承 Thread 类的方式。
-因为在 Java 中规定 了一个类只能有一个父类，不能同时有两个父类。所以就只能使用实现 Runnable 接口的方式了。
+  因为在 Java 中规定 了一个类只能有一个父类，不能同时有两个父类。所以就只能使用实现 Runnable 接口的方式了。
 - 增强了代码的健壮性，代码能够被多个线程共同访问，代码与数据是独立的。多个线程可以操 作相同的数据，与它们的代码无关。
-当线程被构造时，需要的代码和数据通过一个对象作为构 造函数实参传递进去，这个对象就是一个实现了 Runnable 接口的类的实例
+  当线程被构造时，需要的代码和数据通过一个对象作为构 造函数实参传递进去，这个对象就是一个实现了 Runnable 接口的类的实例
+
+<!-- more -->
 
 ### 线程同步的方法
 
@@ -75,11 +77,14 @@ AOP是一种编程范式，提供从另一个角度来考虑程序结构以完�
 AOP为开发者提供了一种描述横切关注点的机制，并能够自动将横切关注点织入到面向对象的软件系统中，从而实现了横切关注点的模块化。
 AOP能够将那些与业务无关，却为业务模块所共同调用的逻辑或责任，例如事务处理、日志管理、权限控制等，封装起来，便于减少系统的重复代码，降低模块间的耦合度，并有利于未来的可操作性和可维护性。
 
-### ConcurrentHashMap处理并发
-1.7和1.8版本的是有区别的，主要体现在：存放数据的 HashEntry 改为 Node，但作用都是相同的；分段锁技术换成了 CAS + synchronized 来保证并发安全性。
+### ConcurrentHashMap 处理并发
+
+HashMap,Hashtable与ConcurrentHashMap都是实现的哈希表数据结构，在随机读取的时候效率很高。Hashtable实现同步是利用synchronized关键字进行锁定的，其是针对整张哈希表进行锁定的，即每次锁住整张表让线程独占，在线程安全的背后是巨大的浪费。ConcurrentHashMap和Hashtable主要区别就是围绕着 **锁的粒度** 进行区别以及如何区锁定。
+
+ConcurrentHashMap  1.7和1.8版本的是有区别的，主要体现在：存放数据的 HashEntry 改为 Node，但作用都是相同的；分段锁技术换成了 CAS + synchronized 来保证并发安全性。
 
 先说说HashMap。HashMap底层是基于 数组和链表 进行实现的。具体的可查看源码
-```
+```java
 public HashMap() {
     this(DEFAULT_INITIAL_CAPACITY, DEFAULT_LOAD_FACTOR);
 }
@@ -110,7 +115,7 @@ public HashMap(int initialCapacity, float loadFactor) {
 然后在根据equals()方法找到对应的Entry，这也很好的解释了“为什么覆写equals()方法一定要覆写HashCode()方法”，因为hashcode相同，equals不一定相同；equals相同，hashcode必同。
 
 HashMap的遍历方式：
-```
+```java
 ### 方式1（推荐）
 Iterator<Map.Entry<String, Integer>> entryIterator = map.entrySet().iterator();
 while (entryIterator.hasNext()) {
@@ -130,6 +135,10 @@ ConcurrentHashMap 采用了分段锁技术，其中 Segment 继承于 ReentrantL
 不会像 HashTable 那样不管是 put 还是 get 操作都需要做同步处理，
 理论上 ConcurrentHashMap 支持 CurrencyLevel (Segment 数组数量)的线程并发。
 每当一个线程占用锁访问一个 Segment 时，不会影响到其他的 Segment，在整个过程都不需要加锁。
+
+
+
+> 其他并发类：`ConcurrentLinkedQueue`,`CopyOnWriteArrayList`,`CopyOnWriteArraySet`,`LinkedBlockingQueue`,`ArrayBlockingQueue`,`LinkedBlockingQueue`,`DelayQueue`,`LinkedTransferQueue`,`SynchronousQueue`
 
 
 ### Java 中的设计模式&回收机制 
@@ -177,7 +186,7 @@ ConcurrentHashMap 采用了分段锁技术，其中 Segment 继承于 ReentrantL
 - 省去了new运算符，降低了系统内容的使用频率，减轻了GC的压力。
 - 有些类只需要使用一个，这样就可以使用单例了。
 
-```
+```java
 /**
  * 单例设计模式，饿汉式(一上来就new对象)
  */
@@ -247,23 +256,23 @@ mysql索引的用途：
 - 简化聚合数据操作
 
  索引的数据结构：B-、B+、R-、散列
- 
+
  ### 索引的实现方式
- 
+
  1、B+树
- 
+
  2、散列索引
- 
+
  3、位图索引
- 
+
  ### 对象锁和类锁
- 
+
  1. synchronized 加到 static 方法前面是给class 加锁，即类锁；而synchronized 加到非静态方法前面是给对象上锁。
- 
+
  2. 如果多线程同时访问同一类的 类锁（synchronized 修饰的静态方法）以及对象锁（synchronized 修饰的非静态方法）这两个方法执行是异步的，原因：类锁和对象锁是2中不同的锁。
- 
+
  3. 类锁对该类的所有对象都能起作用，而对象锁不能
- 
+
 
 ### 什么是控制反转(IOC)?什么是依赖注入?
 
@@ -284,12 +293,12 @@ mysql索引的用途：
 
 
  
- 
+
  ### 五种经典的I/O模型
- 
+
  - 1. Blocking I/O（阻塞I/O）
- 
- ```
+
+ ```java
  //代码1
 //在Java中使用同步阻塞I/O实现文件的读取
 public static void main(String[] args) throws IOException {
@@ -302,32 +311,24 @@ public static void main(String[] args) throws IOException {
     }
 }
  ```
- 
- - 2. Nonblocking I/O（非阻塞I/O）
- 
- - 3. I/O Multiplexing（I/O多路复用）
- 
- - 4. Signal-Driven I/O（信号驱动I/O）
- 
- - 5. Asynchronous I/O （异步I/O）
- 
- ```
+- 2. Nonblocking I/O（非阻塞I/O）
+- 3. I/O Multiplexing（I/O多路复用）
+- 4. Signal-Driven I/O（信号驱动I/O）
+- 5. Asynchronous I/O （异步I/O）
+
+```java
  //代码2
 //node环境下异步读取一个文件
 const fs = require('fs')
 const file='/Users/lk/Desktop/pro.properties'
 fs.readFile(file,'utf-8', (err,data)=>{console.log(data)});
- ```
-
-
+```
 
 ### cookie
-
 
 cookie是保存在本地终端的数据。cookie由服务器生成，发送给浏览器，浏览器把cookie以kv形式保存到某个目录下的文本文件内，
 下一次请求同一网站时会把该cookie发送给服务器。由于cookie是存在客户端上的，所以浏览器加入了一些限制确保cookie不会被恶意使用，
 同时不会占据太多磁盘空间，所以每个域的cookie数量是有限的。
-
 
 ### token
 
@@ -339,7 +340,6 @@ token选值：
 
 1. 用设备号/设备mac地址作为Token（推荐）
 
-
 客户端：客户端在登录的时候获取设备的设备号/mac地址，并将其作为参数传递到服务端。
 
 服务端：服务端接收到该参数后，便用一个变量来接收同时将其作为Token保存在数据库，并将该Token设置到session中，客户端每次请求的时候都要统一拦截，
@@ -349,16 +349,13 @@ token选值：
 而且服务器端还需要保存；优点是客户端不需重新登录，只要登录一次以后一直可以使用，至于超时的问题是有服务器这边来处理，如何处理？若服务器的Token超时后，
 服务器只需将客户端传递的Token向数据库中查询，同时并赋值给变量Token，如此，Token的超时又重新计时。
 
-
 2. 用session值作为Token
-
 
 客户端：客户端只需携带用户名和密码登陆即可。
 
 客户端：客户端接收到用户名和密码后并判断，如果正确了就将本地获取sessionID作为Token返回给客户端，客户端以后只需带上请求数据即可。
 
 分析：这种方式使用的好处是方便，不用存储数据，但是缺点就是当session过期后，客户端必须重新登录才能进行访问数据。
-
 
 区别：
 
@@ -412,3 +409,13 @@ Login Action调用认证服务进行用户名密码认证，如果认证通过�
 全部通过后，根据获取的用户的角色权限信息，进行对请求的资源的权限逻辑判断；
 
 如果权限逻辑判断通过则通过Response对象返回；否则则返回HTTP 401；
+
+### Sprint cloud 和 Sprint boot区别
+
+Spring Boot:
+
+旨在简化创建产品级的Spring应用和服务，简化了配置文件，使用嵌入式web服务器，含有诸多开箱即用微服务功能，可以和spring cloud联合部署。
+
+ Spring Cloud：
+
+微服务工具包，为开发者提供了在分布式系统的配置管理、服务发现、断路器、智能路由、微代理、控制总线等开发工具包。

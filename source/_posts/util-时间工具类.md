@@ -8,8 +8,10 @@ categories: util
 
 ### 时间工具类
 
-```
-Java时间格式转换大全
+<!-- more -->
+
+```java
+###Java时间格式转换大全
 
 import java.text.*;
 import java.util.Calendar;

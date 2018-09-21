@@ -131,9 +131,7 @@ public class Springboot0Application {
 
 1. 导入官网下载下来的zip包发现pom报错
 
-将用户主目录下`.m2/repository/`下的依赖全部清空。然后，在eclipse中右键项目 `--> Maven --> Update Project`等待更新完成后，错误自动消失了。
+将用户主目录下`.m2/repository/`下的依赖全部清空。然后，在eclipse中右键项目 `--> Maven --> Update Project`等待更新完成后，错误自动消失了。或者在IDEA中右击pom.xml，然后选择`Maven --> Reimport`即可。
 
-2. @SpringBootApplication.java首行package报错
-package打包时最后的文件名称没有输入，需手动输入。
-（这个java文件是整个项目的启动入口;扫描的时候是扫描该类的同包或者子包，否则会报404）
+2. @SpringBootApplication.java 首行 package 报错, package 打包时最后的文件名称没有输入，需手动输入。（这个java文件是整个项目的启动入口;扫描的时候是扫描该类的同包或者子包，否则会报404）
 

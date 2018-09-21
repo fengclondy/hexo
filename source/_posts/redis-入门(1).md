@@ -1,7 +1,7 @@
 ---
 layout: post
 title: redis入门(1)
-date: 2018-03-15 07:56:47
+date: 2018-07-15 07:56:47
 tags: redis
 categories: redis
 ---
@@ -80,7 +80,7 @@ windows下可能会出现闪退情况，原因是redis服务需要同时启动�
 解决办法是,新建start.bat文件，在里面填入：`redis-server.exe  redis.windows.conf`
 
 如果想要加入系统自启动，则需编写xxx.cmd文件：
-```
+```shell
 @echo off
 echo Starting rabbitMQ...
 start "rabbitMQ" "C:\Program Files\RabbitMQ Server\rabbitmq_server-3.7.4\sbin\rabbitmq-server.bat"
@@ -89,18 +89,16 @@ start "redis" "startRedis.bat"
 ```
 
 或者：`redis-server --service-install redis.windows-service.conf --loglevel verbose`。你也可以在`redis.windows.conf`中设置密码。列举常用服务：
-```
+```shell
 redis-server --service-uninstall    #卸载服务
 redis-server --service-start    #开启服务
 redis-server --service-stop    #停止服务
 ```
 
-
-
 3、在打开一个cmd窗口，进行基本操作：
 
-```
-redis-cli.exe -h 127.0.0.1 -p 6379 
+```shell
+>redis-cli.exe -h 127.0.0.1 -p 6379 
 
 设置键值对 set myKey abc
 
@@ -123,13 +121,14 @@ requirepass [密码]；
 ```
 
 此时，连接时，出现没有权限提示，输入密码即可：
-```
+```shell
 >auth [密码]
 ```
 
 ### 性能测试 benchmark 
 命令行输入：`redis-benchmark -h 127.0.0.1 -p 6379 -c 1000 -n 100000`
 表示向server发送10万个请求，每次请求并发数为1000。结果如下：
+
 ```
  ====== PING_INLINE ======
     100000 requests completed in 154.46 seconds
@@ -145,8 +144,6 @@ requirepass [密码]；
 
 
 
-
-
 ### Redis 数据结构简介
 
 1. Redis 可以存储键与5种不同数据结构类型之间的映射，
@@ -157,7 +154,7 @@ requirepass [密码]；
 
 RedisTemplate中定义了对5种数据结构操作：
 
-```
+```java
 redisTemplate.opsForValue();   //操作字符串
 redisTemplate.opsForHash();   //操作hash
 redisTemplate.opsForList();   //操作list
@@ -180,7 +177,7 @@ redisTemplate.opsForZSet();  //操作有序set
 
 2、添加配置文件：
 
-```
+```properties
 properties中加入配置
 # REDIS (RedisProperties)
 # Redis数据库索引（默认为0）
@@ -205,21 +202,21 @@ spring.redis.timeout=0
 
 3、在你的类中注入：
 
-```
+```java
    @Autowired
    private StringRedisTemplate stringRedisTemplate;
 ```
 
 或者：
 
-```
+```java
     @Autowired
     private RedisTemplate redisTemplate;
 ```
 
 4、使用
 
-```
+```java
 //方式1：key-value形式
 使用：redisTemplate.opsForValue().set("name","tom");
 结果：redisTemplate.opsForValue().get("name")  输出结果为tom
@@ -233,13 +230,11 @@ redisTemplate.delete("onlineUsers");
 ```
 
 
-
-
-编写逻辑代码（一个简单的方法事例）
+### 案例：编写逻辑代码（一个简单的方法事例）
 
 编写controller：
 
-```
+```java
     @Autowired
     UserServiceIMPL userServiceImpl;
     
@@ -252,7 +247,7 @@ redisTemplate.delete("onlineUsers");
 
 编写service：
 
-```
+```java
     @Autowired
     private UserRepository userRepository;
 
@@ -289,7 +284,7 @@ redisTemplate.delete("onlineUsers");
 
 编写repository：
 
-```
+```java
 public interface UserRepository extends JpaRepository<User, Long> {
 }
 ```
@@ -303,115 +298,15 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 等价于在控制台输入如下语句
 
-```
+```shell
 >sadd ddd "\"zhangsan\""
 ```
 >这里需要特别注意的是一定要加双引号将要插入的值括起来，且双引号需要用转义字符\。
 
 
-
-
-
-
-https://www.jianshu.com/p/7bf5dc61ca06
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
--------------------------------------------------------下面删除------------------------
-
-3、编写Cache配置类：
-
+2、redis可视化工具，RedisDesktopManager。
+redis中推荐使用`:`这种方式开区分两个不同的key，这种方式显示的可视化界面有点像windows中的文件夹。
 ```java
-@Configuration
-@EnableCaching
-public class RedisConfig extends CachingConfigurerSupport{
-    
-    @Bean
-    public KeyGenerator keyGenerator() {
-        return new KeyGenerator() {
-            @Override
-            public Object generate(Object target, Method method, Object... params) {
-                StringBuilder sb = new StringBuilder();
-                sb.append(target.getClass().getName());
-                sb.append(method.getName());
-                for (Object obj : params) {
-                    sb.append(obj.toString());
-                }
-                return sb.toString();
-            }
-        };
-    }
-
-    @SuppressWarnings("rawtypes")
-    @Bean
-    public CacheManager cacheManager(RedisTemplate redisTemplate) {
-        RedisCacheManager rcm = new RedisCacheManager(redisTemplate);
-        //设置缓存过期时间
-        //rcm.setDefaultExpiration(60);//秒
-        return rcm;
-    }
-    
-    @Bean
-    public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory factory) {
-        StringRedisTemplate template = new StringRedisTemplate(factory);
-        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
-        ObjectMapper om = new ObjectMapper();
-        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
-        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
-        jackson2JsonRedisSerializer.setObjectMapper(om);
-        template.setValueSerializer(jackson2JsonRedisSerializer);
-        template.afterPropertiesSet();
-        return template;
-    }
-
-}
-```
-
-4、编写测试类：
-```java
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(Application.class)
-public class TestRedis {
-
-    @Autowired
-    private StringRedisTemplate stringRedisTemplate;
-    
-    @Autowired
-    private RedisTemplate redisTemplate;
-
-    @Test
-    public void test() throws Exception {
-        stringRedisTemplate.opsForValue().set("aaa", "111");
-        Assert.assertEquals("111", stringRedisTemplate.opsForValue().get("aaa"));
-    }
-    
-    @Test
-    public void testObj() throws Exception {
-        User user=new User("aa@126.com", "aa", "aa123456", "aa","123");
-        ValueOperations<String, User> operations=redisTemplate.opsForValue();
-        operations.set("com.neox", user);
-        operations.set("com.neo.f", user,1,TimeUnit.SECONDS);
-        Thread.sleep(1000);
-        //redisTemplate.delete("com.neo.f");
-        boolean exists=redisTemplate.hasKey("com.neo.f");
-        if(exists){
-            System.out.println("exists is true");
-        }else{
-            System.out.println("exists is false");
-        }
-       // Assert.assertEquals("aa", operations.get("com.neo.f").getUserName());
-    }
-}
+redisTemplate.opsForSet().add("onlineUsers:man",“zhangsan”);
+redisTemplate.opsForSet().add("onlineUsers:woman",xiaohong);
 ```

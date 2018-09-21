@@ -12,7 +12,7 @@ categories: springBoot
 * 1. 在 Eclipse 中运行 Maven 构建，`Run As > Maven Build`。在 Goals 文本字段中，
     输入 clean 和 package，然后单击 Run 按钮。当看到文本 “App Started” 时，就可以体验该应用程序了
 
-* 2. 从命令行运行 Maven 构建 `mvn clean package`
+* 2. （推荐）从命令行运行 Maven 构建 `mvn clean package`
 
 ### 运行可执行 JAR
 
@@ -20,15 +20,15 @@ categories: springBoot
 
 其中 target 是构建的默认输出目录。启动成功后,就可以访问了。
 
-- 默认启动端口为8080，你也可以手动设置，指定端口号: 
+- 默认启动端口为8080，你也可以手动设置，指定端口号
 
 `java -jar spring-boot-demo01.jar --server.port=9090`
 
-- 如果出现中文乱码,请添加上该字段 `-Dfile.encoding=utf=8`:
+- 如果出现中文乱码,请添加上该字段 `-Dfile.encoding=utf-8`
 
 `java -Dfile.encoding=utf=8 -jar spring-boot-demo01.jar --server.port=9090`
 
-- 引用外部配置文件，这里将jar与配置.properties放在同一个目录下
+- 引用外部配置文件，这里将jar与配置.properties放在同一个目录下（参看springBoot启动配置读取顺序）
 
 `java -jar spring-boot-demo01.jar --Dspring.config.location=application.properties`
 
@@ -43,13 +43,13 @@ categories: springBoot
 #### 方式一：使用Jpa  
 
 在使用`spring boot jpa`的情况下设置`spring.jpa.hibernate.ddl-auto`的属性设置为 `create` or `create-drop`的时候，
-spring boot 启动时默认会扫描classpath下面（项目中一般是resources目录）是否有`import.sql`，如果有机会执行`import.sql`脚本。
+spring boot 启动时默认会扫描classpath下面（项目中一般是resources目录）是否有`import.sql`，如果有，会执行`import.sql`脚本。
 
 #### 方式二：使用Spring JDBC  
 
 在属性文件里加入：
 
-```
+```yaml
 spring:
     datasource:
       schema: database/data.sql  //脚本的路径
@@ -64,7 +64,7 @@ spring:
 
 - `create-drop` ：每次加载hibernate时根据model类生成表，但是sessionFactory一关闭,表就自动删除。
 
-- `update`：最常用的属性，第一次加载hibernate时根据model类会自动建立起表的结构（前提是先建立好数据库），以后加载hibernate时根据 model类自动更新表结构，即使表结构改变了但表中的行仍然存在不会删除以前的行。要注意的是当部署到服务器后，表结构是不会被马上建立起来的，是要等 应用第一次运行起来后才会。
+- `update`：最常用的属性，第一次加载hibernate时根据model类会自动建立起表的结构（前提是先建立好数据库），以后加载hibernate时根据 model类自动更新表结构，即使表结构改变了但表中的行仍然存在不会删除以前的行。要注意的是当部署到服务器后，表结构是不会被马上建立起来的，是要等应用第一次运行起来后才会。
 
 - `validate` ：每次加载hibernate时，验证创建数据库表结构，只会和数据库中的表进行比较，不会创建新表，但是会插入新值。 
 
@@ -98,12 +98,12 @@ spring:
 @Email	    验证注解的元素值是Email，也可以通过正则表达式和flag指定自定义的email格式
 ```
 
-* 2. Controller中开启验证
+* 2. Controller 中开启验证
 
 * 3. resource 下新建错误信息配置文件
   
   在resource 目录下新建提示信息配置文件"ValidationMessages.properties"(名字不可更改)，
- ```xml
+ ```shell
  user.name.notBlank=\u7528\u6237\u540d\u4e0d\u80fd\u4e3a\u7a7a
  ```
 * 4. 自定义异常处理器，捕获错误信息
@@ -120,12 +120,13 @@ spring:
 * 3.Date时间格式转换。
 
  数据库查询出来的日期，不想转换，可以在apllication.property中加入：
- ```xml
+ ```properties
  spring.jackson.date-format=yyyy-MM-dd HH:mm:ss
  spring.jackson.time-zone=GMT+8
  ```
 
  前台传过来的是String字符的时间，不想转换，可在实体类的date属性头上加入：
- ```xml
+ ```java
  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
  ```
+

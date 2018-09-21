@@ -28,6 +28,8 @@ categoriets: sql
 
 更多基本操作参考：https://juejin.im/post/5ae55861f265da0ba062ec71
 
+<!-- more -->
+
 ### 语法详解
 
 1、MySQL 和 Oracle 中的限制返回大小

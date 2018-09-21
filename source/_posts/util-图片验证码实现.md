@@ -21,7 +21,10 @@ categories: util
 
 ```
 
+<!-- more -->
+
 2、定义KaptchaConfiguration：
+
 ```java
 @Configuration
 public class KaptchaConfiguration {

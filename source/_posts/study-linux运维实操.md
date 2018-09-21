@@ -21,6 +21,7 @@ KiB Swap:  2097148 total,   476760 free,  1620388 used.    62780 avail Mem
 >us 用户空间占用CPU百分比；sy 内核空间占用CPU百分比；ni 用户进程空间内改变过优先级的进程占用CPU百分比；
 id 空闲CPU百分比；wa 等待输入输出的CPU时间百分比；hi 硬件中断；si 软件中断；st: 实时；
 
+<!-- more -->
 
 ### free查看内存使用情况
 

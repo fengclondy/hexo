@@ -1,7 +1,7 @@
 ---
 layout: post
 title: redis入门（2）
-date: 2018-08-01 07:25:42
+date: 2018-07-16 07:25:42
 tags: redis
 categories: redis
 ---
@@ -71,7 +71,7 @@ OK
 >计数器是有范围的，它不能超过Long.Max(即，9223372036854775807)，不能低于Long.MIN(即，-9223372036854775808).
 强行操作，会报错`(error) ERR increment or decrement would overflow`
 
-过期和删除。字符串可以使用del指令进行主动删除，可以使用expire指令设置过期时间，到点会自动删除，这属于被动删除。可以使用ttl指令获取字符串的寿命。
+过期和删除。字符串可以使用 del 指令进行主动删除，可以使用 expire 指令设置过期时间，过期会自动删除，这属于被动删除。可以使用 ttl 指令获取字符串的寿命。
 ```shell
 > expire ireader 60
 (integer) 1  # 1表示设置成功，0表示变量ireader不存在
@@ -83,7 +83,7 @@ OK
 (nil)  # 变量ireader没有了
 ```
 
-组合使用：
+组合使用（推荐，这种方式更原子化）：
 ```shell
 > setex name 5 codehole  # 5s 后过期，等价于 set+expire
 
@@ -93,9 +93,10 @@ OK
 
 #### List类型（双向列表，非数组）
 
-队列／堆栈。链表可以从表头和表尾追加和移除元素，结合使用rpush/rpop/lpush/lpop四条指令，
+队列／堆栈。链表可以从表头和表尾追加和移除元素，结合使用 rpush / rpop / lpush / lpop 四条指令，
 可以将链表作为队列或堆栈使用，左向右向进行都可以。
 可以使用正负下标，负标表示倒数，0和-n都表示第一个元素。
+
 >在日常应用中，列表常用来作为异步队列来使用。
 ```shell
 # 右进左出
@@ -161,7 +162,7 @@ OK
 2) "javascript"
 3) "python"
 ```
-插入元素:(通过方向参数before/after来指明是前置或后置插入，指定的是具体位置的值，而非坐标)
+插入元素:(通过方向参数 before / after 来指明是前置或后置插入，指定的是具体位置的值，而非坐标)
 ```shell
 > rpush ireader go java python
 (integer) 3
@@ -181,9 +182,9 @@ OK
 (integer) 1
 > lrange ireader 0 -1
 1) "go"
-2) "java"
+2) "python"
 ```
-定长列表：(两个参数start和end，范围之内的元素被保留，范围之外的都将被移除；如果end小于start，相当于del命令，全部删除)
+定长列表：(两个参数 start 和 end，范围之内的元素被保留，范围之外的都将被移除；如果 end 小于 start，相当于 del 命令，全部删除；且两参数必须符号相同)
 ```shell
 > rpush ireader go java python javascript ruby erlang rust cpp
 (integer) 8
@@ -306,11 +307,11 @@ OK
 ```
 
 #### ZSet类型
-SortedSet(zset)是Redis提供的一个非常特别的数据结构，
-一方面它等价于Java的数据结构Map<String, Double>，可以给每一个元素value赋予一个权重score，
-另一方面它又类似于TreeSet，内部的元素会按照权重score进行排序，可以得到每个元素的名次，还可以通过score的范围来获取元素的列表。
+SortedSet(zset) 是 Redis 提供的一个非常特别的数据结构，
+一方面它等价于 Java 的数据结构 Map<String, Double>，可以给每一个元素 value 赋予一个权重 score，
+另一方面它又类似于 TreeSet，内部的元素会按照权重 score 进行排序，可以得到每个元素的名次，还可以通过 score 的范围来获取元素的列表。
 
-增加元素：（value/score对，score放在前面）
+增加元素：（ score / value 对，score 放在前面）
 ```shell
 > zadd ireader 4.0 python
 (integer) 1
@@ -368,7 +369,7 @@ SortedSet(zset)是Redis提供的一个非常特别的数据结构，
 5) "go"
 6) "1"
 ```
-根据score范围获取列表并排序：(参数-inf表示负无穷，+inf表示正无穷)
+根据score范围获取列表并排序：(参数 -inf 表示负无穷，+inf 表示正无穷)
 ```shell
 > zrangebyscore ireader 0 5
 1) "go"

@@ -30,7 +30,7 @@ socket.broadcast.emit 信息传输对象为所有 client ，排除当前socket �
 
 - 3、在使用Node的http模块创建服务器同时还要Express应用，因为这个服务器对象需要同时充当Express服务和Socket.io服务。(如下)
 
-```
+```js
 var app = require('express')(); //Express服务
 var server = require('http').Server(app); //原生Http服务
 var io = require('socket.io')(server); //Socket.io服务
@@ -38,9 +38,11 @@ io.on('connection', function(socket){
     /* 具体操作 */
 });
 server.listen(3000);
+```
 当客户端需要连接服务器时，它需要先建立一个握手。io.处理连接事件，socket 处理断开连接事件。在上面代码里，这套握手机制是完全自动的，我们可以通过也可以io.use()方法来设置这一过程。
+
 客户端使用js调用socket.io的Client API即可。
-复制代码
+```js
 <script src="/lib/socket.io/socket.io.js"></script>
 <script>
    var socket = io();
@@ -48,9 +50,11 @@ server.listen(3000);
            /* 具体操作 */
    });
 </script>
-复制代码
-4、同一个服务器可以使用namespaces创造不同的Socket连接。Socket.IO使用of()来指定不同的命名空间。
+```
 
+
+4、同一个服务器可以使用namespaces创造不同的Socket连接。Socket.IO使用of()来指定不同的命名空间。
+```js
 io.of('/someNamespace').on('connection', function(socket){
     socket.on('customEvent', function(customEventData) {
         /* 具体操作 */
@@ -61,7 +65,9 @@ io.of('/someOtherNamespace').on('connection', function(socket){
     /* 具体操作 */
     });
 });
-　　服务器端则通过在定义Socket对象时传递namespace参数。
+```
+服务器端则通过在定义Socket对象时传递namespace参数。
+```js
 <script>
  var someSocket = io('/someNamespace');
  someSocket.on('customEvent', function(customEventData) {
@@ -72,8 +78,9 @@ io.of('/someOtherNamespace').on('connection', function(socket){
      /* 具体操作 */
  });
 </script>
+```
 　　在每一个namespace中又可以使用room来进一步划分，不过sockets是使用join()、leave()来调用。
-
+```js
 //服务器端
 io.on('event', function(eventData){
      //监听join事件
@@ -85,9 +92,12 @@ io.on('event', function(eventData){
           socket.leave(roomData.roomName);
      });
 });
+```
+```js
 //浏览器端
 io.on('connection', function(socket){
      //在此room下触发事件
      io. in('someRoom') .emit('customEvent', customEventData);
 });
 ```
+

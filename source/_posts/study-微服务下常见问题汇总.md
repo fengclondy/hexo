@@ -41,6 +41,8 @@ categories: study
 </profile>  
 ```
 
+<!-- more -->
+
 #### RESTful API
 
 五种请求类型：

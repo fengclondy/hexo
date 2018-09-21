@@ -77,3 +77,16 @@ public class AConfiguration {
  
 }
 ```
+
+
+
+### 微服务
+第一代微服务：SpringCloud、Dubbo
+下一代微服务：Service Mesh、Linkerd、Envoy、Istio、Conduit
+
+容器调度编排：Kubernetes
+
+很有潜力的组合：Kubernetes + Service Mesh
+![](http://p2jr3pegk.bkt.clouddn.com/springBoot10-1.jpg)
+未来框架设计图：
+![](http://p2jr3pegk.bkt.clouddn.com/springBoot10-2.jpg)

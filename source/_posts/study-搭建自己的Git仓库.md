@@ -35,7 +35,9 @@ $ passwd git
 $ chown -R git:git hello.git  
 ```
 
-#### 服务端
+<!-- more -->
+
+#### 客户端
 
 1、创建用户
 

@@ -66,15 +66,18 @@ $ java -version
 ### Mysql安装
 
 1、下载mysql源安装包
+
 ```powershell
-$ wget http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm
+$ wget http://dev.mysql.com/get/mysql57-community-release-el7-9.noarch.rpm
 ```
 2、安装mysql源包
+
 ```powershell
-$ yum install mysql57-community-release-el7-8.noarch.rpm
+$ yum install mysql57-community-release-el7-9.noarch.rpm
 ```
 
 3、检查mysql源是否安装成功
+
 ```powershell
 $ yum repolist enabled | grep "mysql.*-community.*"
 ```
@@ -82,6 +85,7 @@ $ yum repolist enabled | grep "mysql.*-community.*"
 正常安装会出现如下界面：![](http://p2jr3pegk.bkt.clouddn.com/linux01-1.png)
 
 4、安装MySQL服务
+
 ```powershell
 $  yum -y install mysql-community-server
 ```
@@ -101,12 +105,28 @@ $ systemctl enable mysqld
 $ systemctl start mysqld
 ```
 
-7、配置mysql
+7、配置mysql(新版本密码设置要求：大小写+数字+特殊字符)
+
 ```powershell
 $ mysql_secure_installation
 ```
 
-8、设置mysql
+> 也可以通过命令：`ALTER USER 'root'@'localhost' IDENTIFIED BY 'xxxxxx'`; 执行后：`flush privileges` ,刷新权限。yum安装系统会默认生成随机密码，可用过`grep 'password' /var/log/mysqld.log |head -n1`查看。
+
+8、设置mysql（外部不能访问mysql）
+
 ```powershell
-$ 
+$ mysql -u root -p
+>use mysql;
+>update user set host=’%’ where user=’root’;
+>select host,user from user;
+$ service mysqld restart
 ```
+
+9、其他相关
+
+```powershell
+$ cat /var/log/mysqld.log       #查看mysql操作日志
+$ service mysqld restart       #重启mysql服务
+```
+

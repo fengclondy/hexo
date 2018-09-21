@@ -31,7 +31,7 @@ public String getCreateTime() {
 
 * 3、springboot的公共配置：http://blog.720ui.com/2016/springboot_appendix_common_application_properties/
 
-
+<!-- more -->
 
 #### 查看session下都存放了哪些值，并打印下来。
 
@@ -60,7 +60,7 @@ $("#id option:selected").text()    //获取选中的option的文本信息
 
 2.新建.html页面，拷贝刚才的数据源，同时加入如下script代码。并运行代码，接着在控制台就能输出想要的结果。    
 
-```
+```js
 //记录结果
 var areas = [];                                                                                        
 //堆栈记录层级信息
@@ -95,7 +95,7 @@ console.log(JSON.stringify(areas,null,4));
 ```
 
 输出格式：
-```
+```json
 [ { "code": "110000", "name": "北京市",
 
 　　　　　　　　　　"children": [ { "code": "110100", "name": "市辖区",
@@ -105,7 +105,7 @@ console.log(JSON.stringify(areas,null,4));
 
 也可以直接获取到所有的省份、城市和地区的单独json格式串，代码见下：
 
-```
+```js
 //记录结果
 var prov = [];
 var city = [];
@@ -144,12 +144,12 @@ console.log(JSON.stringify(county,null,4));
 ```
 
 输出结果：
-```
+```json
 var provinceJson = [{"id":"110000","province":"北京市"},...
 var provinceJson = [{"id":"110100","city":"市辖区","parent":"110000"},...
 var provinceJson = [{"id":"110101","county":"东城区","parent":"110100"},...
 ```
- 
+
 
 #### finally不一定必须执行，return在catch/finally中处理情况（建议亲自操刀试一下）
 
@@ -159,7 +159,7 @@ var provinceJson = [{"id":"110101","county":"东城区","parent":"110100"},...
 
 #### MD5工具实现编码
 
-```
+```java
 import java.security.MessageDigest;  
 import java.security.NoSuchAlgorithmException;  
   
@@ -187,7 +187,7 @@ public class MD5Tool {
 
 #### ArrayList集合中删除某个元素用Iterator进行操作
 
-```
+```java
 Iterator iterator = answerList.iterator();
   while(iterator.hasNext()){
     answerList.remove(iterator.next());
@@ -200,7 +200,7 @@ Iterator iterator = answerList.iterator();
 
 作用：也可以用来获取不重复的元素 。
 
-```
+```java
 function GetUnique(inputArray)
 {
     var outputArray = [];
@@ -258,7 +258,7 @@ function GetUnique(inputArray)
 
 　也就是说，String str = “aa”；str=“bb”；第二句不是改变“aa”所存储地址的内容，而是另外开辟了一个空间用来存储“bb”；同时由str指向原来的“aa”，
 　现在已经不可达，GC时会自动回收。str还是aa
- 
+
 11、java的垃圾收集机制主要针对新生代和老年代的内存进行回收，不同的垃圾收集算法针对不同的区域。所以java的垃圾收集算法使用的是分代回收。
 一般java的对象首先进入新生代的Eden区域，当进行GC的时候会回收新生代的区域，新生代一般采用复制收集算法，将活着的对象复制到survivor区域中，
 如果survivor区域装在不下，就查看老年代是否有足够的空间装下新生代中的对象，如果能装下就装下，否则老年代就执行FULL GC回收自己，老年代还是装不下，就会抛出OUtOfMemory的异常
@@ -273,9 +273,9 @@ function GetUnique(inputArray)
 14、方法执行完毕，局部变量（即垃圾,没有堆内存引用的栈内存）消除。
 
 15、SpringMVC的原理:
-    SpringMVC是Spring中的模块，它实现了mvc设计模式的web框架，首先用户发出请求，请求到达SpringMVC的前端控制器（DispatcherServlet）,
-    前端控制器根据用户的url请求处理器映射器查找匹配该url的handler，并返回一个执行链，前端控制器再请求处理器适配器调用相应的handler进行处理并返回给前端控制器一个modelAndView，
-    前端控制器再请求视图解析器对返回的逻辑视图进行解析，最后前端控制器将返回的视图进行渲染并把数据装入到request域，返回给用户。
+​    SpringMVC是Spring中的模块，它实现了mvc设计模式的web框架，首先用户发出请求，请求到达SpringMVC的前端控制器（DispatcherServlet）,
+​    前端控制器根据用户的url请求处理器映射器查找匹配该url的handler，并返回一个执行链，前端控制器再请求处理器适配器调用相应的handler进行处理并返回给前端控制器一个modelAndView，
+​    前端控制器再请求视图解析器对返回的逻辑视图进行解析，最后前端控制器将返回的视图进行渲染并把数据装入到request域，返回给用户。
 　　DispatcherServlet作为springMVC的前端控制器，负责接收用户的请求并根据用户的请求返回相应的视图给用户。
 
 16、构造方法是一种特殊的方法，具有以下特点。
@@ -301,7 +301,7 @@ function GetUnique(inputArray)
 - 4.从效率来说
 　　forward --高。
 　　redirect --低。
-  
+
 19、类的加载过程  
 
 JVM将类加载过程分为三个步骤：装载（Load），链接（Link）和初始化(Initialize)链接又分为三个步骤
@@ -341,7 +341,7 @@ JVM将类加载过程分为三个步骤：装载（Load），链接（Link）和
 类的加载指的是将类的.class文件中的二进制数据读入到内存中，将其放在运行时数据区的方法区内，然后在堆区创建一个这个类的Java.lang.Class对象，用来封装类在方法区类的对象
 
 类的加载的最终产品是位于堆区中的Class对象
-        Class对象封装了类在方法区内的数据结构，并且向Java程序员提供了访问方法区内的数据结构的接口
+​        Class对象封装了类在方法区内的数据结构，并且向Java程序员提供了访问方法区内的数据结构的接口
 
 加载类的方式有以下几种：
 
@@ -400,7 +400,7 @@ JVM的类加载是通过ClassLoader及其子类来完成的，类的层次关系
 1、JS中的六种数据类型：boolean，string，number，null，undefined。
 
 2、 
-```
+```js
  var one; 
  var two=null; 
  console.log(one==two,one ===two);    //true，false
@@ -424,18 +424,18 @@ one的值是undefined，two的值为null。js中undefined的值派生自null值�
    将已知的arr数组复制给新数组 ： `var a = arr.slice(0)`;
 
 8、
-```
+```js
 var obj={“key”：“1”，“value”：“2”}；
 var newObj = obj;   //相当于两个对象指向同一个地址，
 //修改其中任何一个，另一个也会受到影响
 ```
-                                
+
 9、`$(emit)`是向上冒泡   ； `$broadcast()`是向下传播事件
 
 10、NOSCRIPT标签用来定义在脚本未被执行时的替代内容
 
 11、
-```
+```js
 //已定义好一个checkState函数
 windows.setTimeout(checkState(), 10000);  //立即被调用
 windows.setTimeout(checkState, 10000);  //10s后被调用
@@ -443,7 +443,8 @@ windows.setTimeout(“checkState()”, 10000);  //10s后被调用，带引号的
 ```
 
 12、
-```
+
+```java
 console.log( 1+ "2" + "2");   //字符串相加等于字符串的合并，结果122
 console.log( 1+ + "2" + "2");   //第一个+“2”中的加号是一元加操作符，会自动转成数值2，结果32                   
 console.log( "A"- "B" + 2);//"A"- "B"先用Number将函数转换为数值，结果为NaN，在算数运算中有一个为NaN，则结果仍为NaN，结果NaN
@@ -453,20 +454,21 @@ console.log( "A"- "B" + "2");    //接上，合并后结果为NaN2
 13、`Number()`函数会将对象的值转换为数字，null； empty ；0；默认都会转换成0
 
 14、javaScript是弱类型语言，会根据后面的语言进行转换
-```
+```js
 var a = “40”， b =7；
 console.log(a%b);   //5
 ```
 
 15、
-```
+
+```json
 var obj = new Boolean('false');  //返回的是对象
 var flag = Boolean(0);   //返回布尔值False
 ```
 
 16、
 
-```
+```js
 $post(url)是ajax请求；
 ajax的事件是：ajaxComplete(callback);
              ajaxError(callback);
@@ -477,7 +479,7 @@ ajax的事件是：ajaxComplete(callback);
 ```
 
 17、
-```
+```js
 function argsAsArray(fn, arr) {
     return fn.apply(this,arr);
 }  //通过argsAsArray方法调用自生的fn方法，传入参数是arr
@@ -501,7 +503,7 @@ call方法:    call([thisObj[,arg1[, arg2[,   [,.argN]]]]])   ----　调用一�
 　　　　
 18、关于prototype原型　　
 
-```
+```js
 //使用构造函数法
 function createModule(str1, str2) {    
      function Obj(){       
@@ -566,14 +568,14 @@ function createModule(str1, str2) {
 
 27、
 
-```
-1 var f = function g(){
-2          return 23;
-3 };
-4 typeof g();     //结果是ReferenceError，g is not defined
-5 typeof g;      //结果是undefined
-6 typeof f();    //结果是number
-7 typeof f;    //结果是function
+```js
+var f = function g(){
+   return 23;
+};
+typeof g();     //结果是ReferenceError，g is not defined
+typeof g;      //结果是undefined
+typeof f();    //结果是number
+typeof f;    //结果是function
 ```
 注： typeof  null  的结果是  object
 
@@ -613,7 +615,7 @@ function createModule(str1, str2) {
 
 　两个封装型进行equals比较，会先比较类型在比较值。
 
-```
+```js
 int a=257；
 Integer b=257；
 Integer c=257；
@@ -644,7 +646,7 @@ System.ou.println(b2==c2);
 43、根类Object中的方法：clone();equals();finalize();getClass();notify();notifyAll();hashCode();toString();wait()
 
 44、
-```
+```js
 var a=2；
 var b=3;
 if(a=b){...
@@ -662,7 +664,12 @@ if(a=b){...
 
 49、javascript中在进行算术运算时，“+号”，数字隐式转换成字符串。其余的运算符号是字符串隐式转换成数字。
 
+#### 其他
 
+1. 在计算机内部数据的存储和运算都采用二进制；
+2. 计算机中数据分为有符号数和无符号数，对于有符号数，计算机规定用最高位来表示符 号。“0”表示正数，“1”表示负数；
+3. Java中的数据都是有符号数；
+4. 计算机中带符号的整数都是使用二进制的补码。
 
 
 
@@ -704,7 +711,7 @@ if(a=b){...
  注：MySQL在Windows下都不区分大小写。
 　　可以查看Linux上的MySQL的配置文件/etc/my.cnf ，就需要在[mysqld]下面添加一行配置，即 lower_case_table_names=1: （其中 0：区分大小写，1：不区分大小写）
 
-```
+```powershell
 [root@VM_219_131_centos tomcat7]# vi /etc/my.cnf 
 [mysqld]
 lower_case_table_names=1
@@ -722,7 +729,7 @@ pid-file=/var/run/mysqld/mysqld.pid
 补：如果想在查询时区分字段值的大小写，则：字段值需要设置BINARY属性，设置的方法有多种：
 
 - A、创建时设置：
-```
+```sql
 CREATE TABLE T(
 
 A VARCHAR(10) BINARY
@@ -734,7 +741,7 @@ A VARCHAR(10) BINARY
 `ALTER TABLE`tablename` MODIFY COLUMN `cloname` VARCHAR(45) BINARY;`
 
 - C、mysql table编辑时中直接勾选BINARY项。
-```
+```powershell
 ## 修改完后，一定记得重启数据库。
 [root@VM_219_131_centos tomcat7]# service mysqld restart
 Stopping mysqld:  [  OK  ]

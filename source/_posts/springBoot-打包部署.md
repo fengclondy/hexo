@@ -6,9 +6,9 @@ tags: springBoot
 categories: springBoot
 ---
 
->两种方式：一种是打包成jar包直接执行，另一种是打包成war包放到tomcat服务器下
+>两种方式：一种是打包成 jar 包直接执行，另一种是打包成 war 包放到 tomcat 服务器下
 
->特别指出一点，bootstrap.yml和application.yml不一样，bootstarp会先加载进工程里，尤其体现在统一配置config里面。
+>特别指出一点，bootstrap.yml 和 application.yml 不一样，bootstarp 会先加载进工程里，尤其体现在统一配置config 里面。
 
 >如果同一个目录下，有application.yml也有application.properties，默认先读取application.properties。还有就是加载文件的顺序会覆盖。
 
