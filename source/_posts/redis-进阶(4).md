@@ -1,7 +1,7 @@
 ---
 layout: post
-title: redis进阶
-date: 2018-07-28 01:20:57
+title: redis进阶(4)
+date: 2018-09-28 01:20:57
 tags: redis
 categories: redis
 ---
@@ -23,7 +23,11 @@ OK
 
 延迟队列，即阻塞读与写，用blpop/brpop替代前面的lpop/rpop
 
+<!-- more -->
+
 ### springBoot中使用redis集群
+
+首先要做的是配置Redis集群，参考：[博客](https://www.cnblogs.com/PatrickLiu/p/8458788.html)
 
 ```yaml
 spring:		

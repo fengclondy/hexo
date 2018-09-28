@@ -126,6 +126,35 @@ CAP定理，又被叫作布鲁尔定理，即一致性，高可用和分区容�
 `@autowired`写在变量上的注入要等到类完全加载完，才会将相应的bean注入，而变量是在加载类的时候按照相应顺序加载的，所以变量的加载要早于`@autowired`变量的加载。
 >特别注意如果类是new出来的，那么就不能在类中使用@Autowired导入spring中的bean。可以在类的头部加上@Component，将其控制权交由spring容器管理。
 
+#### java整型机制
+
+```java
+public static void main(String... strings) {
+
+    Integer integer1 = 3;
+    Integer integer2 = 3;
+
+    if (integer1 == integer2)
+        System.out.println("integer1 == integer2");
+    else
+        System.out.println("integer1 != integer2");
+
+    Integer integer3 = 300;
+    Integer integer4 = 300;
+
+    if (integer3 == integer4)
+        System.out.println("integer3 == integer4");
+    else
+        System.out.println("integer3 != integer4");
+
+}
+```
+输出结果：
+```java
+integer1 == integer2
+integer3 != integer4
+```
+在Java 5中，在Integer的操作上引入了一个新功能来节省内存和提高性能。整型对象通过使用相同的对象引用实现了缓存和重用（适用于整数值区间-128 至 +127；只适用于自动装箱。使用构造函数创建对象不适用。）。
 
 
 

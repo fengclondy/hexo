@@ -53,7 +53,7 @@ categories: springBoot
 >produces:指定返回的内容类型，仅当request请求头中的(Accept)类型中包含该指定类型才返回
 
 当然可以`用@GetMapping`、`@PostMapping`等替代。
-* `@ComponentScan`: 组件扫描，可自动发现和装配一些Bean。如 
+* `@ComponentScan`: 组件扫描，可自动发现和装配一些Bean，并注入到IOC容器中。如 
 
 @Component、@Service、 @Repository、 @Controller、@Entity 等等
 
@@ -81,7 +81,7 @@ categories: springBoot
 
 * `@JsonBackReference`:解决嵌套外链问题。
 
-* `@Import`：用来导入其他配置类。
+* `@Import`：用来导入其他配置类中的bean属性。
 
 * `@ImportResource`：用来加载xml配置文件。
 

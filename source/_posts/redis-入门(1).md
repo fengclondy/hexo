@@ -129,7 +129,7 @@ requirepass [密码]；
 命令行输入：`redis-benchmark -h 127.0.0.1 -p 6379 -c 1000 -n 100000`
 表示向server发送10万个请求，每次请求并发数为1000。结果如下：
 
-```
+```powershell
  ====== PING_INLINE ======
     100000 requests completed in 154.46 seconds
     1000 parallel clients

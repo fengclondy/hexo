@@ -20,14 +20,33 @@ categories: springBoot
 
 如今Metrics已经是系统的“标配”了，Spring Boot 2引入了Micrometer，来统一metrics的规范，使得开发人员更好的理解和使用metrics的模块。RabbitMQ、JVM 线程和垃圾收集指标会自动进行 instrument 监控，异步控制器（controller）也会自动添加到监控里。
 
+<!-- more -->
+
 #### Lettuce
 
 Lettuce取代了Jedis，成为底层连接Redis的方案。Lettuce是一个可伸缩的线程安全的 Redis 客户端，用于同步、异步和响应式使用。多个线程可以共享同一个 RedisConnection，避免了Jedis的线程不安全问题。
+
+```properties
+spring.redis.host=localhost
+spring.redis.port=6379
+#spring.redis.password=root #根据需要
+# 连接超时时间（毫秒）
+spring.redis.timeout=10000
+# Redis默认情况下有16个分片，这里配置具体使用的分片，默认是0
+spring.redis.database=0
+# 连接池最大连接数（使用负值表示没有限制） 默认 8
+spring.redis.lettuce.pool.max-active=8
+# 连接池最大阻塞等待时间（使用负值表示没有限制） 默认 -1
+spring.redis.lettuce.pool.max-wait=-1
+# 连接池中的最大空闲连接 默认 8
+spring.redis.lettuce.pool.max-idle=8
+# 连接池中的最小空闲连接 默认 0
+spring.redis.lettuce.pool.min-idle=0
+```
+
 
 #### 支持HTTP/2
 
 如果你留意访问信息，会发现不少大厂已经悄然升级到HTTP/2了，其中升级最多的是资源类站点，毕竟二进制传输和首部压缩之类的特性可以直接享受。但是要想享受HTTP/2的全部好处，程序上不直接照搬原来的代码是不可能的，起码Server Push之类就做不到。Spring Boot 2.0中，无论选择Tomcat, Netty, Jetty哪一个作为Web容器，都可以支持HTTP/2。但是注意，如果要使用HTTP/2的全部特性，必须使用Servlet 4.0及以上版本。JDK 9新增的HTTPClient可以完整支持HTTP/2。
 
 当然，Spring Boot 2.0的新特性还不止这些，还有OAuth 2.0、嵌入式Netty、Kotlin、JOOQ、Quartz、WebFlux响应式编程等等。
-
-<!-- more -->

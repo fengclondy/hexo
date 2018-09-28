@@ -28,6 +28,8 @@ $ mvn package -DskipTests
 
 打包完成后jar包会生成到target目录下，命名一般是 项目名+版本号.jar 
 
+<!-- more -->
+
 启动jar包命令：
 
 ```powershell
@@ -54,8 +56,6 @@ $ java -jar app.jar --Dspring.config.location=application.properties
 ## 指定启动分支
 $ java -jar app.jar --spring.profiles.active = prod
 ```
-
-<!-- more -->
 
 2、方式二采用了gradle管理：
 

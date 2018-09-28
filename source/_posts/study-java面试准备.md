@@ -6,8 +6,11 @@ tags: study
 categories: study
 ---
 
+### java基本类型
+八大基本类型：字符类型 char、布尔类型 boolean、整数类型 byte、short、int、long、
+浮点数类型 float、double。
 
-### 线程的两种实现方式和区别
+### 线程的两种实现方式和区别（准确来说是三种）
 
 有两种实现方法，分别是继承 Thread 类与实现 Runnable 接口。 实现Runnable 接口除了拥有和继承 Thread类一样的功能以外，实现 Runnable 接口还具有以下功能。
 
@@ -46,7 +49,7 @@ Aspect Oriented Programming：面向切向编程
 
 
 ### Integer类型的数值
-```
+```java
 public static void main(String args){
 
     Integer f1=100, f2=100, f3=150, f4=150;
@@ -290,15 +293,11 @@ mysql索引的用途：
 
 - 接口注入
 
+### 五种经典的I/O模型
 
+1. Blocking I/O（阻塞I/O）：
 
- 
-
- ### 五种经典的I/O模型
-
- - 1. Blocking I/O（阻塞I/O）
-
- ```java
+```java
  //代码1
 //在Java中使用同步阻塞I/O实现文件的读取
 public static void main(String[] args) throws IOException {
@@ -310,11 +309,15 @@ public static void main(String[] args) throws IOException {
         System.out.println(pro.getProperty((String)key));
     }
 }
- ```
-- 2. Nonblocking I/O（非阻塞I/O）
-- 3. I/O Multiplexing（I/O多路复用）
-- 4. Signal-Driven I/O（信号驱动I/O）
-- 5. Asynchronous I/O （异步I/O）
+```
+
+2. Nonblocking I/O（非阻塞I/O）
+
+3. I/O Multiplexing（I/O多路复用）
+
+4. Signal-Driven I/O（信号驱动I/O）
+
+5. Asynchronous I/O （异步I/O）
 
 ```java
  //代码2
@@ -419,3 +422,43 @@ Spring Boot:
  Spring Cloud：
 
 微服务工具包，为开发者提供了在分布式系统的配置管理、服务发现、断路器、智能路由、微代理、控制总线等开发工具包。
+
+SpringCloud的**基础功能**：
+
+- 服务治理： Spring  Cloud Eureka
+- 客户端负载均衡： Spring Cloud Ribbon
+- 服务容错保护： Spring  Cloud Hystrix  
+- 声明式服务调用： Spring  Cloud Feign
+- API网关服务：Spring Cloud Zuul
+- 分布式配置中心： Spring Cloud Config
+
+SpringCloud的高级功能：
+
+- 消息总线： Spring  Cloud Bus
+- 消息驱动的微服务： Spring Cloud Stream
+- 分布式服务跟踪： Spring  Cloud Sleuth
+
+### 设计模式6大原则
+1. 单一职责原则(SRP) ：就一个类而言，应该仅有一个引起它变化的原因。 
+2. 开放封闭原则(ASD) ：类、模块、函数等等等应该是可以拓展的，但是不可修改。
+3. 里氏替换原则(LSP) ：所有引用基类（父类）的地方必须能透明地使用其子类的对象 。
+4. 依赖倒置原则(DIP) ：高层模块不应该依赖低层模块，两个都应该依赖于抽象。抽象不应该依赖于细节，细节应该依赖于抽象。 
+5. 迪米特原则(LOD) ：一个软件实体应当尽可能少地与其他实体发生相互作用。 
+6. 接口隔离原则(ISP) ：一个类对另一个类的依赖应该建立在最小的接口上。 
+
+### StringBuilder 与 StringBuffer 的区别以及StringBuilder 与 String 的区别
+1. StringBuilder效率高，线程不安全，StringBuffer效率低，线程安全。
+
+2. String是不可变字符串，StringBuilder是可变字符串。为什么有这样的差异，可以深入源码去解析，比如String类内的 priver final  char  value[] 等方法的原因。
+
+3. 如果是简单的声明一个字符串没有后续过多的操作，使用 String，StringBuilder 均可，若后续对字符穿做频繁的添加，删除操作，或者是在循环当中动态的改变字符串的长度应该用 StringBuilder。使用 String 会产生多余的字符串，占用内存空间。
+
+### 读写锁与独占锁
+
+与传统锁不同的是读写锁的规则是可以共享读，但只能一个写，总结起来为：读读不互斥，读写互斥，写写互斥，而一般的独占锁是：读读互斥，读写互斥，写写互斥，而场景中往往读远远大于写，读写锁就是为了这种优化而创建出来的一种机制。
+
+注意是*读远远大于写*，一般情况下独占锁的效率低来源于高并发下对临界区的激烈竞争导致线程上下文切换。因此当并发不是很高的情况下，读写锁由于需要额外维护读锁的状态，可能还不如独占锁的效率高。因此需要根据实际情况选择使用。
+
+ReadWriteLock ---读写锁
+
+ReentrantLock ---可重入锁
