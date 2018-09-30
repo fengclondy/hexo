@@ -1,7 +1,7 @@
 {
 	"list": [{
 		"arr": {
-			"link": ["A1-1.jpg", "A1-1.jpg"],
+			"link": ["A1-12.jpg", "A1-12.jpg"],
 			"text": ["A1", "A2"],
 			"month": 3,
 			"type": ["image", "image"],
@@ -10,7 +10,7 @@
 		"date": "2017-03"
 	}, {
 		"arr": {
-			"link": ["A1-1.jpg"],
+			"link": ["A1-122.jpg"],
 			"text": ["A1-1"],
 			"month": 1,
 			"type": ["image"],
