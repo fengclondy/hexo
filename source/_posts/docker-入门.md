@@ -17,11 +17,11 @@ categoriets: docker
 
 虚拟机（virtual machine）就是带环境安装的一种解决方案。它可以在一种操作系统里面运行另一种操作系统，比如在 Windows 系统里面运行 Linux 系统。应用程序对此毫无感知，因为虚拟机看上去跟真实系统一模一样，而对于底层系统来说，虚拟机就是一个普通文件，不需要了就删掉，对其他部分毫无影响。
 虽然用户可以通过虚拟机还原软件的原始环境。但是，这个方案有几个缺点。
-- （1）资源占用多。  
+- （1）资源占用多。
 虚拟机会独占一部分内存和硬盘空间。它运行的时候，其他程序就不能使用这些资源了。哪怕虚拟机里面的应用程序，真正使用的内存只有 1MB，虚拟机依然需要几百 MB 的内存才能运行。
-- （2）冗余步骤多。  
+- （2）冗余步骤多。
 虚拟机是完整的操作系统，一些系统级别的操作步骤，往往无法跳过，比如用户登录。
-- （3）启动慢。  
+- （3）启动慢。
 启动操作系统需要多久，启动虚拟机就需要多久。可能要等几分钟，应用程序才能真正运行。
 
 <!-- more -->
@@ -31,11 +31,11 @@ categoriets: docker
 由于虚拟机存在这些缺点，Linux 发展出了另一种虚拟化技术：Linux 容器（Linux Containers，缩写为 LXC）。
 Linux 容器不是模拟一个完整的操作系统，而是对进程进行隔离。或者说，在正常进程的外面套了一个保护层。对于容器里面的进程来说，它接触到的各种资源都是虚拟的，从而实现与底层系统的隔离。
 由于容器是进程级别的，相比虚拟机有很多优势。
-- （1）启动快  
+- （1）启动快 
 容器里面的应用，直接就是底层系统的一个进程，而不是虚拟机内部的进程。所以，启动容器相当于启动本机的一个进程，而不是启动一个操作系统，速度就快很多。
-- （2）资源占用少  
+- （2）资源占用少 
 容器只占用需要的资源，不占用那些没有用到的资源；虚拟机由于是完整的操作系统，不可避免要占用所有资源。另外，多个容器可以共享资源，虚拟机都是独享资源。
-- （3）体积小  
+- （3）体积小 
 容器只要包含用到的组件即可，而虚拟机是整个操作系统的打包，所以容器文件比虚拟机文件要小很多。  
 总之，容器有点像轻量级的虚拟机，能够提供虚拟化的环境，但是成本开销小得多。
 
@@ -61,26 +61,26 @@ Docker是CS架构，基本组成：
 
 - Docker daemon: 
 
-运行在宿主机上，Docker守护进程，用户通过Docker client(Docker命令)与Docker daemon交互
+运行在宿主机上，Docker守护进程，用户通过 Docker client (Docker命令)与 Docker daemon 交互
 
 - Docker client: 
 
-Docker 命令行工具，是用户使用Docker的主要方式，Docker client与Docker daemon通信并将结果返回给用户，
-Docker client也可以通过socket或者RESTful api访问远程的Docker daemon
+Docker 命令行工具，是用户使用 Docker 的主要方式，Docker client 与 Docker daemon 通信并将结果返回给用户，
+Docker client 也可以通过 socket 或者 RESTful api 访问远程的 Docker daemon
 
 #### 重要概念
 
 - Docker image：
 
-镜像是只读的，镜像中包含有需要运行的文件。镜像用来创建container，一个镜像可以运行多个container；镜像可以通过Dockerfile创建，也可以从Docker hub/registry上下载。
+镜像是只读的，镜像中包含有需要运行的文件。镜像用来创建 container，一个镜像可以运行多个container；镜像可以通过 Dockerfile 创建，也可以从Docker hub/registry上下载。
 
 - Docker container：
 
-容器是Docker的运行组件，启动一个镜像就是一个容器，容器是一个隔离环境，多个容器之间不会相互影响，保证容器中的程序运行在一个相对安全的环境中。
+容器是 Docker 的运行组件，启动一个镜像就是一个容器，容器是一个隔离环境，多个容器之间不会相互影响，保证容器中的程序运行在一个相对安全的环境中。
 
 - Docker hub/registry: 
 
-共享和管理Docker镜像，用户可以上传或者下载上面的镜像，官方地址为https://registry.hub.docker.com/，也可以搭建自己私有的Docker registry。
+共享和管理 Docker 镜像，用户可以上传或者下载上面的镜像，官方地址为https://registry.hub.docker.com/，也可以搭建自己私有的Docker registry。
 
 ### 深入理解 
 
@@ -119,7 +119,7 @@ Dockerfile 一般位于构建上下文的根目录下，也可以通过-f指定�
 ```powershell
 $ docker build -f /path/to/a/Dockerfile .
 ```
->还可以通过-t参数指定构建成镜像的仓库、标签。
+>还可以通过 -t 参数指定构建成镜像的仓库、标签。
 
 
 #### 镜像标签
@@ -128,7 +128,7 @@ $ docker build -f /path/to/a/Dockerfile .
 $ docker build -t nginx/v3 .
 ```
 
-如果存在多个仓库下，或使用多个镜像标签，就可以使用多个-t参数：
+如果存在多个仓库下，或使用多个镜像标签，就可以使用多个 -t 参数：
 
 ```powershell
 $ docker build -t nginx/v3:1.0.2 -t nginx/v3:latest .
@@ -146,7 +146,7 @@ Error response from daemon: Unknown instruction: RUNCMD
 
 Docker 守护进程会一条一条的执行 Dockerfile 中的指令，而且会在每一步提交并生成一个新镜像，最后会输出最终镜像的ID。
 生成完成后，Docker 守护进程会自动清理你发送的上下文。 Dockerfile文件中的每条指令会被独立执行，
-并会创建一个新镜像，RUN cd /tmp等命令不会对下条指令产生影响。 Docker 会重用已生成的中间镜像，以加速docker build的构建速度。以下是一个使用了缓存镜像的执行过程：
+并会创建一个新镜像，RUN cd /tmp 等命令不会对下条指令产生影响。 Docker 会重用已生成的中间镜像，以加速 docker build 的构建速度。以下是一个使用了缓存镜像的执行过程：
 
 ```powershell
 $ docker build -t svendowideit/ambassador .
@@ -220,7 +220,7 @@ $ docker version
 
 #### 配置
 
-Docker 中国官方镜像加速可通过registry.docker-cn.com访问。该镜像库只包含流行的公有镜像，私有镜像仍需要从美国镜像库中拉取。
+Docker 中国官方镜像加速可通过 registry.docker-cn.com 访问。该镜像库只包含流行的公有镜像，私有镜像仍需要从美国镜像库中拉取。
 
 ```json
 vi  /etc/docker/daemon.json
@@ -231,7 +231,6 @@ vi  /etc/docker/daemon.json
 }
 ```
 可以采用阿里云的镜像配置。
-
 
 #### 拉取docker镜像
 ```powershell
@@ -285,7 +284,7 @@ $ docker info
 ```
 
 #### 从Docker hub上下载某个镜像
-```
+```powershell
 $ docker pull centos:latest
 ```
 >执行docker pull centos会将Centos这个仓库下面的所有镜像下载到本地repository。

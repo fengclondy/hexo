@@ -1,6 +1,6 @@
 ---
 layout: post
-title: springCloud--网关zuul
+title: springCloud--网关gateway
 date: 2018-07-16 01:10:35
 tags: springCloud
 categories: springCloud

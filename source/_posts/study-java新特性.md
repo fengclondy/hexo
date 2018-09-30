@@ -1,6 +1,6 @@
 ---
 layout: post
-title: study-java8新特性
+title: study-java新特性
 date: 2018-08-02 02:17:35
 tags: study
 categories: study
@@ -70,3 +70,97 @@ Optional类常用方法：
 参考：https://mp.weixin.qq.com/s/yXkQwcKueWYLDKw3l8tFDQ
 
 
+
+### java11新特性
+- 1、本地变量类型推断
+```java
+var javastack = "javastack";
+//等价于 String javastack = "javastack"; 即不需要写出具体的类型
+```
+
+- 2、字符串加强
+```java
+/** 增加了一系列的字符串处理方法 */
+// 判断字符串是否为空白
+" ".isBlank(); // true
+
+// 去除首尾空格
+" Javastack ".strip(); // "Javastack"
+
+// 去除尾部空格 
+" Javastack ".stripTrailing(); // " Javastack"
+
+// 去除首部空格 
+" Javastack ".stripLeading(); // "Javastack "
+
+// 复制字符串
+"Java".repeat(3); // "JavaJavaJava"
+
+// 行数统计
+"A\nB\nC".lines().count(); // 3
+```
+
+3、集合加强
+Jdk 里面为集合（List/ Set/ Map）都添加了 `of` 和 `copyOf` 方法，它们两个都用来创建不可变的集合。
+
+4、Stream 加强
+1) 增加单个参数构造方法，可为null
+```java
+Stream.ofNullable(null).count(); // 0
+```
+2) 增加 takeWhile 和 dropWhile 方法
+```java
+Stream.of(1, 2, 3, 2, 1)
+    .takeWhile(n -> n < 3)
+    .collect(Collectors.toList());  // [1, 2]
+```
+从开始计算，当 n < 3 时就截止。
+
+```java
+Stream.of(1, 2, 3, 2, 1)
+    .dropWhile(n -> n < 3)
+    .collect(Collectors.toList());  // [3, 2, 1]
+```
+这个和上面的相反，一旦 n < 3 不成立就开始计算。
+
+3）iterate重载
+
+这个 iterate 方法的新重载方法，可以让你提供一个 Predicate (判断条件)来指定什么时候结束迭代。
+
+如果你对 JDK 8 中的 Stream 还不熟悉，可以看之前分享的这一系列教程。
+
+5、Optional 加强
+```java
+Optional.of("javastack").orElseThrow();     // javastack
+Optional.of("javastack").stream().count();  // 1
+Optional.ofNullable(null)
+    .or(() -> Optional.of("javastack"))
+    .get();   // javastack
+```
+
+6、InputStream 加强
+```java
+var classLoader = ClassLoader.getSystemClassLoader();
+var inputStream = classLoader.getResourceAsStream("javastack.txt");
+var javastack = File.createTempFile("javastack2", "txt");
+try (var outputStream = new FileOutputStream(javastack)) {
+    inputStream.transferTo(outputStream);
+}
+```
+7、HTTP Client API
+```java
+var request = HttpRequest.newBuilder()
+    .uri(URI.create("https://javastack.cn"))
+    .GET()
+    .build();
+var client = HttpClient.newHttpClient();
+
+// 同步
+HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+System.out.println(response.body());
+
+// 异步
+client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+    .thenApply(HttpResponse::body)
+    .thenAccept(System.out::println);
+```

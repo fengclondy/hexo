@@ -20,7 +20,7 @@ $ docker pull nginx：latest
 $ docker run --name webserver -d -p 80:80 nginx
 ```
 
->此时直接访问宿主机的IP地址，可以出现ngin欢迎界面
+>此时直接访问宿主机的IP地址，可以出现nginx欢迎界面
 
 <!-- more -->
 
@@ -33,7 +33,6 @@ root@3729b97e8226:/# exit
 ```
 
 >可通过` docker diff webserver `查看前后操作发生了那些变化
-
 
 4、保存修改的容器为镜像（实际情况下，尽量不要使用，不推荐；强烈建议使用 Dockerfile）。
 
@@ -76,7 +75,7 @@ ae513a47849c        4 weeks ago         /bin/sh -c #(nop)  CMD ["nginx" "-g" "da
 1、拉取
 
 ```powershell
-$ docker pull docker pull mysql/mysql-server:latest
+$ docker pull mysql/mysql-server:latest
 ```
 
 2、启动，并查看容器启动端口号

@@ -31,19 +31,17 @@ categoriets: sql
 <!-- more -->
 
 ### 语法详解
-
 1、MySQL 和 Oracle 中的限制返回大小
 
-Mysql语法：
-```
+MySQL语法：
+```sql
 SELECT column_name(s)
 FROM table_name
 LIMIT number;
 ```
 
 Oracle语法：
-
-```  
+```  sql
 SELECT column_name(s)
 FROM table_name
 WHERE ROWNUM <= number;
@@ -73,7 +71,7 @@ WHERE ROWNUM <= number;
 
 7、Sql函数：
 
-```
+```powershell
 AVG() - 返回平均值
 COUNT() - 返回行数
 FIRST() - 返回第一个记录的值

@@ -7,17 +7,17 @@ tags:
 
 ### SSM框架开发 笔记
 
-1、前台ajax到后台，后台要返回给前台。数据都正常，但前台就是获取不到值。---解决办法：@ResponseBody写在Controller上，这样前台才能获取到该值。
+1、前台ajax到后台，后台要返回给前台。数据都正常，但前台就是获取不到值。---解决办法：`@ResponseBody`写在Controller上，这样前台才能获取到该值。
 
 2、关于post和ajax：
 
-   $.post和$.get是$.ajax的两种简单形式。如果对业务要求不是很好，可以用，否则应该使用ajax。因为ajax可以指定很多其他参数，比如post默认是异步执行的，而ajax可以直接指定异步、同步方式。
+`$.post`和`$.get`是`$.ajax`的两种简单形式。如果对业务要求不是很好，可以用，否则应该使用 ajax。因为 ajax 可以指定很多其他参数，比如 post 默认是异步执行的，而 ajax 可以直接指定异步、同步方式。
 
 3、SSM框架，mybatis配置xml，需要在插入一条数据之后返回插入的id，只需在 {这里} insert into XX的头部插入如下语句即可。
 
 ```xml
 <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
-        SELECT LAST_INSERT_ID() AS id
+     SELECT LAST_INSERT_ID() AS id
 </selectKey>
 ```
 
@@ -71,11 +71,11 @@ select count(*) from users
 
 >补充：一定要注意到$和#的区别，$的参数直接输出，#的参数会被替换为?，然后传入参数值执行。（还不是很明白其中道理）
 
-5、使用update更新时，传入参数是实体类pojo，总报错java.lang.NullPointerException
+5、使用 update 更新时，传入参数是实体类 pojo，总报错 java.lang.NullPointerException
 
-一定要注意实体类的get方法，对于值为null的直接返回即可（因为SSm会对实体类的每个属性进行一次get方法），不能操作。尤其是日期格式的问题，需特别注意
+一定要注意实体类的 get 方法，对于值为 null 的直接返回即可（因为 SSM 会对实体类的每个属性进行一次get方法），不能操作。尤其是日期格式的问题，需特别注意
 
-6、使用 if  test 判断的时候，一定不能加在where语句后面，where语句不能识别，会直接将其作为入参进行判断。
+6、使用 if  test 判断的时候，一定不能加在 where 语句后面，where 语句不能识别，会直接将其作为入参进行判断。
 
 ```xml
 <if test="#{0} != null">
@@ -91,8 +91,8 @@ log4j.logger.org.mybatis=DEBUG
 
 7、SQL语法：
 
-- `isnull(expr)`的用法：如expr 为null，那么isnull() 的返回值为 1，否则返回值为 0。
+- `isnull(expr)`的用法：如expr 为 null，那么 isnull() 的返回值为 1，否则返回值为 0。
 
-- `IFNULL(expr1,expr2)`的用法：假如expr1 不为NULL，则 IFNULL()的返回值为 expr1; 否则其返回值为expr2。IFNULL()的返回值是数字或是字符串，具体情况取决于其所使用的语境。
+- `IFNULL(expr1,expr2)`的用法：假如expr1 不为 NULL，则 IFNULL() 的返回值为 expr1; 否则其返回值为expr2。IFNULL() 的返回值是数字或是字符串，具体情况取决于其所使用的语境。
 
-- `NULLIF(expr1,expr2)`的用法：如果expr1=expr2 成立，那么返回值为NULL，否则返回值为expr1。
+- `NULLIF(expr1,expr2)`的用法：如果 expr1=expr2 成立，那么返回值为 NULL，否则返回值为 expr1。

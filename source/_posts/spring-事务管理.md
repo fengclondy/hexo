@@ -12,12 +12,12 @@ categoriets: spring
 
 - 1、Spring中的事务分为物理事务和逻辑事务
 
-物理事务：就是底层数据库提供的事务支持，如JDBC或JTA提供的事务；
+物理事务：就是底层数据库提供的事务支持，如 JDBC 或 JTA 提供的事务；
 
-逻辑事务：是Spring管理的事务，不同于物理事务，逻辑事务提供更丰富的控制，而且如果想得到Spring事务管理的好处，必须使用逻辑事务，因此在Spring中如果没特别强调一般就是逻辑事务；
+逻辑事务：是 Spring 管理的事务，不同于物理事务，逻辑事务提供更丰富的控制，而且如果想得到 Spring 事务管理的好处，必须使用逻辑事务，因此在 Spring 中如果没特别强调一般就是逻辑事务；
 
-- 2、@Transactional可指定的事务属性
-```shell
+- 2、`@Transactional`可指定的事务属性
+```powershell
 @isolation：用于指定事务的隔离级别。默认为底层事务的隔离级别
 
 @noRollbackFor：指定遇到特定异常时不回滚事务
@@ -39,9 +39,9 @@ categoriets: spring
 
 - 3、属性参数的含义
 
-事务隔离级别：用来解决并发事务时出现的问题，其使用TransactionDefinition中的静态变量来指定：
+事务隔离级别：用来解决并发事务时出现的问题，其使用 TransactionDefinition 中的静态变量来指定：
 
-```shell
+```powershell
 ISOLATION_DEFAULT：默认隔离级别，即使用底层数据库默认的隔离级别；
 ISOLATION_READ_UNCOMMITTED：未提交读；
 ISOLATION_READ_COMMITTED：提交读，一般情况下我们使用这个；
@@ -51,7 +51,7 @@ ISOLATION_SERIALIZABLE：序列化。
 
 事务传播行为：Spring管理的事务是逻辑事务，而且物理事务和逻辑事务最大差别就在于事务传播行为，事务传播行为用于指定在多个事务方法间调用时，事务是如何在这些方法间传播的，Spring共支持7种传播行为：
 
-```
+```powershell
 PROPAGATION_REQUIRED：如果当前存在事务，则加入该事务；如果当前没有事务，则创建一个新的事务。
 PROPAGATION_REQUIRES_NEW：创建一个新的事务，如果当前存在事务，则把当前事务挂起。
 PROPAGATION_SUPPORTS：如果当前存在事务，则加入该事务；如果当前没有事务，则以非事务的方式继续运行。
@@ -65,7 +65,7 @@ PROPAGATION_NESTED：如果当前存在事务，则创建一个事务作为当�
 
 >这里以之前遇到的一个项目做简要说明
 
-- 1、在配置文件的头部引入<tx>和<aop>命名空间（以spring-mybatis为例）
+- 1、在配置文件的头部引入`<tx>`和`<aop>`命名空间（以spring-mybatis为例）
 
 ```xml
  <beans
@@ -97,7 +97,7 @@ xsi:schemaLocation="
 
 - 一个类的内部，方法 A 调用方法 B 。在方法 B 上申明事务而 A 没有，则方法 B 的事务不起作用。如果在 A 上申明而 B 上没有，则方法 B 会自动参与该事务。（重要）
 
-- 在类上申明@Tranactional，相当于在所有的方法上申明@Tranactional。如果不涉及多表的关联操作问题，一般不需要声明。
+- 在类上申明`@Tranactional`，相当于在所有的方法上申明`@Tranactional`。如果不涉及多表的关联操作问题，一般不需要声明。
 
 - `try{}catch{}`和`rollbackFor`是矛盾的（个人理解）。要想实现事务的回滚，必须有 Exception 产生，如果 Exception 被捕获，那么注解`@Tranactional`申明就不起作用。
   从被调用处到调用处，需要向上抛Exception,直到其被上层捕获。
