@@ -79,7 +79,6 @@
       };
     }
 
-
     /**
      * @name impush-client 
      * @description 这个项目让我发家致富…
@@ -111,59 +110,33 @@
         addMask($videoImg[i]);
       }
     };
+    var render = function render(res) {
+      var ulTmpl = "";
+      for (var j = 0, len2 = res.list.length; j < len2; j++) {
+        var data = res.list[j].arr;
+        var liTmpl = "";
+        for (var i = 0, len = data.link.length; i < len; i++) {
+          var minSrc = 'https://raw.githubusercontent.com/suguoqiang/Blog-Gallery/master/min-photos/' + data.link[i];
+          var src = 'https://raw.githubusercontent.com/suguoqiang/Blog-Gallery/master/photos/' + data.link[i];
+          var type = data.type[i];
+          var target = src + (type === 'video' ? '.mp4' : '.jpg');
+          src += '';
 
-    
-    
- 
-
-	  var page =1;
-	  var offset = 20;
-	  
-	  var render = function (data) {
-      var begin = (page - 1) * offset;
-      var end = page * offset;
-      if (begin >= data.length) return;
-      var html, li = "";
-      for (var i = begin; i < end && i < data.length; i++) {
-        li += '<li><div class="img-box">' +
-          '<a class="img-bg" rel="example_group" href="http://peerywwd5.bkt.clouddn.com/' + data[i] + '?raw=true"></a>' +
-          "![](https://oc1gyfe6q.qnssl.com/" + data[i] + "?raw=true)" +
-          '</li>';
-          
-      }
-
-      //  document.querySelector('.img-box-ul').appendChild(li);
-
-	    document.querySelector('.img-box-ul').innerHTML += li ;
-
-      // $(".img-box-ul").append(li);
-      // $(".img-box-ul").lazyload();
-      // $("a[rel=example_group]").fancybox();
-	  
-	   createVideoIncon();
-      _view2.default.init();
-
-     
-    };
-	
-	///AAAAAAAAAAAAAAAAAAAAA
-	 var scroll =  function (data) {
-      var that = this;
-      $(window).scroll(function () {
-        var windowPageYOffset = window.pageYOffset;
-        var windowPageYOffsetAddHeight = windowPageYOffset + window.innerHeight;
-        var sensitivity = 0;
-
-        var offsetTop = $(".instagram").offset().top + $(".instagram").height();
-
-        if (offsetTop >= windowPageYOffset && offsetTop < windowPageYOffsetAddHeight + sensitivity) {
-          that.render(++that.page, data);
+          liTmpl += '<figure class="thumb" itemprop="associatedMedia" itemscope="" itemtype="http://schema.org/ImageObject">\
+                <a href="' + src + '" itemprop="contentUrl" data-size="1080x1080" data-type="' + type + '" data-target="' + src + '">\
+                  <img class="reward-img" data-type="' + type + '" data-src="' + minSrc + '" src="/assets/img/empty.png" itemprop="thumbnail" onload="lzld(this)">\
+                </a>\
+                <figcaption style="display:none" itemprop="caption description">' + data.text[i] + '</figcaption>\
+            </figure>';
         }
-      })
+        ulTmpl = ulTmpl + '<section class="archives album"><h1 class="year">' + data.year + '年<em>' + data.month + '月</em></h1>\
+        <ul class="img-box-ul">' + liTmpl + '</ul>\
+        </section>';
+      }
+      document.querySelector('.instagram').innerHTML = '<div class="photos" itemscope="" itemtype="http://schema.org/ImageGallery">' + ulTmpl + '</div>';
+      createVideoIncon();
+      _view2.default.init();
     };
-
-	
-	
 
     var replacer = function replacer(str) {
       var arr = str.split("/");
@@ -196,7 +169,7 @@
     function loadData(success) {
       if (!searchData) {
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'data.json?t=' + +new Date(), true);
+        xhr.open('GET', './data.json?t=' + +new Date(), true);
 
         xhr.onload = function() {
           if (this.status >= 200 && this.status < 300) {
