@@ -100,7 +100,7 @@ def handle_photo():
     list_info = []
     for i in range(len(file_list)):
         filename = file_list[i]
-        date_str, info = filename.split("-")
+        date_str, info = filename.split("_")
         info, _ = info.split(".")
         date = datetime.strptime(date_str, "%Y-%m-%d")
         year_month = date_str[0:7]            
