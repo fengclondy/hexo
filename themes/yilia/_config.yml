@@ -2,9 +2,9 @@
 
 menu:
   主页: /
-  相册: /photos
+  相册&视频: /photos
   归档:  /archives/index.html
-  qita: /about/index.html
+  其他: /about/index.html
 
 # SubNav
 subnav:
