@@ -27,3 +27,7 @@ Ioc的初始化过程：
 - 4、根据 lazy-init 属性初始化 Bean 实例和依赖注入.
 
 <!-- more -->
+
+### 事件与事件监听器
+
+Java提供了实现事件监听机制的两个基础类：自定义事件类型扩展自 java.util.EventObject、事件的监听器扩展自 java.util.EventListener。

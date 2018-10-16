@@ -50,11 +50,11 @@ Spring 是个java企业级应用的开源开发框架。Spring主要用来开发
 
 ####  4. 核心容器（应用上下文) 模块
 
-这是基本的Spring模块，提供spring 框架的基础功能，BeanFactory 是 任何以spring为基础的应用的核心。Spring 框架建立在此模块之上，它使Spring成为一个容器。
+这是基本的Spring模块，提供spring 框架的基础功能，BeanFactory 是任何以spring为基础的应用的核心。Spring 框架建立在此模块之上，它使Spring成为一个容器。
 
 ####  5. BeanFactory – BeanFactory 实现举例
 
-Bean 工厂是工厂模式的一个实现，提供了控制反转功能，用来把应用的配置和依赖从正真的应用代码中分离。最常用的BeanFactory 实现是XmlBeanFactory 类。
+Bean 工厂是工厂模式的一个实现，提供了控制反转功能，用来把应用的配置和依赖从真正的应用代码中分离。最常用的BeanFactory 实现是XmlBeanFactory 类。
 
 ####  6. XMLBeanFactory
 
@@ -70,7 +70,7 @@ AOP模块用于发给我们的Spring应用做面向切面的开发， 很多支�
 
 #### 9. 解释对象/关系映射集成模块
 
-Spring 通过提供ORM模块，支持我们在直接JDBC之上使用一个对象/关系映射映射(ORM)工具，Spring 支持集成主流的ORM框架，如Hiberate,JDO和 iBATIS SQL Maps。Spring的事务管理同样支持以上所有ORM框架及JDBC。
+Spring 通过提供ORM模块，支持我们在直接JDBC之上使用一个对象/关系映射(ORM)工具，Spring 支持集成主流的ORM框架，如Hiberate,JDO和 iBATIS SQL Maps。Spring的事务管理同样支持以上所有ORM框架及JDBC。
 
 ####  10. 解释WEB 模块
 
@@ -86,7 +86,7 @@ Spring IOC 负责创建对象，管理对象（通过依赖注入（DI），装�
 
 #### 14. IOC的优点是什么？
 
-IOC 或 依赖注入把应用的代码量降到最低。它使应用容易测试，单元测试不再需要单例和JNDI查找机制。最小的代价和最小的侵入性使松散耦合得以实现。IOC容器支持加载服务时的饿汉式初始化和懒加载。
+IOC（依赖注入）把应用的代码量降到最低。它使应用容易测试，单元测试不再需要单例和JNDI查找机制。最小的代价和最小的侵入性使松散耦合得以实现。IOC容器支持加载服务时的饿汉式初始化和懒加载。
 
 #### 15. ApplicationContext通常的实现是什么？
 
@@ -100,7 +100,7 @@ WebXmlApplicationContext：此容器加载一个XML文件，此文件定义了�
 
 Application contexts提供一种方法处理文本消息，一个通常的做法是加载文件资源（比如镜像），它们可以向注册为监听器的bean发布事件。另外，在容器或容器内的对象上执行的那些不得不由bean工厂以程序化方式处理的操作，可以在Application contexts中以声明的方式处理。Application contexts实现了MessageSource接口，该接口的实现以可插拔的方式提供获取本地化消息的方法。
 
-#### 17. 一个Spring的应用看起来象什么？
+#### 17. 一个Spring的应用看起来像什么？
 
 一个定义了一些功能的接口
 
@@ -152,7 +152,7 @@ Spring 框架定义的beans都是单件beans。在bean tag中有个属性”sing
 
 Spring框架支持以下五种bean的作用域：
 
-(1)`singleton`:bean在每个Spring ioc 容器中只有一个实例。
+(1)`singleton`: bean在每个Spring ioc 容器中只有一个实例。
 
 (2)`prototype`：一个bean的定义可以有多个实例。
 
@@ -170,21 +170,21 @@ Spring框架支持以下五种bean的作用域：
 
 #### 27. 解释Spring框架中bean的生命周期
 
-Spring容器 从XML 文件中读取bean的定义，并实例化bean。
+1、Spring容器 从XML 文件中读取bean的定义，并实例化bean。
 
-Spring根据bean的定义填充所有的属性。
+2、Spring根据bean的定义填充所有的属性。
 
-如果bean实现了BeanNameAware 接口，Spring 传递bean 的ID 到 setBeanName方法。
+3、如果bean实现了BeanNameAware 接口，Spring 传递bean 的ID 到 setBeanName方法。
 
-如果Bean 实现了 BeanFactoryAware 接口， Spring传递beanfactory 给setBeanFactory 方法。
+4、如果Bean 实现了 BeanFactoryAware 接口， Spring传递beanfactory 给setBeanFactory 方法。
 
-如果有任何与bean相关联的BeanPostProcessors，Spring会在postProcesserBeforeInitialization()方法内调用它们。
+5、如果有任何与bean相关联的BeanPostProcessors，Spring会在postProcesserBeforeInitialization()方法内调用它们。
 
-如果bean实现IntializingBean了，调用它的afterPropertySet方法，如果bean声明了初始化方法，调用此初始化方法。
+6、如果bean实现IntializingBean了，调用它的afterPropertySet方法，如果bean声明了初始化方法，调用此初始化方法。
 
-如果有BeanPostProcessors 和bean 关联，这些bean的postProcessAfterInitialization() 方法将被调用。
+7、如果有BeanPostProcessors 和bean 关联，这些bean的postProcessAfterInitialization() 方法将被调用。
 
-如果bean实现了 DisposableBean，它将调用destroy()方法。
+8、如果bean实现了 DisposableBean，它将调用destroy()方法。
 
 #### 28. 哪些是重要的bean生命周期方法？ 你能重载它们吗？
 

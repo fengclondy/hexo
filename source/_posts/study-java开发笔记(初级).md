@@ -528,7 +528,13 @@ function createModule(str1, str2) {
          }            
 ```
 
-19、toString()方法将对象转换成字符串。如果带参数toString(n)，即将其转换成n进制表示。
+19、toString()方法将对象转换成字符串。如果带参数toString(n)，即将其转换成n进制表示。将字符串转换为对象
+
+```java
+//1、使用JSONObject
+JSONObject jsonObject=JSONObject.fromObject(objectStr);
+Student stu=(Student)JSONObject.toBean(jsonObject, Student.class);
+```
 
 20、javascript标准事件模型的执行顺序：事件捕获->事件处理->事件冒泡。先事件捕获从windows到document往下级知道特定的事件节点，然后进行事件处理，在事件冒泡，
 

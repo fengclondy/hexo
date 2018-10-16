@@ -105,6 +105,8 @@ redis-server --service-stop    #停止服务
 取出键值对 get myKey
 ```
 
+> redis-cli -h host -p port -a password     #有密码的连接方式
+
 4、其他的一些相关操作：
 
 ```
