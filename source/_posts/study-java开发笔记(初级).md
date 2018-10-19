@@ -754,3 +754,72 @@ Stopping mysqld:  [  OK  ]
 Starting mysqld:  [  OK  ]
 ```
 
+### AOP面向切面编程
+- @Apsect：将当前类标识为一个切面；
+- @Pointcut：定义切点，这里使用的是条件表达式；
+- @Before：前置增强，就是在目标方法执行之前执行；
+- @AfterReturning：后置增强，方法退出时执行；
+- @AfterThrowing：有异常时该方法执行；
+- @After：最终增强，无论什么情况都会执行；
+- @Afround：环绕增强；
+- 
+所谓AOP也就是面向切面编程，能够让我们在不影响原有业务功能的前提下，横切扩展新的功能。这里面有一个比较显眼的词我们需要注意一下，横切，它是基于横切面对程序进行扩展的。
+```java
+@Aspect
+@Component
+public class LogAspect {
+   /**
+    * 功能描述: 拦截对这个包下所有方法的访问
+    *
+    * @param:[]
+    * @return:void
+    **/
+   @Pointcut("execution(* com.example.springbootaop.controller.*.*(..))") //指明要横切扩展的路径
+   public void loginLog() {
+   }
+
+   // 前置通知
+   @Before("loginLog()")
+   public void loginBefore(JoinPoint joinPoint) {
+       // 我们从请求的上下文中获取request，记录请求的内容
+       ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+       HttpServletRequest request = attributes.getRequest();
+       System.out.println("请求路径 : " + request.getRequestURL());
+       System.out.println("请求方式 : " + request.getMethod());
+       System.out.println("方法名 : " + joinPoint.getSignature().getName());
+       System.out.println("类路径 : " + joinPoint.getSignature().getDeclaringTypeName());
+       System.out.println("参数 : " + Arrays.toString(joinPoint.getArgs()));
+   }
+
+   @AfterReturning(returning = "object", pointcut = "loginLog()")
+   public void doAfterReturning(Object object) {
+       System.out.println("方法的返回值 : " + object);
+   }
+
+   // 方法发生异常时执行该方法
+   @AfterThrowing(throwing = "e",pointcut = "loginLog()")
+   public void throwsExecute(JoinPoint joinPoint, Exception e) {
+       System.err.println("方法执行异常 : " + e.getMessage());
+   }
+
+   // 后置通知
+   @After("loginLog()")
+   public void afterInform() {
+       System.out.println("后置通知结束");
+   }
+
+   // 环绕通知
+   @Around("loginLog()")
+   public Object surroundInform(ProceedingJoinPoint proceedingJoinPoint) {
+       System.out.println("环绕通知开始...");
+       try {
+           Object o =  proceedingJoinPoint.proceed();
+           System.out.println("方法环绕proceed，结果是 :" + o);
+           return o;
+       } catch (Throwable e) {
+           e.printStackTrace();
+           return null;
+       }
+   }
+}
+```

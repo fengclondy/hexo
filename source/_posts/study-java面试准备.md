@@ -40,7 +40,7 @@ wait 是 Object 类的方法，对此对象调用 wait 方法导致本线程放�
 IoC：反转控制。
 　　反转控制就是指将控制权由类内部抽离到容器，由容器类的实例化及动作进行配置管理。
 
-Dependency-injection：依赖注入  
+Dependency-injection：依赖注入 
 　　对象的依赖关系由负责协调系统中各个对象的第三方组件在创建对象时设定。对象不自行创建或管理它们的依赖关系，依赖关系被自动注入到需要它们的对象中。通过参数和配置能够体会出“注入”这个词在这里有多形象。依赖注入的最大好处就是松耦合。不需要再类内部去和特定的类进行绑定，而是将一些依赖关系以参数的形式注入到类内部。
 
 Aspect Oriented Programming：面向切向编程
@@ -112,10 +112,12 @@ public HashMap(int initialCapacity, float loadFactor) {
 因此通常建议能提前预估 HashMap 的大小最好，尽量的减少扩容带来的性能损耗。
 
 >个人理解：HashMap是有数组（也有叫做桶）和链表进行实现的，其中的链表在HashMap定义为Entry，它有三个属性，key，value和next。
-当对一个元素进行存操作的时候，首先会利用hash算法对key进行运算求出，要存入数组中的index位置，如果当前位置没有其他元素则直接将该元素放入该位置。
-如果当前位置有值，则将该位置元素置为该元素，并将next节点指向原来的元素，所以数组中永远存放的是最后插入的元素。（这就很好的解决了hash冲突的问题，可以存放多个元素）
-当对一个key进行取操作的时候，首先会根据key计算出其对应的index（HashMap中同一个key的index位置永远是固定的，即使按2的幂次即扩容），
-然后在根据equals()方法找到对应的Entry，这也很好的解释了“为什么覆写equals()方法一定要覆写HashCode()方法”，因为hashcode相同，equals不一定相同；equals相同，hashcode必同。
+>当对一个元素进行存操作的时候，首先会利用hash算法对key进行运算求出，要存入数组中的index位置，如果当前位置没有其他元素则直接将该元素放入该位置。
+>如果当前位置有值，则将该位置元素置为该元素，并将next节点指向原来的元素，所以数组中永远存放的是最后插入的元素。（这就很好的解决了hash冲突的问题，可以存放多个元素）
+>当对一个key进行取操作的时候，首先会根据key计算出其对应的index（HashMap中同一个key的index位置永远是固定的，即使按2的幂次即扩容），
+>然后在根据equals()方法找到对应的Entry，这也很好的解释了“为什么覆写equals()方法一定要覆写HashCode()方法”，因为hashcode相同，equals不一定相同；equals相同，hashcode必同。
+
+**总结**：HashMap 基于 hashing 原理，我们通过 put ()和 get ()方法储存和获取对象。当我们将键值对传递给 put ()方法时，它调用键对象的 hashCode ()方法来计算 hashcode，让后找到 bucket 位置来储存值对象。当获取对象时，通过键对象的 equals ()方法找到正确的键值对，然后返回值对象。HashMap 使用 LinkedList 来解决碰撞问题，当发生碰撞了，对象将会储存在 LinkedList 的下一个节点中。 HashMap 在每个 LinkedList 节点中储存键值对对象。
 
 HashMap的遍历方式：
 ```java

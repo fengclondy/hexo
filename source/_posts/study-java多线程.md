@@ -96,7 +96,7 @@ Runnable接口中的run()方法的返回值是void，它做的事情只是纯粹
 
 另外提一点，Thread类提供了一个getStackTrace()方法也可以用于获取线程堆栈。这是一个实例方法，因此此方法是和具体线程实例绑定的，每次获取获取到的是具体某个线程当前运行的堆栈。
 
- 
+
 #### 9、一个线程如果出现了运行时异常会怎么样
 
 如果这个异常没有被捕获的话，这个线程就停止执行了。另外重要的一点是：**如果这个线程持有某个某个对象的监视器，那么这个对象监视器会被立即释放**
@@ -148,6 +148,7 @@ synchronized是和if、else、for、while一样的关键字，ReentrantLock是�
 - （3）ReentrantLock可以灵活地实现多路通知
 
 另外，二者的锁机制其实也是不一样的。ReentrantLock底层调用的是Unsafe的park方法加锁，synchronized操作的应该是对象头中mark word，这点我不能确定。
+
 
 #### 19、ConcurrentHashMap的并发度是什么
 
@@ -307,3 +308,17 @@ a）假如是业务时间长集中在IO操作上，也就是IO密集型的任务
 b）假如是业务时间长集中在计算操作上，也就是计算密集型任务，这个就没办法了，和（1）一样吧，线程池中的线程数设置得少一些，减少线程上下文的切换
 
 c）并发高、业务执行时间长，解决这种类型任务的关键不在于线程池而在于整体架构的设计，看看这些业务里面某些数据是否能做缓存是第一步，增加服务器是第二步，至于线程池的设置，设置参考其他有关线程池的文章。最后，业务执行时间长的问题，也可能需要分析一下，看看能不能使用中间件对任务进行拆分和解耦。
+
+#### synchronized关键字的补充
+- synchronized锁是可重入的，且在父子类继承中同样适用；
+- synchronized锁在遇到异常时自动释放锁；
+- synchronized锁的同步化不可以继承；
+
+synchronized修饰方法时：
+1）当多个线程同时访问同一个对象的同步方法时，是线程安全的，注意一定是同一个对象。
+2）在同一个实例对象中，synchronized关键字仅对加了synchronized关键字的方法)会保证线程安全，其他未加synchronized关键字方法不保证线程安全。
+3）synchronized关键字获得是对象锁，多个synchronized方法会争夺同一个对象锁。一个类中，如果有多个synchronized方法，则该实例对象中的多个方法之间是同步的，需要等待上一个方法执行结束后，下一个获得该对象锁的方法才可以执行。
+4）synchronized修饰静态方法，持有的锁为类锁，在这种情况下，无论创建多少对象，都共同持有同一个锁即类锁。两个静态方法同时加synchronized时，会发生阻塞。一个静态方法一个动态方法，同时加synchronized，不会发生阻塞，原因是一个是静态方法的synchronized持有的是类锁，动态方法持有的synchronized是对象锁。
+5）同步synchronized(class)和直接使用synchronized修饰静态方法效果一样，都是获得类锁，而不是对象锁。
+6）当一个线程访问该对象的一个synchronized(this)同步代码块时，其他线程对该对象所有其他的synchronized(this)同步代码块的访问将被阻塞。
+7）使用synchronized(非this)同步代码块时，同一个实例对象可以有多个synchronized(非this)同步代码块，当synchronized(非this)中非this对象相同时，多个synchronized(非this)代码块中的代码具有阻塞性，当非this对象不同时，多个synchronized(非this)代码块分别具有同步特性，相互之间不会出现阻塞。

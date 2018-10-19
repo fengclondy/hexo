@@ -156,6 +156,33 @@ integer3 != integer4
 ```
 在Java 5中，在Integer的操作上引入了一个新功能来节省内存和提高性能。整型对象通过使用相同的对象引用实现了缓存和重用（适用于整数值区间-128 至 +127；只适用于自动装箱。使用构造函数创建对象不适用。）。
 
+### @Bean的转换
 
+在基于XML的配置元数据的情况下，可以使用init-method 属性来指定具有void无参数签名的方法的名称。例如：
+```xml
+ <bean id="exampleBean"     class="examples.ExampleBean" init-method="init"/>
+```
+下面是类的定义：
+```java
+ @Bean
+ public class ExampleBean {
+    public void init() {
+       // do some initialization work 
+    } 
+}
+```
 
+在基于XML的配置元数据的情况下，您可以使用destroy-method属性来指定具有void无参数签名的方法的名称。例如：
+```xml
+ <bean id="exampleBean"     class="examples.ExampleBean" destroy-method="destroy"/>
+```
+下面是类的定义：
+```java
+ @Bean
+ public class ExampleBean {
+    public void destroy() {
+       // do some destruction work
+    }
+ }
+```
 

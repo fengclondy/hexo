@@ -280,3 +280,13 @@ public class QiniuTest {
 
 }
 ```
+
+### hutool工具箱
+```xml
+<!--hutool-->
+<dependency>
+	<groupId>cn.hutool</groupId>
+	<artifactId>hutool-all</artifactId>
+	<version>${hutool.version}</version>
+</dependency>
+```

@@ -72,4 +72,7 @@ public class Swagger2Config {
 }
 ```
 
+> @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "int", paramType = "path", example = "1000")
+
 4、启动SpringBoot程序，查看文档：http://localhost:8080/swagger-ui.html
+

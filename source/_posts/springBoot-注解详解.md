@@ -52,7 +52,7 @@ categories: springBoot
 >consumes:指定处理请求的提交内容类型（Content-Type），如application/json,text/html; 
 >produces:指定返回的内容类型，仅当request请求头中的(Accept)类型中包含该指定类型才返回
 
-当然可以`用@GetMapping`、`@PostMapping`等替代。
+当然可以`用@GetMapping`、`@PostMapping`等替代。如：`@GetMapping(value = {"/info", "/info/{username}"})`
 * `@ComponentScan`: 组件扫描，可自动发现和装配一些Bean，并注入到IOC容器中。如 
 
 @Component、@Service、 @Repository、 @Controller、@Entity 等等
@@ -136,4 +136,7 @@ categories: springBoot
 * 18、`@SpringCloudApplication`：该注解，整合了@SpringBootApplication、@EnableDiscoveryClient、@EnableCircuitBreaker
 * 19、`@PreAuthorize`：配置接口权限校验，先验证
 * 20、`@EnableGlobalMethodSecurity(prePostEnabled = true)`：在WebSecurityConfigurerAdapter 的继承类上加，与19对应使用
+
+### 6、SpringCloud 相关
+* 1、`@SpringCloudApplication`：包括@SpringBootApplication、@EnableDiscoveryClient、@EnableCircuitBreaker，分别是SpringBoot注解、注册服务中心Eureka注解、断路器注解。
 
