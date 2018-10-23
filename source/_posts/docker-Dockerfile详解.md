@@ -114,7 +114,7 @@ ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
 
 1、新建.dockerignore 文件，添加（排除不需要打包文件）：
 
-```
+```shell
 .git
 node_modules
 npm-debug.log

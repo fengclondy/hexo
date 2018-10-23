@@ -53,11 +53,14 @@ categories: springBoot
 >produces:指定返回的内容类型，仅当request请求头中的(Accept)类型中包含该指定类型才返回
 
 当然可以`用@GetMapping`、`@PostMapping`等替代。如：`@GetMapping(value = {"/info", "/info/{username}"})`
+
+* `@ModelAttribute`:标记在方法上，会在标记了`@RequestMapping`的方法前执行；标记在方法的参数上，会将请求参数按名称注入到指定对象中，并且会将这个对象自动加入ModelMap中，便于View层使用
+
 * `@ComponentScan`: 组件扫描，可自动发现和装配一些Bean，并注入到IOC容器中。如 
 
 @Component、@Service、 @Repository、 @Controller、@Entity 等等
 
-* `@Component`：定义Spring管理Bean。它的扩展类有：@Repository、@Service、@Controller
+* `@Component`：定义Spring管理Bean，泛指组件。它的扩展类有：@Repository、@Service、@Controller
 
 * `@Configuration`: 等同于spring的XML配置文件中的 ``<beans>``，作用为：配置 spring 容器(应用上下文)；使用Java代码可以检查类型安全。
 
@@ -67,7 +70,7 @@ categories: springBoot
 
 * `@RequestBody`、`@ResonseBody`、`@RathVariable`
 
-* `@Autowired`:自动导入依赖的bean。
+* `@Autowired`:自动导入依赖的bean，默认按byType注入。
 
 * `@PathVariable`:获取参数,与`@RequestParam`区别在于，能够自动识别处模板。
 
@@ -79,25 +82,30 @@ categories: springBoot
 
 * `@Inject`：等价于默认的@Autowired，只是没有required属性。
 
-* `@JsonBackReference`:解决嵌套外链问题。
+* `@JsonBackReference`：解决嵌套外链问题。
 
 * `@Import`：用来导入其他配置类中的bean属性。
 
 * `@ImportResource`：用来加载xml配置文件。
 
-* `@Resource(name="name",type="type")`：与@Autowired类似。
+* `@Resource(name="name",type="type")`：与@Autowired类似，默认按byName注入。
 
-* `@Jsonfield注解`: 设置方法或者属性的setter和getter方法。
+* `@Jsonfield注解`：设置方法或者属性的setter和getter方法。
 
-* `@Pointcut`: 拦截的切入点方法，注解的在方法级别之上，但是不执行方法体，只表示切入点的入口。
+* `@Pointcut`：拦截的切入点方法，注解的在方法级别之上，但是不执行方法体，只表示切入点的入口。
 
-* `@Around`: 判断是否执行以上的拦截,后面跟的值为申明切入点的方法名，而该注解申明的方法的第一个参数必须ProceedingJoinPoint。
+* `@Around`：判断是否执行以上的拦截,后面跟的值为申明切入点的方法名，而该注解申明的方法的第一个参数必须ProceedingJoinPoint。
 
-* `@Cacheable`: 支持缓存，指定三个属性，value、key和condition。
+* `@Cacheable`：支持缓存，指定三个属性，value、key和condition。
 
-* `@CachePut`: 主要针对方法配置，能够根据方法的请求参数对其结果进行缓存，和 @Cacheable 不同的是，它每次都会触发真实方法的调用.
+* `@CachePut`：主要针对方法配置，能够根据方法的请求参数对其结果进行缓存，和 @Cacheable 不同的是，它每次都会触发真实方法的调用。
 
-* `@CacheEvict`: 主要针对方法配置，能够根据一定的条件对缓存进行清空.
+* `@CacheEvict`：主要针对方法配置，能够根据一定的条件对缓存进行清空。
+
+* `@Scope`：用来配置 spring bean 的作用域。singleton:单例模式,全局有且仅有一个实例；
+prototype:原型模式,每次获取Bean的时候会有一个新的实例；request:request表示该针对每一次HTTP请求都会产生一个新的bean，同时该bean仅在当前HTTP request内有效；session:session作用域表示该针对每一次HTTP请求都会产生一个新的bean，同时该bean仅在当前HTTP session内有效；global session:只在portal应用中有用，给每一个 global http session 新建一个Bean实例。
+
+* `@SessionAttributes(value={"names"},types={Integer.class})`：默认情况下Spring MVC将模型中的数据存储到request域中。当一个请求结束后，数据就失效了。如果要跨页面使用。那么需要使用到session。而@SessionAttributes注解就可以使得模型中的数据存储一份到session域中
 
 
 ### 4、全局异常处理
@@ -120,7 +128,7 @@ categories: springBoot
 * 3、`@Aspect`:切面编程。与@Pointcut、@Before、@After、@AfterReturning等配合使用。
 * 4、`@EnableCaching`:开启缓存功能（启动类）。与`@CacheConfig`和`@Cacheable`一起使用（配置类）。
     缓存配置这里不叙述，可自行百度，推荐使用redis或ecache，[EhCache学习](http://blog.csdn.net/vbirdbest/article/details/72763048)
-* 5、`@PostConstruct`：在构造函数执行后执行； `@PreDestory`：在Bean销毁之前执行。
+* 5、`@PostConstruct`：在构造函数执行后执行，init()方法之前执行； `@PreDestory`：在Bean销毁之前执行，即destroy()方法之后执行，都只会执行一次。
 * 6、`@EnableAsync`:开启异步任务支持 ；`@Async`:注解该方法/类为异步方法。
 * 7、`@EnableScheduling`:开启定时任务； `@Scheduled(fixedDelay = 1000*60)`:定时任务，60s执行一次。
 * 8、`@Conditional`：条件匹配注解。

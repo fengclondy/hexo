@@ -6,6 +6,9 @@ tags: springBoot
 categories: springBoot
 ---
 
+### 魔板引擎
+例如，代码自动生成模块，利用的就是velocity自定好的模板文件.vm。
+
 ### 配置文件优先级
 1. file:./config/ (当前项目路径config目录下); 
 2. file:./ (当前项目路径下); 

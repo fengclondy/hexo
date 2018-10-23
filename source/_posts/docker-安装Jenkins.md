@@ -28,7 +28,10 @@ $ chown -R 1000:1000 jenkins/
 $ docker run -itd -p 8080:8080 -p 50000:50000 --name jenkins  -v /home/project/jenkins:/var/jenkins_home jenkins
 ```
 
+<!-- more -->
+
 4、查看启动状态及日志
+
 ```powershell
 $ dockers ps
 $ docker logs jenkins

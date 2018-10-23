@@ -77,7 +77,7 @@ $ chmod +x /usr/local/bin/docker-compose
 
 可选参数：
 
-```
+```shell
 --automated		  #只列出自动构建的镜像
 --filter, -f		#根据指定条件过滤结果
 --limit	25	     #搜索结果的最大条数(默认25)
@@ -91,7 +91,7 @@ $ chmod +x /usr/local/bin/docker-compose
 
 可选参数：
 
-```
+```shell
 --all-tags, -a	   #下载所有标签的镜像
 --disable-content-trust		  #忽略镜像的校验(默认true)
 ```
@@ -116,7 +116,7 @@ $ chmod +x /usr/local/bin/docker-compose
 
 可选参数：
 
-```
+```shell
 --all, -a		 #列出本地所有的镜像（含中间映像层，默认情况下，过滤掉中间映像层）
 --digests		 #显示摘要信息
 --filter, -f		#显示满足条件的镜像
@@ -146,7 +146,7 @@ $ chmod +x /usr/local/bin/docker-compose
 
 可选参数：
 
-```
+```shell
 --force, -f		#强制删除
 --no-prune		#不移除该镜像的过程镜像，默认移除
 ```
@@ -156,7 +156,7 @@ $ chmod +x /usr/local/bin/docker-compose
 命令格式：`docker save [OPTIONS] IMAGE [IMAGE...]`
 
 可选参数：
-```
+```shell
 --output, -o	 #输出到外部文件
 ```
 
@@ -166,7 +166,7 @@ $ chmod +x /usr/local/bin/docker-compose
 
 可选参数：
 
-```
+```shell
 --input, -i		#从文件加载而非STDIN
 --quiet, -q		 #静默加载
 ```
@@ -177,7 +177,7 @@ $ chmod +x /usr/local/bin/docker-compose
 
 可选参数：
 
-```
+```shell
 --add-host		 #添加自定义从host到IP的映射，格式为（host:ip）
 --build-arg		#设置构建时的变量
 --cache-from		#作为缓存源的镜像
@@ -215,7 +215,7 @@ $ chmod +x /usr/local/bin/docker-compose
 `docker run --name container-name -d -p 8088:80 image-name`
 
 参数说明：
-```
+```shell
 -d                        # 后台运行
 -p 宿主机端口:容器端口       # 开放容器端口到宿主机端口
 ```

@@ -2,7 +2,7 @@
 layout: post
 title: 搭建Apache James邮件服务(2)
 date: 2018-01-20 13:10:57
-tags: Apache James
+tags: Apache James 
 categories: Apache James
 ---
 
@@ -183,17 +183,17 @@ public class BizMaillet extends GenericMailet {   //GenericMailet 是一个maile
 
 编译
    我们把这两个java文件的class文件编译成一个名字为：jamesstudy.jar 的jar文件。
-    
+
 ##### 发布－Matcher 和 Mailet以及config.xml
 
 1.发布jar文件
 
 我们把这个jar文件发布到项目根目录 \apps\james\SAR-INF\lib 下面
-    
+
 >注意：如果没有找到相关目录，则需要先启动一遍james,相关的文件夹才会被创建。还有一点需要特别说明：lib目录是通过我们手动创建的。
 
 2.将Matcher 和 Mailet发布到config.xml中，config.xml在james\apps\james\SAR-INF\下
-       
+​     
 1）我们首先找到如下内容: 
 ```xml
 <mailetpackages>  
@@ -234,38 +234,4 @@ Mailet元素代表了一个matcher和一个mailet的组合。Match属性：是�
 
 测试－ 验证我们的mail应用程序:
 
-我们主要通过mail类来测试我们的应用。还记得我们刚才写的那个mail类吗？！在那个类中我们初始化了相关的信息.
-                   username = "kakaxi";
-                   password = "kakaxi";
-                   mailServer = "localhost";
-                   From = "kakaxi@localhost";
-                   To = "mingren@localhost";
-                   mailSubject = "Hello Scientist";
-                   MailContent = "How are you today!";
-发件人是卡卡西，收件人是mingren.这两个用户我们在前面都已经创建完毕。我们用他们来测试james的邮件收发以及mailet api的应用。
-根据需求假设我们发给james 服务器（这里是james的默认配置：localhost）的邮件的收件人是鸣人。那么我们就能通过matcher监测到这封邮件，并且调用相应的mailet来进行处理。由mailet打印出相应的邮件发送者和正文。运行Mail类后得到
-Using PHOENIX_HOME:   C:\james
-Using PHOENIX_TMPDIR: C:\james\temp
-Using JAVA_HOME:      C:\j2sdk1.4.2_02
-Phoenix 4.2
-
-James Mail Server 2.3.1
-Remote Manager Service started plain:4555
-POP3 Service started plain:110
-SMTP Service started plain:25
-NNTP Service started plain:119
-FetchMail Disabled
-
-
-sender:kakaxi@localhost
-content:How are you today!
-
-总结
-
-最终我们看到发送者和正文的信息。That’s all ! 大功告成。
-其实james的功能是非常非常强大的，尤其是它的Mailet API能够帮助我们完成很多与邮件邮件有关的工作如过滤垃圾邮件。
-用它我们甚至可以搭建我们自己的企业邮件服务器。
-我们通过james接收到的邮件，然后用matcher找到我们想要处理的邮件，然后通过mailet做一些业务上的处理。这篇文章涵盖的面很小。如果大家有兴趣可以研究一下james项目。
-Config.xml实际上是最重要的文件，如果你把它研究透彻了那么就就算把Mailet API研究透了。
-         
 参考：http://www.cnblogs.com/softidea/p/5348683.html

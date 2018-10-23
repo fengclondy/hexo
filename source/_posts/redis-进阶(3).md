@@ -75,7 +75,7 @@ codehole
 > psubscribe codehole.*  # 用模式匹配一次订阅多个主题，主题以 codehole. 字符开头的消息都可以收到
 ```
 
-### Redis 5.0新特性Stream
+### Redis  5.0 新特性Stream
 
 ### LRU淘汰策略
 

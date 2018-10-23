@@ -98,11 +98,11 @@ public class RedisConfig extends CachingConfigurerSupport {
 
 4、创建服务类
 
-@Cacheable 注解。@Cacheable 在方法执行前 Spring 先查看缓存中是否有数据，如果有数据，则直接返回缓存数据；若没有数据，调用方法并将方法返回值放进缓存。有两个重要的值， value，返回的内容将存储在 value 定义的缓存的名字对象中。key，如果不指定将使用默认的 KeyGenerator 生成。
+`@Cacheable` 注解。`@Cacheable` 在方法执行前 Spring 先查看缓存中是否有数据，如果有数据，则直接返回缓存数据；若没有数据，调用方法并将方法返回值放进缓存。有两个重要的值 key 和 value，**返回的内容**将存储在 value 定义的缓存的名字对象中。key，如果不指定将使用默认的 KeyGenerator 生成。
 
 <!-- more -->
 
-(1)在查询方法上，添加 @Cacheable 注解，其中缓存名称为 concurrenmapcache
+(1)在查询方法上，添加 @Cacheable 注解，其中缓存名称为 value:key,即“usercache:name”，值为返回的User实体。
 
 ```JAVA
 // @Cacheable缓存key为name的数据到缓存usercache中
@@ -133,12 +133,12 @@ public void removeUser(String name) {
 ### 其他注解
 
 ```shell
-@EnableCaching	开启缓存功能，放在配置类或启动类上
-@CacheConfig	缓存配置，设置缓存名称
-@Cacheable	执行方法前先查询缓存是否有数据。有则直接返回缓存数据；否则查询数据再将数据放入缓存，有三个属性，value、key和condition，condition默认为空。value是必须的，key支持两种写法，"#参数名"或者"#p参数index"
-@CachePut	执行新增或更新方法后，将数据放入缓存中，与@Cacheable先查缓存在执行方法不同，它是先执行方法
-@CacheEvict	清除缓存，可以指定的属性有value、key、condition、allEntries(清除缓存中的所有元素,默认为false)和beforeInvocation(是否在执行之前清除，避免执行报错，默认为false)
-@Caching	将多个缓存操作重新组合到一个方法中，有三个属性：cacheable、put和evict，分别用于指定@Cacheable、@CachePut和@CacheEvict
+@EnableCaching	  开启缓存功能，放在配置类或启动类上
+@CacheConfig	 缓存配置，设置缓存名称
+@Cacheable	   执行方法前先查询缓存是否有数据。有则直接返回缓存数据；否则查询数据再将数据放入缓存，有三个属性，value、key和condition，condition默认为空。value是必须的，key支持两种写法，"#参数名"或者"#p参数index"
+@CachePut	  执行新增或更新方法后，将数据放入缓存中，与@Cacheable先查缓存在执行方法不同，它是先执行方法
+@CacheEvict	    清除缓存，可以指定的属性有value、key、condition、allEntries(清除缓存中的所有元素,默认为false)和beforeInvocation(是否在执行之前清除，避免执行报错，默认为false)
+@Caching	  将多个缓存操作重新组合到一个方法中，有三个属性：cacheable、put和evict，分别用于指定@Cacheable、@CachePut和@CacheEvict
 ```
 
 例子：

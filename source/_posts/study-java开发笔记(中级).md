@@ -186,3 +186,23 @@ integer3 != integer4
  }
 ```
 
+### SQL语句执行顺序
+>FROM <left_table>
+ON <join_condition>
+<join_type> JOIN <right_table>
+WHERE <where_condition>
+GROUP BY <group_by_list>
+HAVING <having_condition>
+SELECT
+DISTINCT <select_list>
+ORDER BY <order_by_condition>
+LIMIT <limit_number>
+
+### 系统安全性问题
+严格控制操作系统的权限：
+- 锁定mysql用户
+- 其他任何用户都采取独立的账号登录，管理员通过mysql专有用户管理MySQL，或者通过root su到mysql用户下进行管理
+- mysql用户目录下，除了数据文件目录，其他文件和目录属主都改为root
+- 尽量避免以root权限运行MySQL
+- 除root外，任何用户不应有mysql库user表的存取权限
+- 不要把FILE、PROCESS或SUPER权限授予管理员以外的账号

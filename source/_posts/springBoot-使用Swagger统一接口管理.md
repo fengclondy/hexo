@@ -54,7 +54,16 @@ public class Swagger2Config {
 
 <!-- more -->
 
-3、添加文档内容：
+3、添加文档内容（可选择性添加）：
+
+1)在类上添加注解：
+
+```java
+@Api("swagger实例")
+//@Apignore      //注解在类上，表示不让其在前端显示；注解在方法上，表示接口不再前端显示
+```
+
+2)在方法上添加注解：
 
 ```java
 @ApiOperation(value="创建用户", notes="根据User对象创建用户")
@@ -73,6 +82,17 @@ public class Swagger2Config {
 ```
 
 > @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "int", paramType = "path", example = "1000")
+
+3)在实体类bean上添加注解：
+```java
+@ApiModel
+public class User{
+
+@ApiModelProperty(value="姓名"，example="")   //example是对象关联属性，不需要则不添加
+private String name;
+...
+}
+```
 
 4、启动SpringBoot程序，查看文档：http://localhost:8080/swagger-ui.html
 

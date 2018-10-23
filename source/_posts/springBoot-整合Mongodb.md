@@ -30,11 +30,18 @@ spring:
 
 创建 Student 实体类:
 ```java
+@Document()
 public class Student {
 
+	/** 属性序列号(SerialNo) */
+	@Id
 	private String id;
 	private String stuName;
 	private Integer age;
+	
+	/** 属性备注(Remark) */
+	@Indexed
+	private String remark;
 	
 	public Student(){}
 
@@ -88,5 +95,28 @@ public classStuController {
      studentService.addStudent(stu);
      return  msg;
   }
+}
+```
+
+
+
+#### 4、或者利用 MongoRepository 接口来实现
+```java
+public interface CustomerRepository extends MongoRepository<Customer, String> {
+
+    public Customer findByFirstName(String firstName);
+    public List<Customer> findByLastName(String lastName);
+}
+```
+
+```java
+ @Autowired
+    CustomerRepository customerRepository;
+
+@Test
+public void mongodbIdTest(){
+Customer customer=new Customer("lxdxil","dd");
+        customer=customerRepository.save(customer);
+        logger.info( "mongodbId:"+customer.getId());
 }
 ```

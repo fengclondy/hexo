@@ -26,6 +26,8 @@ categories: springBoot
 
 Lettuce取代了Jedis，成为底层连接Redis的方案。Lettuce是一个可伸缩的线程安全的 Redis 客户端，用于同步、异步和响应式使用。多个线程可以共享同一个 RedisConnection，避免了Jedis的线程不安全问题。
 
+>Jedis在实现上是直连redis server，多线程环境下非线程安全，除非使用连接池，为每个Jedis实例增加物理连接。Lettuce基于Netty的连接实例（StatefulRedisConnection），可以在多个线程间并发访问，且线程安全，满足多线程环境下的并发访问，同时它是可伸缩的设计，一个连接实例不够的情况也可以按需增加连接实例**。
+
 ```properties
 spring.redis.host=localhost
 spring.redis.port=6379
@@ -42,6 +44,63 @@ spring.redis.lettuce.pool.max-wait=-1
 spring.redis.lettuce.pool.max-idle=8
 # 连接池中的最小空闲连接 默认 0
 spring.redis.lettuce.pool.min-idle=0
+```
+
+```java
+@Configuration
+@AutoConfigureAfter(RedisAutoConfiguration.class)
+public class RedisCacheAutoConfiguration {
+
+    @Bean
+    public RedisTemplate<String, Serializable> redisCacheTemplate(LettuceConnectionFactory redisConnectionFactory) {
+        RedisTemplate<String, Serializable> template = new RedisTemplate<>();
+        template.setKeySerializer(new StringRedisSerializer());
+        template.setValueSerializer(new GenericJackson2JsonRedisSerializer());
+        template.setConnectionFactory(redisConnectionFactory);
+        return template;
+    }
+}
+```
+
+```java
+public class User implements Serializable {
+    private static final long serialVersionUID = 8655851615465363473L;
+    private Long id;
+    private String username;
+    private String password;
+    // TODO  省略get set
+}
+```
+
+```java
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class Chapter8ApplicationTest {
+
+    @Autowired
+    private RedisTemplate<String, Serializable> redisCacheTemplate;
+
+	//@Autowired
+   // private StringRedisTemplate<String, String> stringRedisTemplate;
+
+    @Test
+    public void get() {
+    
+         // 2.0之前的redisTemplate线程安全的实现,需要构造线程池
+        //ExecutorService executorService = Executors.newFixedThreadPool(1000);
+        //IntStream.range(0, 1000).forEach(i ->
+                //executorService.execute(() -> stringRedisTemplate.opsForValue().increment("kk", 1));
+        //);
+        //stringRedisTemplate.opsForValue().set("k1", "v1");
+        //final String k1 = stringRedisTemplate.opsForValue().get("k1");
+        //log.info("[字符缓存结果] - [{}]", k1);
+    
+        String key = "battcn:user:1";
+        redisCacheTemplate.opsForValue().set(key, new User(1L, "u1", "pa"));
+        final User user = (User) redisCacheTemplate.opsForValue().get(key);
+        log.info("[对象缓存结果] - [{}]", user);
+    }
+}
 ```
 
 

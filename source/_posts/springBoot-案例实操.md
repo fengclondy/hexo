@@ -312,3 +312,20 @@ public void sendTemplateMail(){
 #### 上传图片
 
 https://blog.csdn.net/wqh8522/article/details/78971260
+
+#### 消息会话
+springBoot工程中，添加依赖：
+```xml
+<dependency>
+   <groupId>org.springframework.boot</groupId>
+   <artifactId>spring-boot-starter-amqp</artifactId>
+</dependency>
+```
+如果是SpringCloud，改为：
+```xml
+<dependency>
+   <groupId>org.springframework.cloud</groupId>
+   <artifactId>spring-cloud-starter-bus-amqp</artifactId>
+</dependency>
+```
+>实际使用时一定要分清楚，只是普通的springBoot工程还是SpringCLoud工程
