@@ -130,3 +130,18 @@ spring:
  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
  ```
 
+### 关于配置文件
+.yml和.properties文件可以共存，但是会优先读取.properties文件。如果存在共有属性，以.properties文件中定义的为准，即使.yml文件中的属性设置不对也能正常运行。
+
+### Tomcat编码
+```yaml
+spring:
+  http: 
+    encoding: 
+      force: true
+      charset: UTF-8
+      enabled: true
+server:
+  tomcat: 
+    uri-encoding: UTF-8
+```

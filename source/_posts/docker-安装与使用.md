@@ -250,6 +250,9 @@ $ chmod +x /usr/local/bin/docker-compose
 
 `docker logs container-name/container-id`
 
+##### 容器端口
+`docker port container-name/container-id`
+
 
 ### 其他
 
@@ -261,5 +264,9 @@ $ chmod +x /usr/local/bin/docker-compose
 
 3、更多容器
 `docker inspect container-name/container-id`
+
+4、一键查看docker内存占用和清理未运行的容器命令
+`docker system df` 、 `docker system prune`
+
 
 

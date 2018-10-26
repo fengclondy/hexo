@@ -126,6 +126,9 @@ npm-debug.log
 FROM node:8.4COPY . /app
 WORKDIR /app
 RUN npm install --registry=https://registry.npm.taobao.org
+#设置时区
+RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+    && echo 'Asia/Shanghai' >/etc/timezone \
 EXPOSE 3000
 ```
 

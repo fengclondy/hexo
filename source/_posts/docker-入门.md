@@ -325,3 +325,12 @@ $ docker rm $(docker ps -a -q)
 ```powershell
 $ docker rmi $(docker images -q -f dangling=true)
 ```
+
+5、 容器和宿主机文件的拷贝
+```powershell
+#拷贝容器中文件到宿主机
+$ docker cp mycontainer：/opt/testnew/file.txt /opt/test/
+#拷贝宿主机中文件到容器
+$ docker cp /opt/test/file.txt mycontainer：/opt/testnew/
+```
+>友情提醒，不管宿主机是否启动，拷贝命令都是生效的。

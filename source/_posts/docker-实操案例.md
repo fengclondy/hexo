@@ -8,6 +8,8 @@ categoriets: docker
 
 ### nginx服务小例子
 
+> Nginx的docker容器中，有一个默认配置文件 /etc/nginx/nginx.conf 。还有一个默认放配置文件的目录 /etc/nginx/conf.d。可以用默认目录文件替换掉默认配置文件。默认首页文件夹html路径/usr/share/nginx/html。
+
 1、从远程仓库拉取镜像文件nginx，`:latest`是标签，可以不加。（也可以直接从远程镜像仓库中拉取并运行镜像，即步骤2）。
 
 ```powershell
@@ -69,6 +71,8 @@ ae513a47849c        4 weeks ago         /bin/sh -c #(nop)  CMD ["nginx" "-g" "da
 <missing>           4 weeks ago         /bin/sh -c #(nop)  CMD ["bash"]                 0B                  
 <missing>           4 weeks ago         /bin/sh -c #(nop) ADD file:ec5be7eec56a74975…   55.3MB   
 ```
+
+> nginx做图片映射的时候，一定要将本地的映射目录与容器映射关系确定好，不然容器内找不到目录映射。一般不推荐使用这种方式做图片服务器映射，因为要存两份文件，太占用内存。当然，可以使用 `docker ps -s`查看容器占用的空间大小。（有待验证）
 
 ### mysql 服务启动
 

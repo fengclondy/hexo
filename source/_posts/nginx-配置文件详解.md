@@ -43,7 +43,7 @@ worker_processes  1;
 
 ##### 2、事件配置
 
-```conf
+```powershell
 #工作模式及连接数上限
 events {
     #use [ kqueue | rtsig | epoll | /dev/poll | select | poll ] 是多路复用IO(I/O Multiplexing)中的方式
@@ -74,7 +74,7 @@ events {
 ```
 
 ##### 3、服务器设置
-```conf
+```powershell
 http {
     #文件扩展名与文件类型映射表
     include    mime.types;
@@ -169,7 +169,7 @@ http {
 ```
 
 ##### 4、虚拟主机基本设置
-```conf
+```powershell
     #设定虚拟主机配置
     server {
         #侦听端口
@@ -180,11 +180,17 @@ http {
         #编码格式，若网页格式与此不同，将被自动转码
         #charset koi8-r;
 
-        #定义服务器的默认网站根目录位置
+        #定义服务器的默认网站根文件（下面定义的路径的前缀都为/etc/nginx/html下）
         root html;
 
         #设定本虚拟主机的访问日志
         access_log  logs/nginx.access.log  main;
+        
+        #默认配置
+        #location / {
+        #    root   /usr/share/nginx/html;
+        #    index  index.html index.htm;
+        #}
 
         #默认请求(映射，可配置成浏览器访问)
         location / {
@@ -199,7 +205,6 @@ http {
             autoindex_exact_size off;
             #显示的文件时间为文件的服务器时间
             autoindex_localtime on; 
-
         }
 
         # 定义错误提示页面

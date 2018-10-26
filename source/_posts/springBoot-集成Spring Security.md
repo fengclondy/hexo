@@ -140,3 +140,143 @@ if (principal instanceof UserDetails) {
 
 
 参考：https://www.jianshu.com/p/6c87b8304fc9
+
+
+
+### Spring security实现第三方登录授权服务，使用Oauth2.0协议
+
+#### github授权登录
+在github中，使用的是授权码模式，在这种模式中，客户端需要引导用户重定向请求到Github的OAuth认证接口,带上在授权服务器申请的客户端 client_id,配置的回调地址 redirect_uri ,申请授权的scope,你也可以带上状态值state,服务器会在回调中原封不动地返回你这个值，这一步将会换取前面我们说到的授权码code。
+
+在[页面](https://github.com/settings/developers)注册一个OAuth应用，填写相应的应用名称，主页url和回调地址:
+![](http://p2jr3pegk.bkt.clouddn.com/springBoot-s02.png)
+
+完后注册后，可获得客户端的Client ID和Client Secret。
+
+```java
+@Controller
+@RequestMapping("/OAuth")
+public class OAuthController {
+	/**
+	 * 1.访问用户登录的验证接口
+	 * https://github.com/login/oauth/authorize?client_id=xxxxxxxxxxxxxxxxxx&scope=user,public_repo
+	 * 2.访问上面接口后会github会让其跳转到你预定的url(Authorization callback URL)，并且带上code参数,例如
+	 * http://localhost:8080/callback?code=****************
+	 * 3.然后，开发者可以通过code,client_id以及client_secret这三个参数获取用户的access_token即用户身份标识，请求如下
+	 * https://github.com/login/oauth/access_token?client_id=xxxxxxxxxxxxxxxxxxx&client_secret=xxxxxxxxxxxxxxxxx&code=xxxxxxxxxxxxxxxxxxx
+	 * 这样就会返回access_token,如下
+	 * access_token=xxxxxxxxxxxxxxxxxxxxxxxxx&scope=public_repo%2
+	 * Cuser&token_type=bearer 4. 这样我们就可以用这个access_token来获取用户的信息
+	 * https://api.github.com/user?access_token=xxxxxxxxxxxxxxxxxxxxxxxxx
+	 * 
+	 */
+
+	@Autowired
+	private UserRepository userRepository;
+	@Autowired
+	private RoleRepository roleRepository;
+
+	@Autowired
+	protected AuthenticationManager authenticationManager;
+
+	private static final String PROTECTED_RESOURCE_URL = "https://api.github.com/user";
+	//Github上申请的appId
+	private String appId = e7a2d0c08578e2a2b110；
+	//Github上申请的appSecret
+	private String appSecret = 8da3a2eaf9d246ef7b8e4aa0b0e867cfc7a8dcfe; 
+	//Github登录成功之后的回调系统地址
+	private String callbackUrl = http://127.0.0.1:8080/OAuth/callback/getOAuth ；
+	//系统跳转到Github认证登录地址
+	private String redrictUrl = https://github.com/login/oauth/authorize?client_id=e7a2d0c08578e2a2b110&scope=user,public_repo ；
+	
+	//前台点击使用github账号登录，返回的重定向url
+	@RequestMapping(value = "/authLogin", method = RequestMethod.GET)
+	public void authLogin(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			response.sendRedirect(redrictUrl);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@RequestMapping(value = "/callback/getOAuth", method = RequestMethod.GET)
+	public String getOAuth(@RequestParam(value = "code", required = true) String code, Model model,
+			HttpServletRequest request, HttpServletResponse response) {
+		String secretState = "secret" + new Random().nextInt(999_999);
+		OAuth20Service service = new ServiceBuilder(appId)
+				.apiSecret(appSecret).state(secretState)
+				.callback(callbackUrl).build(GitHubApi.instance());
+		OAuth2AccessToken accessToken = null;
+		GithubUser githubUser = null;
+		try {
+			accessToken = service.getAccessToken(code);
+			final OAuthRequest oAuthRequest = new OAuthRequest(Verb.GET, PROTECTED_RESOURCE_URL);
+			service.signRequest(accessToken, oAuthRequest);
+			final Response oAuthresponse = service.execute(oAuthRequest);
+			githubUser = JSON.parseObject(oAuthresponse.getBody(), new TypeReference<GithubUser>() {});
+			model.addAttribute("user", oAuthresponse.getBody());
+			System.out.println(oAuthresponse.getBody());
+		} catch (IOException e) {
+			model.addAttribute("error", "github登录失败！");
+			return "login";
+		} catch (InterruptedException e) {
+			model.addAttribute("error", "github登录失败！");
+			return "login";
+		} catch (ExecutionException e) {
+			model.addAttribute("error", "github登录失败！");
+			return "login";
+		} catch (OAuthException e) {
+			model.addAttribute("error", "github登录失败！");
+			return "login";
+		}
+		// TODO
+		// 1、判断是不是第一次授权登录,新增用户写进数据库，给一个默认角色
+		/*
+		 * if(第一次授权登录){ 
+		 * 新增用户写进数据库，给一个默认角色，user表新增字段第三方登录方式及第三方用户id
+		 * 新增userDetail表来存储用户详细信息 
+		 * }else{ 
+		 * 	根据第三方用户id获取以前存进库里的信息登录 
+		 * }
+		 */
+		List<RoleEntity> roles = new ArrayList<RoleEntity>();
+		roles.add(roleRepository.findOne((long) 2));//普通用户
+		UserEntity userEntity = new UserEntity();
+		userEntity.setUsername(githubUser.getLogin());
+		userEntity.setPassword("123456");
+		userEntity.setId((long) 3);
+		userEntity.setRoles(roles);
+		userEntity = userRepository.saveAndFlush(userEntity);
+		List<GrantedAuthority> authorities = new ArrayList<>();
+		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+		Authentication authentication = new UsernamePasswordAuthenticationToken(userEntity.getUsername(), userEntity.getPassword(), authorities);
+		//List<GrantedAuthority> authorities = new ArrayList<>();
+		//authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+		//authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+		//Authentication authentication = new UsernamePasswordAuthenticationToken("admin", "123456", authorities);
+		// 将token传递给Authentication进行验证
+		Authentication result = authenticationManager.authenticate(authentication);
+		SecurityContextHolder.getContext().setAuthentication(result);
+		UserEntity user = (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		List<RoleEntity> roleList = user.getRoles();
+		Set<ResourceEntity> resourceList = new HashSet<ResourceEntity>();
+		String roles1 = "";
+		for (RoleEntity role : roleList) {
+			roles1 += role.getName() + ",";
+			resourceList.addAll(role.getResources());
+		}
+		roles1 = roles1.substring(0, roles1.length() - 1);
+		request.getSession().setAttribute("roles", roles1);
+		System.out.println("====================="+roles1);
+		for(ResourceEntity r: resourceList) {
+			System.out.println(r.getName());
+		}
+		System.out.println(ResourceUtil.format(new ArrayList<>(resourceList)));
+		model.addAttribute("resourceList", ResourceUtil.format(new ArrayList<>(resourceList)));
+		return "github_success";
+	}
+}
+```
+正常的显示页面为:![](http://p2jr3pegk.bkt.clouddn.com/springBoot-s01.png)
+
+![](http://p2jr3pegk.bkt.clouddn.com/springBoot-s03.png)

@@ -15,10 +15,9 @@ message: true
 本博客采用hexo搭建，用阿里云提供支持服务。
 
 
-
 <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="https://music.163.com/outchain/player?type=2&id=408522142&auto=1&height=66"></iframe> 
 
-<iframe height=498 width=510 src="http://p9owo0j2d.bkt.clouddn.com/youname123.mp4" frameborder=0 allowfullscreen></iframe> 
+<iframe height=498 width=510 src="http://p9owo0j2d.bkt.clouddn.com/youname123.mp4" frameborder=0 allowtransparency=false></iframe> 
 
 
 本站部分信息来源于互联网。 本站个人原创内容欢迎转载分享，但还劳烦您注明出处。 本站内容如有侵犯您的权益，请及时联系调整。

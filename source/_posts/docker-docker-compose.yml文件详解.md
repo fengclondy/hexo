@@ -83,8 +83,9 @@ expose:
 
 #### volumes
 
-卷挂载路径设置。可以设置宿主机路径 （HOST:CONTAINER） 或加上访问模式 （HOST:CONTAINER:ro）。
+卷挂载路径设置，映射到容器中。可以设置宿主机路径 （HOST:CONTAINER） 或加上访问模式 （HOST:CONTAINER:ro）。
 格式：src:dest:mode（卷名：路径：权限）
+
 - src：可以是卷名，宿主机目录等，可以是文件或者目录，若是文件则文件必须存在，否则会是目录的形式挂载。  
 - dest：容器内的路径，可以是文件可以是目录，若是文件则文件必须存在，否则会是目录的形式挂载。  
 - mode：权限，只读(ro)，可读可写(rw)  
